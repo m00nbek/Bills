@@ -10,7 +10,7 @@ import UIKit
 final public class AppFlow {
     let navigationController: UINavigationController
     
-    var homeVC = UIViewController()
+    var homeVC = HomeController()
     
     public init(navigationController: UINavigationController) {
         self.navigationController = navigationController
