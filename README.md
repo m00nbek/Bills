@@ -189,7 +189,7 @@ Given the customer doesn't have connectivity
 
 ## Flowchart
 
-[//]: # (![Feed Loading Feature](feed_flowchart.png))
+![Feed Loading Feature](feed_diagram.png)
 
 ## Model Specs
 
