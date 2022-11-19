@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct FeedItem {
+public struct FeedItem: Equatable {
     let id: UUID
     let title: String
     let timestamp: Date
@@ -15,7 +15,7 @@ struct FeedItem {
     let currency: Currency
 }
 
-enum Currency {
+public enum Currency {
     case USD
     case UZS
     
