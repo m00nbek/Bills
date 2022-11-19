@@ -76,42 +76,23 @@ class RemoteFeedLoaderTests: XCTestCase {
     func test_load_deliversItemsOn200HTTPResponseWithJSONItems() {
         let (sut, client) = makeSUT()
         
-        let item1 = FeedItem(
+        let item1 = makeItem(
             id: UUID(),
             title: "A title",
             timestamp: Date(timeIntervalSinceReferenceDate: Date.timeIntervalSinceReferenceDate.rounded()),
             cost: 45,
             currency: .USD)
         
-        let item1JSON: [String: Any] = [
-            "id": item1.id.uuidString,
-            "title": item1.title,
-            "timestamp": item1.timestamp.ISO8601Format(),
-            "cost": item1.cost,
-            "currency": item1.currency.rawValue
-        ]
-        
-        let item2 = FeedItem(
+        let item2 = makeItem(
             id: UUID(),
             title: "Another title",
             timestamp: Date(timeIntervalSinceReferenceDate: Date.timeIntervalSinceReferenceDate.rounded()),
             cost: 23000,
             currency: .UZS)
         
-        let item2JSON: [String: Any] = [
-            "id": item2.id.uuidString,
-            "title": item2.title,
-            "timestamp": item2.timestamp.ISO8601Format(),
-            "cost": item2.cost,
-            "currency": item2.currency.rawValue
-        ]
-        
-        let itemsJSON = [
-            "items": [item1JSON, item2JSON]
-        ]
-        
-        expect(sut, toCompleteWith: .success([item1, item2]), when: {
-            let json = try! JSONSerialization.data(withJSONObject: itemsJSON)
+        let items = [item1.model, item2.model]
+        expect(sut, toCompleteWith: .success(items), when: {
+            let json = makeItemsJSON([item1.json, item2.json])
             client.complete(withStatusCode: 200, data: json)
         })
     }
@@ -121,6 +102,25 @@ class RemoteFeedLoaderTests: XCTestCase {
         let client = HTTPClientSpy()
         let sut = RemoteFeedLoader(url: url, client: client)
         return (sut, client)
+    }
+    
+    private func makeItem(id: UUID, title: String, timestamp: Date, cost: Float, currency: Currency) -> (model: FeedItem, json: [String: Any]) {
+        let item = FeedItem(id: id, title: title, timestamp: timestamp, cost: cost, currency: currency)
+        
+        let json: [String: Any] = [
+            "id": item.id.uuidString,
+            "title": item.title,
+            "timestamp": item.timestamp.ISO8601Format(),
+            "cost": item.cost,
+            "currency": item.currency.rawValue
+        ]
+        
+        return (item, json)
+    }
+    
+    private func makeItemsJSON(_ items: [[String: Any]]) -> Data {
+        let json = ["items": items]
+        return try! JSONSerialization.data(withJSONObject: json)
     }
     
     private func expect(_ sut: RemoteFeedLoader, toCompleteWith result: RemoteFeedLoader.Result, when action: () -> Void, file: StaticString = #filePath, line: UInt = #line) {
