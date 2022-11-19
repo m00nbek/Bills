@@ -15,16 +15,7 @@ public struct FeedItem: Equatable {
     let currency: Currency
 }
 
-public enum Currency {
+public enum Currency: String {
     case USD
     case UZS
-    
-    var stringValue: String {
-        switch self {
-        case .USD:
-            return "USD"
-        case .UZS:
-            return "UZS"
-        }
-    }
 }
