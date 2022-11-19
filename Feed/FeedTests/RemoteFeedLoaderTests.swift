@@ -73,6 +73,49 @@ class RemoteFeedLoaderTests: XCTestCase {
         })
     }
     
+    func test_load_deliversItemsOn200HTTPResponseWithJSONItems() {
+        let (sut, client) = makeSUT()
+        
+        let item1 = FeedItem(
+            id: UUID(),
+            title: "A title",
+            timestamp: Date(timeIntervalSinceReferenceDate: Date.timeIntervalSinceReferenceDate.rounded()),
+            cost: 45,
+            currency: .USD)
+        
+        let item1JSON: [String: Any] = [
+            "id": item1.id.uuidString,
+            "title": item1.title,
+            "timestamp": item1.timestamp.ISO8601Format(),
+            "cost": item1.cost,
+            "currency": item1.currency.rawValue
+        ]
+        
+        let item2 = FeedItem(
+            id: UUID(),
+            title: "Another title",
+            timestamp: Date(timeIntervalSinceReferenceDate: Date.timeIntervalSinceReferenceDate.rounded()),
+            cost: 23000,
+            currency: .UZS)
+        
+        let item2JSON: [String: Any] = [
+            "id": item2.id.uuidString,
+            "title": item2.title,
+            "timestamp": item2.timestamp.ISO8601Format(),
+            "cost": item2.cost,
+            "currency": item2.currency.rawValue
+        ]
+        
+        let itemsJSON = [
+            "items": [item1JSON, item2JSON]
+        ]
+        
+        expect(sut, toCompleteWith: .success([item1, item2]), when: {
+            let json = try! JSONSerialization.data(withJSONObject: itemsJSON)
+            client.complete(withStatusCode: 200, data: json)
+        })
+    }
+    
     // MARK: - Helpers
     private func makeSUT(url: URL = URL(string: "https://a-url.com")!) -> (sut: RemoteFeedLoader, client: HTTPClientSpy) {
         let client = HTTPClientSpy()

@@ -8,14 +8,24 @@
 import Foundation
 
 public struct FeedItem: Equatable {
-    let id: UUID
-    let title: String
-    let timestamp: Date
-    let cost: Float
-    let currency: Currency
+    public let id: UUID
+    public let title: String
+    public let timestamp: Date
+    public let cost: Float
+    public let currency: Currency
+    
+    public init(id: UUID, title: String, timestamp: Date, cost: Float, currency: Currency) {
+        self.id = id
+        self.title = title
+        self.timestamp = timestamp
+        self.cost = cost
+        self.currency = currency
+    }
 }
 
-public enum Currency: String {
+extension FeedItem: Decodable {}
+
+public enum Currency: String, Decodable {
     case USD
     case UZS
 }
