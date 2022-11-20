@@ -39,12 +39,10 @@ public final class RemoteFeedLoader {
         client.get(from: url) { result in
             switch result {
             case let .success(data, response):
-                let decoder = JSONDecoder()
-                decoder.dateDecodingStrategy = .iso8601
-                
-                if response.statusCode == 200, let root = try? decoder.decode(Root.self, from: data) {
-                    completion(.success(root.items.map { $0.item }))
-                } else {
+                do {
+                    let items = try FeedItemsMapper.map(data, response)
+                    completion(.success(items))
+                } catch {
                     completion(.failure(.invalidData))
                 }
             case .failure:
@@ -54,19 +52,34 @@ public final class RemoteFeedLoader {
     }
 }
 
-private struct Root: Decodable {
-    let items: [Item]
-}
-
-private struct Item: Decodable {
-    let id: UUID
-    let title: String
-    let timestamp: Date
-    let cost: Float
-    let currency: Currency
+private class FeedItemsMapper {
     
-    var item: FeedItem {
-        return FeedItem(id: id, title: title, timestamp: timestamp, cost: cost, currency: currency)
+    private struct Root: Decodable {
+        let items: [Item]
+    }
+
+    private struct Item: Decodable {
+        let id: UUID
+        let title: String
+        let timestamp: Date
+        let cost: Float
+        let currency: Currency
+        
+        var item: FeedItem {
+            return FeedItem(id: id, title: title, timestamp: timestamp, cost: cost, currency: currency)
+        }
+    }
+
+    static func map(_ data: Data, _ response: HTTPURLResponse) throws -> [FeedItem] {
+        guard response.statusCode == 200 else {
+            throw RemoteFeedLoader.Error.invalidData
+        }
+        
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .iso8601
+        
+        let root = try decoder.decode(Root.self, from: data)
+        return root.items.map { $0.item }
     }
 }
 
