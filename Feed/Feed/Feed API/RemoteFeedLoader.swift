@@ -43,7 +43,7 @@ public final class RemoteFeedLoader {
                 decoder.dateDecodingStrategy = .iso8601
                 
                 if response.statusCode == 200, let root = try? decoder.decode(Root.self, from: data) {
-                    completion(.success(root.items))
+                    completion(.success(root.items.map { $0.item }))
                 } else {
                     completion(.failure(.invalidData))
                 }
@@ -55,5 +55,19 @@ public final class RemoteFeedLoader {
 }
 
 private struct Root: Decodable {
-    let items: [FeedItem]
+    let items: [Item]
 }
+
+private struct Item: Decodable {
+    let id: UUID
+    let title: String
+    let timestamp: Date
+    let cost: Float
+    let currency: Currency
+    
+    var item: FeedItem {
+        return FeedItem(id: id, title: title, timestamp: timestamp, cost: cost, currency: currency)
+    }
+}
+
+extension Currency: Decodable {}

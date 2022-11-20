@@ -23,9 +23,7 @@ public struct FeedItem: Equatable {
     }
 }
 
-extension FeedItem: Decodable {}
-
-public enum Currency: String, Decodable {
+public enum Currency: String {
     case USD
     case UZS
 }
