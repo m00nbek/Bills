@@ -2,7 +2,7 @@
 //  FeedItem.swift
 //  Feed
 //
-//  Created by m00nbek Melikulov on 11/18/22.
+//  Created by m00nbek Melikulov on 11/20/22.
 //
 
 import Foundation
