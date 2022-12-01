@@ -217,14 +217,14 @@ GET /feed
 			"title": "a title",
 			"timestamp": "2022-11-18 06:20:17+0000",
 			"cost": "45.3",
-			"currency: "USD"
+			"currency": "USD"
 		},
 		{
 			"id": "another UUID",
 			"title": "another title",
 			"timestamp": "2022-11-18 06:20:20+0000",
 			"cost": "23000",
-			"currency: "UZS"
+			"currency": "UZS"
 		},
 		...
 	]
