@@ -11,7 +11,7 @@ import Feed
 final class FeedAPIEndToEndTests: XCTestCase {
     
     func test_endToEndTestServerGETFeedResult_matchesFixedTestAccountData() {
-        let testServerURL = URL(string: "http://127.0.0.1:8080/feed")!
+        let testServerURL = URL(string: "http://127.0.0.1:8080/test-feed")!
         let client = URLSessionHTTPClient()
         let loader = RemoteFeedLoader(url: testServerURL, client: client)
         
