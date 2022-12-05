@@ -1,5 +1,5 @@
-name: Test CI
-
+name: Unit tests
+ 
 on:
   push:
     branches: [ main ]
