@@ -37,7 +37,7 @@ class URLSessionHTTPClientTests: XCTestCase {
         
         makeSUT().get(from: url) { _ in }
         
-        wait(for: [exp], timeout: 1.0)
+        wait(for: [exp], timeout: 0.1)
     }
     
     func test_getFromURL_failsOnRequestError() {
@@ -129,7 +129,7 @@ class URLSessionHTTPClientTests: XCTestCase {
             exp.fulfill()
         }
         
-        wait(for: [exp], timeout: 1.0)
+        wait(for: [exp], timeout: 0.1)
         
         return receivedResult
     }
