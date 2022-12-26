@@ -48,7 +48,7 @@ final class FeedAPIEndToEndTests: XCTestCase {
             exp.fulfill()
         }
         
-        wait(for: [exp], timeout: 7.0)
+        wait(for: [exp], timeout: 3.0)
         return receivedResult
     }
     
