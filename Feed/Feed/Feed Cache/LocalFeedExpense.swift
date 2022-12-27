@@ -1,5 +1,5 @@
 //
-//  LocalFeedItem.swift
+//  LocalFeedExpense.swift
 //  Feed
 //
 //  Created by m00nbek Melikulov on 12/27/22.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct LocalFeedItem: Equatable {
+public struct LocalFeedExpense: Equatable {
     public let id: UUID
     public let title: String
     public let timestamp: Date

@@ -1,5 +1,5 @@
 //
-//  FeedItem.swift
+//  FeedExpense.swift
 //  Feed
 //
 //  Created by m00nbek Melikulov on 11/20/22.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct FeedItem: Equatable {
+public struct FeedExpense: Equatable {
     public let id: UUID
     public let title: String
     public let timestamp: Date
