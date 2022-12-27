@@ -1,13 +1,13 @@
 //
-//  FeedExpense.swift
+//  LocalFeedExpense.swift
 //  Feed
 //
-//  Created by m00nbek Melikulov on 11/20/22.
+//  Created by m00nbek Melikulov on 12/27/22.
 //
 
 import Foundation
 
-public struct FeedExpense: Equatable {
+public struct LocalFeedExpense: Equatable {
     public let id: UUID
     public let title: String
     public let timestamp: Date
@@ -27,4 +27,3 @@ public struct FeedExpense: Equatable {
         case UZS
     }
 }
-

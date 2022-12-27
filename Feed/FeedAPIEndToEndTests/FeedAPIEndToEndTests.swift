@@ -12,17 +12,17 @@ final class FeedAPIEndToEndTests: XCTestCase {
     
     func test_endToEndTestServerGETFeedResult_matchesFixedTestAccountData() {
         switch getFeedResult() {
-        case let .success(items)?:
-            XCTAssertEqual(items.count, 8, "Exptected 8 items in the test account")
+        case let .success(expenseFeed)?:
+            XCTAssertEqual(expenseFeed.count, 8, "Exptected 8 expenses in the test account")
             
-            XCTAssertEqual(items[0], expectedItem(at: 0))
-            XCTAssertEqual(items[1], expectedItem(at: 1))
-            XCTAssertEqual(items[2], expectedItem(at: 2))
-            XCTAssertEqual(items[3], expectedItem(at: 3))
-            XCTAssertEqual(items[4], expectedItem(at: 4))
-            XCTAssertEqual(items[5], expectedItem(at: 5))
-            XCTAssertEqual(items[6], expectedItem(at: 6))
-            XCTAssertEqual(items[7], expectedItem(at: 7))
+            XCTAssertEqual(expenseFeed[0], expectedExpense(at: 0))
+            XCTAssertEqual(expenseFeed[1], expectedExpense(at: 1))
+            XCTAssertEqual(expenseFeed[2], expectedExpense(at: 2))
+            XCTAssertEqual(expenseFeed[3], expectedExpense(at: 3))
+            XCTAssertEqual(expenseFeed[4], expectedExpense(at: 4))
+            XCTAssertEqual(expenseFeed[5], expectedExpense(at: 5))
+            XCTAssertEqual(expenseFeed[6], expectedExpense(at: 6))
+            XCTAssertEqual(expenseFeed[7], expectedExpense(at: 7))
         case let .failure(error)?:
             XCTFail("Expected successful feed result, got \(error) instead")
         default:
@@ -52,8 +52,8 @@ final class FeedAPIEndToEndTests: XCTestCase {
         return receivedResult
     }
     
-    private func expectedItem(at index: Int) -> FeedItem {
-        return FeedItem(id: id(at: index), title: title(at: index), timestamp: timestamp(at: index), cost: cost(at: index), currency: currency(at: index))
+    private func expectedExpense(at index: Int) -> FeedExpense {
+        return FeedExpense(id: id(at: index), title: title(at: index), timestamp: timestamp(at: index), cost: cost(at: index), currency: currency(at: index))
     }
     
     private func id(at index: Int) -> UUID {
@@ -99,7 +99,7 @@ final class FeedAPIEndToEndTests: XCTestCase {
         return [450, 3400, 5600, 6, 455, 100, 20, 99.99][index]
     }
     
-    private func currency(at index: Int) -> Currency {
+    private func currency(at index: Int) -> FeedExpense.Currency {
         return [.USD, .UZS, .USD, .USD, .USD, .USD, .USD, .USD][index]
     }
 }

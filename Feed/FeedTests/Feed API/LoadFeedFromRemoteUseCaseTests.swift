@@ -127,8 +127,8 @@ class LoadFeedFromRemoteUseCaseTests: XCTestCase {
         return .failure(error)
     }
     
-    private func makeItem(id: UUID, title: String, timestamp: Date, cost: Float, currency: Currency) -> (model: FeedItem, json: [String: Any]) {
-        let item = FeedItem(id: id, title: title, timestamp: timestamp, cost: cost, currency: currency)
+    private func makeItem(id: UUID, title: String, timestamp: Date, cost: Float, currency: FeedExpense.Currency) -> (model: FeedExpense, json: [String: Any]) {
+        let item = FeedExpense(id: id, title: title, timestamp: timestamp, cost: cost, currency: currency)
         
         let json: [String: Any] = [
             "id": item.id.uuidString,
