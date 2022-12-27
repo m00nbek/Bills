@@ -21,9 +21,10 @@ public struct FeedItem: Equatable {
         self.cost = cost
         self.currency = currency
     }
+    
+    public enum Currency: String {
+        case USD
+        case UZS
+    }
 }
 
-public enum Currency: String {
-    case USD
-    case UZS
-}

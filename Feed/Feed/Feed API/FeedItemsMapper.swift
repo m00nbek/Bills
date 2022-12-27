@@ -22,7 +22,7 @@ internal final class FeedItemsMapper {
         let title: String
         let timestamp: Date
         let cost: Float
-        let currency: Currency
+        let currency: FeedItem.Currency
         
         var item: FeedItem {
             return FeedItem(id: id, title: title, timestamp: timestamp, cost: cost, currency: currency)
@@ -46,4 +46,4 @@ internal final class FeedItemsMapper {
     }
 }
 
-extension Currency: Decodable {}
+extension FeedItem.Currency: Decodable {}
