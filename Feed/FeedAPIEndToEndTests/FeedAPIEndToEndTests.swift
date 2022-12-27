@@ -99,7 +99,7 @@ final class FeedAPIEndToEndTests: XCTestCase {
         return [450, 3400, 5600, 6, 455, 100, 20, 99.99][index]
     }
     
-    private func currency(at index: Int) -> Currency {
+    private func currency(at index: Int) -> FeedItem.Currency {
         return [.USD, .UZS, .USD, .USD, .USD, .USD, .USD, .USD][index]
     }
 }
