@@ -7,18 +7,6 @@
 
 import Foundation
 
-internal struct RemoteFeedItem: Decodable {
-    internal let id: UUID
-    internal let title: String
-    internal let timestamp: Date
-    internal let cost: Float
-    internal let currency: Currency
-    internal enum Currency: String, Decodable {
-        case USD
-        case UZS
-    }
-}
-
 internal final class FeedItemsMapper {
     
     private struct Root: Decodable {
