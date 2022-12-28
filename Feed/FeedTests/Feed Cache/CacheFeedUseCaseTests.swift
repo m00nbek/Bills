@@ -125,44 +125,6 @@ class CacheFeedUseCaseTests: XCTestCase {
         XCTAssertEqual((receivedError as NSError?)?.code, expectedError?.code, file: file, line: line)
     }
     
-    private class FeedStoreSpy: FeedStore {
-        enum ReceivedMessage: Equatable {
-            case deleteCachedFeed
-            case insert([LocalFeedExpense], Date)
-        }
-        
-        private(set) var receivedMessages = [ReceivedMessage]()
-        
-        private var deletionCompletions = [DeletingCompletion]()
-        private var insertionCompletions = [InsertionCompletion]()
-        
-        func deleteCachedFeed(completion: @escaping DeletingCompletion) {
-            deletionCompletions.append(completion)
-            receivedMessages.append(.deleteCachedFeed)
-        }
-        
-        func completeDeletion(with error: Error, at index: Int = 0) {
-            deletionCompletions[index](error)
-        }
-        
-        func completeDeletionSuccessfully(at index: Int = 0) {
-            deletionCompletions[index](nil)
-        }
-        
-        func insert(_ feed: [LocalFeedExpense], timestamp: Date, completion: @escaping InsertionCompletion) {
-            insertionCompletions.append(completion)
-            receivedMessages.append(.insert(feed, timestamp))
-        }
-        
-        func completeInsertion(with error: Error, at index: Int = 0) {
-            insertionCompletions[index](error)
-        }
-        
-        func completeInsertionSuccessfully(at index: Int = 0) {
-            insertionCompletions[index](nil)
-        }
-    }
-    
     private func uniqueExpense() -> FeedExpense {
         return FeedExpense(id: UUID(), title: "any", timestamp: Date.now, cost: 0, currency: .USD)
     }
