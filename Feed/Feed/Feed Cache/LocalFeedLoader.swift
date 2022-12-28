@@ -31,10 +31,13 @@ public final class LocalFeedLoader {
     }
     
     public func load(completion: @escaping (LoadResult) -> Void) {
-        store.retrieve { error in
-            if let error {
+        store.retrieve { result in
+            switch result {
+            case let .failure(error):
                 completion(.failure(error))
-            } else {
+            case let .found(feed, _):
+                completion(.success(feed.toModels()))
+            case .empty:
                 completion(.success([]))
             }
         }
@@ -56,5 +59,15 @@ private extension Array where Element == FeedExpense {
                             timestamp: $0.timestamp,
                             cost: $0.cost,
                             currency: LocalFeedExpense.Currency.init(rawValue: $0.currency.rawValue)!) }
+    }
+}
+
+private extension Array where Element == LocalFeedExpense {
+    func toModels() -> [FeedExpense] {
+        map { FeedExpense(id: $0.id,
+                            title: $0.title,
+                            timestamp: $0.timestamp,
+                            cost: $0.cost,
+                            currency: FeedExpense.Currency.init(rawValue: $0.currency.rawValue)!) }
     }
 }
