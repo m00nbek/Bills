@@ -10,8 +10,10 @@ import Foundation
 public final class LocalFeedLoader {
     private let store: FeedStore
     private let currentDate: () -> Date
+    private let calender = Calendar(identifier: .gregorian)
     
     public typealias SaveResult = Error?
+    public typealias LoadResult = LoadFeedResult
     
     public init(store: FeedStore, currentDate: @escaping () -> Date) {
         self.store = store
@@ -27,6 +29,28 @@ public final class LocalFeedLoader {
                 self.cache(feed, with: completion)
             }
         }
+    }
+    
+    public func load(completion: @escaping (LoadResult) -> Void) {
+        store.retrieve { [unowned self] result in
+            switch result {
+            case let .failure(error):
+                completion(.failure(error))
+            case let .found(feed, timestamp) where self.validate(timestamp):
+                completion(.success(feed.toModels()))
+            case .found, .empty:
+                completion(.success([]))
+            }
+        }
+    }
+    
+    private var maxCacheAgeInDays: Int {
+        return 7
+    }
+    
+    private func validate(_ timestamp: Date) -> Bool {
+        guard let maxCacheAge = calender.date(byAdding: .day, value: maxCacheAgeInDays, to: timestamp) else { return false }
+        return currentDate() < maxCacheAge
     }
     
     private func cache(_ feed: [FeedExpense], with completion: @escaping (SaveResult) -> Void) {
@@ -45,5 +69,15 @@ private extension Array where Element == FeedExpense {
                             timestamp: $0.timestamp,
                             cost: $0.cost,
                             currency: LocalFeedExpense.Currency.init(rawValue: $0.currency.rawValue)!) }
+    }
+}
+
+private extension Array where Element == LocalFeedExpense {
+    func toModels() -> [FeedExpense] {
+        map { FeedExpense(id: $0.id,
+                            title: $0.title,
+                            timestamp: $0.timestamp,
+                            cost: $0.cost,
+                            currency: FeedExpense.Currency.init(rawValue: $0.currency.rawValue)!) }
     }
 }
