@@ -171,34 +171,4 @@ class LoadFeedFromCacheUseCaseTests: XCTestCase {
         action()
         wait(for: [exp], timeout: 1.0)
     }
-    
-    private func uniqueExpense() -> FeedExpense {
-        return FeedExpense(id: UUID(), title: "any", timestamp: Date.now, cost: 0, currency: .USD)
-    }
-    
-    private func uniqueExpenseFeed() -> (models: [FeedExpense], local: [LocalFeedExpense]) {
-        let models = [uniqueExpense(), uniqueExpense()]
-        let local = models.map { LocalFeedExpense(id: $0.id,
-                                               title: $0.title,
-                                               timestamp: $0.timestamp,
-                                               cost: $0.cost,
-                                               currency: LocalFeedExpense.Currency.init(rawValue: $0.currency.rawValue)!)
-        }
-        
-        return (models, local)
-    }
-    
-    private func anyNSError() -> NSError {
-        return NSError(domain: "any error", code: 1)
-    }
-}
-
-private extension Date {
-    func adding(days: Int) -> Date {
-        return Calendar(identifier: .gregorian).date(byAdding: .day, value: days, to: self)!
-    }
-    
-    func adding(seconds: TimeInterval) -> Date {
-        return self + seconds
-    }
 }
