@@ -10,8 +10,37 @@ import Feed
 
 class CodableFeedStore {
     private struct Cache: Codable {
-        let feed: [LocalFeedExpense]
+        let feed: [CodableFeedExpense]
         let timestamp: Date
+        
+        var localFeed: [LocalFeedExpense] {
+            return feed.map { $0.local }
+        }
+    }
+    
+    private struct CodableFeedExpense: Codable {
+        private let id: UUID
+        private let title: String
+        private let timestamp: Date
+        private let cost: Float
+        private let currency: Currency
+        
+        private enum Currency: String, Codable {
+            case USD
+            case UZS
+        }
+        
+        init(_ expense: LocalFeedExpense) {
+            id = expense.id
+            title = expense.title
+            timestamp = expense.timestamp
+            cost = expense.cost
+            currency = Currency(rawValue: expense.currency.rawValue)!
+        }
+        
+        var local: LocalFeedExpense {
+            return LocalFeedExpense(id: id, title: title, timestamp: timestamp, cost: cost, currency: LocalFeedExpense.Currency(rawValue: currency.rawValue)!)
+        }
     }
     
     private let storeURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("expense-feed.store")
@@ -24,12 +53,13 @@ class CodableFeedStore {
         
         let decoder = JSONDecoder()
         let cache = try! decoder.decode(Cache.self, from: data)
-        completion(.found(feed: cache.feed, timestamp: cache.timestamp))
+        completion(.found(feed: cache.localFeed, timestamp: cache.timestamp))
     }
     
     func insert(_ feed: [LocalFeedExpense], timestamp: Date, completion: @escaping FeedStore.InsertionCompletion) {
         let encoder = JSONEncoder()
-        let encoded = try! encoder.encode(Cache(feed: feed, timestamp: timestamp))
+        let cache = Cache(feed: feed.map(CodableFeedExpense.init), timestamp: timestamp)
+        let encoded = try! encoder.encode(cache)
         try! encoded.write(to: storeURL)
         completion(nil)
     }

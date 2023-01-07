@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct LocalFeedExpense: Equatable, Codable {
+public struct LocalFeedExpense: Equatable {
     public let id: UUID
     public let title: String
     public let timestamp: Date
@@ -22,7 +22,7 @@ public struct LocalFeedExpense: Equatable, Codable {
         self.currency = currency
     }
     
-    public enum Currency: String, Codable {
+    public enum Currency: String {
         case USD
         case UZS
     }
