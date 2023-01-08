@@ -8,75 +8,6 @@
 import XCTest
 import Feed
 
-class CodableFeedStore {
-    private struct Cache: Codable {
-        let feed: [CodableFeedExpense]
-        let timestamp: Date
-        
-        var localFeed: [LocalFeedExpense] {
-            return feed.map { $0.local }
-        }
-    }
-    
-    private struct CodableFeedExpense: Codable {
-        private let id: UUID
-        private let title: String
-        private let timestamp: Date
-        private let cost: Float
-        private let currency: Currency
-        
-        private enum Currency: String, Codable {
-            case USD
-            case UZS
-        }
-        
-        init(_ expense: LocalFeedExpense) {
-            id = expense.id
-            title = expense.title
-            timestamp = expense.timestamp
-            cost = expense.cost
-            currency = Currency(rawValue: expense.currency.rawValue)!
-        }
-        
-        var local: LocalFeedExpense {
-            return LocalFeedExpense(id: id, title: title, timestamp: timestamp, cost: cost, currency: LocalFeedExpense.Currency(rawValue: currency.rawValue)!)
-        }
-    }
-    
-    private let storeURL: URL
-    
-    init(storeURL: URL) {
-        self.storeURL = storeURL
-    }
-    
-    func retrieve(completion: @escaping FeedStore.RetrievalCompletion) {
-        guard let data = try? Data(contentsOf: storeURL) else {
-            completion(.empty)
-            return
-        }
-        
-        do {
-            let decoder = JSONDecoder()
-            let cache = try decoder.decode(Cache.self, from: data)
-            completion(.found(feed: cache.localFeed, timestamp: cache.timestamp))
-        } catch {
-            completion(.failure(error))
-        }
-    }
-    
-    func insert(_ feed: [LocalFeedExpense], timestamp: Date, completion: @escaping FeedStore.InsertionCompletion) {
-        do {
-            let encoder = JSONEncoder()
-            let cache = Cache(feed: feed.map(CodableFeedExpense.init), timestamp: timestamp)
-            let encoded = try encoder.encode(cache)
-            try encoded.write(to: storeURL)
-            completion(nil)
-        } catch {
-            completion(error)
-        }
-    }
-}
-
 class CodableFeedStoreTests: XCTestCase {
     
     override func setUp() {
@@ -166,16 +97,46 @@ class CodableFeedStoreTests: XCTestCase {
         XCTAssertNotNil(insertionError, "Expected cache insertion to fail with an error")
         
     }
+    
+    func test_delete_hasNoSideEffectsOnEmptyCache() {
+        let sut = makeSUT()
+        
+        let deletionError = deleteCache(from: sut)
+        
+        XCTAssertNil(deletionError, "Expected empty cache deletion to succeed")
+        expect(sut, toRetrieve: .empty)
+    }
+    
+    func test_delete_emptiesPreviouslyInsertedCache() {
+        let sut = makeSUT()
+        insert((uniqueExpenseFeed().local, Date()), to: sut)
+        
+        let deletionError = deleteCache(from: sut)
+        
+        XCTAssertNil(deletionError, "Expected non-empty cache deletion to succeed")
+        expect(sut, toRetrieve: .empty)
+    }
+    
+    func test_delete_deliversErrorOnDeletionError() {
+        let noDeletePermissionURL = cachesDirectory()
+        let sut = makeSUT(storeURL: noDeletePermissionURL)
+        
+        let deletionError = deleteCache(from: sut)
+        
+        XCTAssertNotNil(deletionError, "Expected cache deletion to fail")
+        expect(sut, toRetrieve: .empty)
+    }
+    
     // MARK: - Helpers
     
-    private func makeSUT(storeURL: URL? = nil, file: StaticString = #filePath, line: UInt = #line) -> CodableFeedStore {
+    private func makeSUT(storeURL: URL? = nil, file: StaticString = #filePath, line: UInt = #line) -> FeedStore {
         let sut = CodableFeedStore(storeURL: storeURL ?? testSpecificStoreURL())
         trackForMemoryLeaks(sut, file: file, line: line)
         return sut
     }
     
     @discardableResult
-    private func insert(_ cache: (feed: [LocalFeedExpense], timestamp: Date), to sut: CodableFeedStore) -> Error? {
+    private func insert(_ cache: (feed: [LocalFeedExpense], timestamp: Date), to sut: FeedStore) -> Error? {
         let exp = expectation(description: "Wait for cache insertion")
         var insertionError: Error?
         sut.insert(cache.feed, timestamp: cache.timestamp) { receivedInsertionError in
@@ -186,12 +147,23 @@ class CodableFeedStoreTests: XCTestCase {
         return insertionError
     }
     
-    private func expect(_ sut: CodableFeedStore, toRetrieveTwice expectedResult: RetrieveCachedFeedResult, file: StaticString = #filePath, line: UInt = #line) {
+    private func deleteCache(from sut: FeedStore) -> Error? {
+        let exp = expectation(description: "Wait for cache deletion")
+        var deletionError: Error?
+        sut.deleteCachedFeed { receivedDeletionError in
+            deletionError = receivedDeletionError
+            exp.fulfill()
+        }
+        wait(for: [exp], timeout: 1.0)
+        return deletionError
+    }
+    
+    private func expect(_ sut: FeedStore, toRetrieveTwice expectedResult: RetrieveCachedFeedResult, file: StaticString = #filePath, line: UInt = #line) {
         expect(sut, toRetrieve: expectedResult, file: file, line: line)
         expect(sut, toRetrieve: expectedResult, file: file, line: line)
     }
     
-    private func expect( _ sut: CodableFeedStore, toRetrieve expectedResult: RetrieveCachedFeedResult, file: StaticString = #filePath, line: UInt = #line) {
+    private func expect( _ sut: FeedStore, toRetrieve expectedResult: RetrieveCachedFeedResult, file: StaticString = #filePath, line: UInt = #line) {
         let exp = expectation(description: "Wait for cache retrieval")
         
         sut.retrieve { retrievedResult in
@@ -227,6 +199,10 @@ class CodableFeedStoreTests: XCTestCase {
     }
     
     private func testSpecificStoreURL() -> URL {
-        return FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!.appendingPathComponent("\(type(of: self)).store")
+        return cachesDirectory().appendingPathComponent("\(type(of: self)).store")
+    }
+    
+    private func cachesDirectory() -> URL {
+        return FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!
     }
 }
