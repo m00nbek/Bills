@@ -24,13 +24,7 @@ public final class CoreDataFeedStore: FeedStore {
                 let request = NSFetchRequest<ManagedCache>(entityName: ManagedCache.entity().name!)
                 request.returnsObjectsAsFaults = false
                 if let cache = try context.fetch(request).first {
-                    completion(.found(
-                        feed: cache.feed!
-                            .compactMap { ($0 as? ManagedFeedExpense) }
-                            .map {
-                                LocalFeedExpense(id: $0.id!, title: $0.title!, timestamp: $0.timestamp!, cost: $0.cost, currency: .init(rawValue: $0.currency!)!)
-                            },
-                        timestamp: cache.timestamp!))
+                    completion(.found(feed: cache.localFeed, timestamp: cache.timestamp!))
                 } else {
                     completion(.empty)
                 }
@@ -46,15 +40,7 @@ public final class CoreDataFeedStore: FeedStore {
             do {
                 let managedCache = ManagedCache(context: context)
                 managedCache.timestamp = timestamp
-                managedCache.feed = NSOrderedSet(array: feed.map { local in
-                    let managed = ManagedFeedExpense(context: context)
-                    managed.id = local.id
-                    managed.title = local.title
-                    managed.timestamp = local.timestamp
-                    managed.cost = local.cost
-                    managed.currency = local.currency.rawValue
-                    return managed
-                })
+                managedCache.feed = ManagedFeedExpense.expenses(from: feed, in: context)
                 
                 try context.save()
                 completion(nil)
@@ -98,5 +84,29 @@ private extension NSManagedObjectModel {
         return bundle
             .url(forResource: name, withExtension: "momd")
             .flatMap { NSManagedObjectModel(contentsOf: $0) }
+    }
+}
+
+extension ManagedCache {
+    var localFeed: [LocalFeedExpense] {
+        return feed!.compactMap { ($0 as? ManagedFeedExpense)?.local }
+    }
+}
+
+extension ManagedFeedExpense {
+    static func expenses(from localFeed: [LocalFeedExpense], in context: NSManagedObjectContext) -> NSOrderedSet {
+        return NSOrderedSet(array: localFeed.map { local in
+            let managed = ManagedFeedExpense(context: context)
+            managed.id = local.id
+            managed.title = local.title
+            managed.timestamp = local.timestamp
+            managed.cost = local.cost
+            managed.currency = local.currency.rawValue
+            return managed
+        })
+    }
+
+    var local: LocalFeedExpense {
+        return LocalFeedExpense(id: id!, title: title!, timestamp: timestamp!, cost: cost, currency: .init(rawValue: currency!)!)
     }
 }
