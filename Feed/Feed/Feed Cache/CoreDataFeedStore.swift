@@ -18,11 +18,50 @@ public final class CoreDataFeedStore: FeedStore {
     
     
     public func retrieve(completion: @escaping RetrievalCompletion) {
-        completion(.empty)
+        let context = self.context
+        context.perform {
+            do {
+                let request = NSFetchRequest<ManagedCache>(entityName: ManagedCache.entity().name!)
+                request.returnsObjectsAsFaults = false
+                if let cache = try context.fetch(request).first {
+                    completion(.found(
+                        feed: cache.feed!
+                            .compactMap { ($0 as? ManagedFeedExpense) }
+                            .map {
+                                LocalFeedExpense(id: $0.id!, title: $0.title!, timestamp: $0.timestamp!, cost: $0.cost, currency: .init(rawValue: $0.currency!)!)
+                            },
+                        timestamp: cache.timestamp!))
+                } else {
+                    completion(.empty)
+                }
+            } catch {
+                completion(.failure(error))
+            }
+        }
     }
     
     public func insert(_ feed: [LocalFeedExpense], timestamp: Date, completion: @escaping InsertionCompletion) {
-        
+        let context = self.context
+        context.perform {
+            do {
+                let managedCache = ManagedCache(context: context)
+                managedCache.timestamp = timestamp
+                managedCache.feed = NSOrderedSet(array: feed.map { local in
+                    let managed = ManagedFeedExpense(context: context)
+                    managed.id = local.id
+                    managed.title = local.title
+                    managed.timestamp = local.timestamp
+                    managed.cost = local.cost
+                    managed.currency = local.currency.rawValue
+                    return managed
+                })
+                
+                try context.save()
+                completion(nil)
+            } catch {
+                completion(error)
+            }
+        }
     }
     
     public func deleteCachedFeed(completion: @escaping DeletionCompletion) {
