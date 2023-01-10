@@ -62,38 +62,3 @@ public final class CoreDataFeedStore: FeedStore {
         context.perform { action(context) }
     }
 }
-
-extension ManagedCache {
-    static func find(in context: NSManagedObjectContext) throws -> ManagedCache? {
-        let request = NSFetchRequest<ManagedCache>(entityName: entity().name!)
-        request.returnsObjectsAsFaults = false
-        return try context.fetch(request).first
-    }
-    
-    static func newUniqueInstance(in context: NSManagedObjectContext) throws -> ManagedCache {
-        try find(in: context).map(context.delete)
-        return ManagedCache(context: context)
-    }
-    
-    var localFeed: [LocalFeedExpense] {
-        return feed!.compactMap { ($0 as? ManagedFeedExpense)?.local }
-    }
-}
-
-extension ManagedFeedExpense {
-    static func expenses(from localFeed: [LocalFeedExpense], in context: NSManagedObjectContext) -> NSOrderedSet {
-        return NSOrderedSet(array: localFeed.map { local in
-            let managed = ManagedFeedExpense(context: context)
-            managed.id = local.id
-            managed.title = local.title
-            managed.timestamp = local.timestamp
-            managed.cost = local.cost
-            managed.currency = local.currency.rawValue
-            return managed
-        })
-    }
-
-    var local: LocalFeedExpense {
-        return LocalFeedExpense(id: id!, title: title!, timestamp: timestamp!, cost: cost, currency: .init(rawValue: currency!)!)
-    }
-}
