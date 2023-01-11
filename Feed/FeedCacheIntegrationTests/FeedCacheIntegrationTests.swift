@@ -12,13 +12,13 @@ final class FeedCacheIntegrationTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-
+        
         setupEmptyStoreState()
     }
-
+    
     override func tearDown() {
         super.tearDown()
-
+        
         undoStoreSideEffects()
     }
     
@@ -32,17 +32,41 @@ final class FeedCacheIntegrationTests: XCTestCase {
         let sutToPerformSave = makeSUT()
         let sutToPerformLoad = makeSUT()
         let feed = uniqueExpenseFeed().models
-
+        
         let saveExp = expectation(description: "Wait for save completion")
         sutToPerformSave.save(feed) { saveError in
             XCTAssertNil(saveError, "Expected to save feed successfully")
             saveExp.fulfill()
         }
         wait(for: [saveExp], timeout: 1.0)
-
+        
         expect(sutToPerformLoad, toLoad: feed)
     }
-
+    
+    func test_save_overridesItemsSavedOnASeparateInstance() {
+        let sutToPerformFirstSave = makeSUT()
+        let sutToPerformLastSave = makeSUT()
+        let sutToPerformLoad = makeSUT()
+        let firstFeed = uniqueExpenseFeed().models
+        let latestFeed = uniqueExpenseFeed().models
+        
+        let saveExp1 = expectation(description: "Wait for save completion")
+        sutToPerformFirstSave.save(firstFeed) { saveError in
+            XCTAssertNil(saveError, "Expected to save feed successfully")
+            saveExp1.fulfill()
+        }
+        wait(for: [saveExp1], timeout: 1.0)
+        
+        let saveExp2 = expectation(description: "Wait for save completion")
+        sutToPerformLastSave.save(latestFeed) { saveError in
+            XCTAssertNil(saveError, "Expected to save feed successfully")
+            saveExp2.fulfill()
+        }
+        wait(for: [saveExp2], timeout: 1.0)
+        
+        expect(sutToPerformLoad, toLoad: latestFeed)
+    }
+    
     // MARK: - Helpers
     private func makeSUT(file: StaticString = #file, line: UInt = #line) -> LocalFeedLoader {
         let storeBundle = Bundle(for: CoreDataFeedStore.self)
@@ -73,19 +97,19 @@ final class FeedCacheIntegrationTests: XCTestCase {
     private func setupEmptyStoreState() {
         deleteStoreArtifacts()
     }
-
+    
     private func undoStoreSideEffects() {
         deleteStoreArtifacts()
     }
-
+    
     private func deleteStoreArtifacts() {
         try? FileManager.default.removeItem(at: testSpecificStoreURL())
     }
-
+    
     private func testSpecificStoreURL() -> URL {
         return cachesDirectory().appendingPathComponent("\(type(of: self)).store")
     }
-
+    
     private func cachesDirectory() -> URL {
         return FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!
     }
