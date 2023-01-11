@@ -33,7 +33,7 @@ final class FeedAPIEndToEndTests: XCTestCase {
     // MARK: - Helpers
     
     private func getFeedResult(file: StaticString = #filePath, line: UInt = #line) -> FeedLoader.Result? {
-        let testServerURL = URL(string: "http://m00nbek.me/bills/test-feed")!
+        let testServerURL = URL(string: "http://18.181.191.127/bills/test-feed")!
         let client = URLSessionHTTPClient(session: URLSession(configuration: .ephemeral))
         let loader = RemoteFeedLoader(url: testServerURL, client: client)
         
