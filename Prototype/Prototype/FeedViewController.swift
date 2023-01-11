@@ -33,5 +33,7 @@ extension FeedExpenseCell {
         title.text = model.title
         cost.text = "-$\(model.cost)"
         date.text = model.timestamp
+        
+        fadeIn()
     }
 }
