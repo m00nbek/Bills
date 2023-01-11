@@ -11,15 +11,27 @@ struct FeedExpenseViewModel {
     let title: String
     let timestamp: String
     let cost: Float
-    let currency: String
 }
 
 final class FeedViewController: UITableViewController {
+    private let feed = FeedExpenseViewModel.prototypedFeed
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        10
+        feed.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        tableView.dequeueReusableCell(withIdentifier: "FeedExpenseCell")!
+        let cell = tableView.dequeueReusableCell(withIdentifier: "FeedExpenseCell") as! FeedExpenseCell
+        let model = feed[indexPath.row]
+        cell.configure(with: model)
+        return cell
+    }
+}
+
+extension FeedExpenseCell {
+    func configure(with model: FeedExpenseViewModel) {
+        title.text = model.title
+        cost.text = "-$\(model.cost)"
+        date.text = model.timestamp
     }
 }
