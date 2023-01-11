@@ -7,6 +7,13 @@
 
 import UIKit
 
+struct FeedExpenseViewModel {
+    let title: String
+    let timestamp: String
+    let cost: Float
+    let currency: String
+}
+
 final class FeedViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         10
