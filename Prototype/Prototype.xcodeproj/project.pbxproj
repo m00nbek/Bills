@@ -14,6 +14,7 @@
 		3BAF8B33296ECCE5002D114B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3BAF8B31296ECCE5002D114B /* LaunchScreen.storyboard */; };
 		3BAF8B3B296EDC10002D114B /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAF8B3A296EDC10002D114B /* FeedViewController.swift */; };
 		3BAF8B3D296EF1B5002D114B /* FeedExpenseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAF8B3C296EF1B5002D114B /* FeedExpenseViewModel.swift */; };
+		3BAF8B3F296EF432002D114B /* FeedExpenseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAF8B3E296EF432002D114B /* FeedExpenseCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		3BAF8B34296ECCE5002D114B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3BAF8B3A296EDC10002D114B /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		3BAF8B3C296EF1B5002D114B /* FeedExpenseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedExpenseViewModel.swift; sourceTree = "<group>"; };
+		3BAF8B3E296EF432002D114B /* FeedExpenseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedExpenseCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 				3BAF8B28296ECCE2002D114B /* SceneDelegate.swift */,
 				3BAF8B3A296EDC10002D114B /* FeedViewController.swift */,
 				3BAF8B3C296EF1B5002D114B /* FeedExpenseViewModel.swift */,
+				3BAF8B3E296EF432002D114B /* FeedExpenseCell.swift */,
 				3BAF8B2C296ECCE2002D114B /* Main.storyboard */,
 				3BAF8B2F296ECCE5002D114B /* Assets.xcassets */,
 				3BAF8B31296ECCE5002D114B /* LaunchScreen.storyboard */,
@@ -144,6 +147,7 @@
 				3BAF8B27296ECCE2002D114B /* AppDelegate.swift in Sources */,
 				3BAF8B3D296EF1B5002D114B /* FeedExpenseViewModel.swift in Sources */,
 				3BAF8B3B296EDC10002D114B /* FeedViewController.swift in Sources */,
+				3BAF8B3F296EF432002D114B /* FeedExpenseCell.swift in Sources */,
 				3BAF8B29296ECCE2002D114B /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
