@@ -9,7 +9,7 @@ import UIKit
 
 struct FeedExpenseViewModel {
     let title: String
-    let timestamp: String
+    let timestamp: Date
     let cost: Float
 }
 
@@ -50,8 +50,26 @@ extension FeedExpenseCell {
     func configure(with model: FeedExpenseViewModel) {
         title.text = model.title
         cost.text = "-$\(model.cost)"
-        date.text = model.timestamp
+        date.text = model.timestamp.formatted()
         
         fadeIn()
+    }
+}
+
+private extension Date {
+    func formatted() -> String {
+        let days = days(self)
+        switch days {
+        case 0:
+            return "Today"
+        case 1:
+            return "Yesterday"
+        default:
+            return "\(days) days ago"
+        }
+    }
+    
+    private func days(_ start: Date) -> Int {
+        return Calendar.current.dateComponents([.day], from: start, to: Date()).day!
     }
 }
