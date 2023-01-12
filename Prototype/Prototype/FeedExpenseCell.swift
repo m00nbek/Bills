@@ -8,7 +8,7 @@
 import UIKit
 
 final class FeedExpenseCell: UITableViewCell {
-    @IBOutlet private(set) var containerView: UIView!
+    @IBOutlet private(set) var expenseView: UIView!
     @IBOutlet private(set) var stackView: UIStackView!
     @IBOutlet private(set) var title: UILabel!
     @IBOutlet private(set) var cost: UILabel!
@@ -18,14 +18,14 @@ final class FeedExpenseCell: UITableViewCell {
         super.awakeFromNib()
         
         stackView.alpha = 0
-        containerView.startShimmering()
+        expenseView.startShimmering()
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
         
         stackView.alpha = 0
-        containerView.startShimmering()
+        expenseView.startShimmering()
     }
     
     func fadeIn() {
@@ -33,7 +33,7 @@ final class FeedExpenseCell: UITableViewCell {
             self.stackView.alpha = 1
         }) { completed in
             if completed {
-                self.containerView.stopShimmering()
+                self.expenseView.stopShimmering()
             }
         }
     }
