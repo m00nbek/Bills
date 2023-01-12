@@ -1,5 +1,5 @@
 //
-//  FeedViewController.swift
+//  FeedViewControllerTests.swift
 //  FeediOSTests
 //
 //  Created by m00nbek Melikulov on 1/12/23.
