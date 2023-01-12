@@ -24,7 +24,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="393" height="102"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qNf-o5-veK" userLabel="ContainerView">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qNf-o5-veK" userLabel="ExpenseView">
                                             <rect key="frame" x="19.666666666666657" y="12" width="353.66666666666674" height="78"/>
                                             <subviews>
                                                 <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" distribution="fillProportionally" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Vlc-ns-NVi">
@@ -90,9 +90,9 @@
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
-                                    <outlet property="containerView" destination="qNf-o5-veK" id="3i0-4i-YkH"/>
                                     <outlet property="cost" destination="tDk-Wd-xgj" id="MYm-Cq-ce2"/>
                                     <outlet property="date" destination="HTW-nZ-b9X" id="AXj-SD-2od"/>
+                                    <outlet property="expenseView" destination="qNf-o5-veK" id="3i0-4i-YkH"/>
                                     <outlet property="stackView" destination="Vlc-ns-NVi" id="RXm-NZ-9UJ"/>
                                     <outlet property="title" destination="iax-MS-I0a" id="1Sj-Yt-aU3"/>
                                 </connections>
@@ -105,6 +105,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Expenses" id="vv1-bY-MXG"/>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="kT2-8v-nJh">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <connections>
                             <action selector="refresh" destination="Gia-FD-91m" eventType="valueChanged" id="b3e-uG-G9w"/>
