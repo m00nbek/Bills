@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="pN7-v0-EV4">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Feed View Controller-->
+        <scene sceneID="xvv-70-IIu">
+            <objects>
+                <tableViewController id="pN7-v0-EV4" customClass="FeedViewController" customModule="FeediOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="aXN-J1-9cR">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.92941176469999998" green="0.91372549020000005" blue="0.94117647059999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="FeedExpenseCell" rowHeight="102" id="LOg-tv-32F" customClass="FeedExpenseCell" customModule="FeediOS" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="50" width="393" height="102"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="LOg-tv-32F" id="Sch-bm-ioP">
+                                    <rect key="frame" x="0.0" y="0.0" width="393" height="102"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wCx-gl-4sx" userLabel="ExpenseView">
+                                            <rect key="frame" x="19.666666666666657" y="12" width="353.66666666666674" height="78"/>
+                                            <subviews>
+                                                <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" distribution="fillProportionally" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="q9Z-hc-Wzi">
+                                                    <rect key="frame" x="8" y="16" width="337.66666666666669" height="46"/>
+                                                    <subviews>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cnG-3h-Nzb">
+                                                            <rect key="frame" x="0.0" y="-2.3333333333333357" width="67.666666666666671" height="51.333333333333336"/>
+                                                            <color key="tintColor" red="0.61176470589999998" green="0.67843137249999996" blue="0.74901960779999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <imageReference key="image" image="dollarsign.circle.fill" catalog="system" symbolScale="large" variableValue="0.0"/>
+                                                        </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Food" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NVf-ok-lcE">
+                                                            <rect key="frame" x="71.666666666666643" y="0.0" width="194.33333333333337" height="46"/>
+                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                            <size key="shadowOffset" width="0.0" height="0.0"/>
+                                                        </label>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="jK3-6R-nDJ">
+                                                            <rect key="frame" x="270" y="0.0" width="67.666666666666686" height="46"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$45" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pgj-cw-rIt">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="67.666666666666671" height="20"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Today" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="ZLH-Fd-roT">
+                                                                    <rect key="frame" x="0.0" y="26" width="67.666666666666671" height="20"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                                    <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                        </stackView>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstItem="jK3-6R-nDJ" firstAttribute="width" secondItem="q9Z-hc-Wzi" secondAttribute="width" multiplier="0.2" id="Mjr-Ce-9Yj"/>
+                                                        <constraint firstItem="cnG-3h-Nzb" firstAttribute="width" secondItem="q9Z-hc-Wzi" secondAttribute="width" multiplier="0.2" id="OPZ-L9-QJx"/>
+                                                    </constraints>
+                                                </stackView>
+                                            </subviews>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="q9Z-hc-Wzi" secondAttribute="trailing" constant="8" id="0mM-w0-Cf1"/>
+                                                <constraint firstItem="q9Z-hc-Wzi" firstAttribute="top" secondItem="wCx-gl-4sx" secondAttribute="top" constant="16" id="1K0-ag-GdR"/>
+                                                <constraint firstItem="q9Z-hc-Wzi" firstAttribute="leading" secondItem="wCx-gl-4sx" secondAttribute="leading" constant="8" id="sdX-GY-JGh"/>
+                                                <constraint firstAttribute="bottom" secondItem="q9Z-hc-Wzi" secondAttribute="bottom" constant="16" id="y2a-oR-NjV"/>
+                                            </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                    <integer key="value" value="22"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </view>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="wCx-gl-4sx" secondAttribute="bottom" constant="12" id="B1q-Qu-CwZ"/>
+                                        <constraint firstItem="wCx-gl-4sx" firstAttribute="centerX" secondItem="Sch-bm-ioP" secondAttribute="centerX" id="KmD-Kx-Agq"/>
+                                        <constraint firstItem="wCx-gl-4sx" firstAttribute="top" secondItem="Sch-bm-ioP" secondAttribute="top" constant="12" id="Zgt-61-vRi"/>
+                                        <constraint firstItem="wCx-gl-4sx" firstAttribute="width" secondItem="Sch-bm-ioP" secondAttribute="width" multiplier="0.9" id="wT4-vv-8Bm"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="costLabel" destination="Pgj-cw-rIt" id="lxt-z5-jeg"/>
+                                    <outlet property="dateLabel" destination="ZLH-Fd-roT" id="Qhu-cN-jDQ"/>
+                                    <outlet property="expenseTitleLabel" destination="NVf-ok-lcE" id="aaF-7V-Dqc"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="pN7-v0-EV4" id="7sL-h3-dKV"/>
+                            <outlet property="delegate" destination="pN7-v0-EV4" id="YPe-Bw-g7I"/>
+                        </connections>
+                    </tableView>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="l5T-sa-l6p">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <connections>
+                            <action selector="refresh" destination="pN7-v0-EV4" eventType="valueChanged" id="1Ok-JP-RJg"/>
+                        </connections>
+                    </refreshControl>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7gT-kr-4Hd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="869.46564885496184" y="-5.6338028169014089"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="dollarsign.circle.fill" catalog="system" width="128" height="123"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
