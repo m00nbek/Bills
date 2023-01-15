@@ -7,8 +7,8 @@
 
 import UIKit
 
- public final class FeedExpenseCell: UITableViewCell {
-     public let expenseTitleLabel = UILabel()
-     public let costLabel = UILabel()
-     public let dateLabel = UILabel()
- }
+public final class FeedExpenseCell: UITableViewCell {
+    @IBOutlet private(set) public var expenseTitleLabel: UILabel!
+    @IBOutlet private(set) public var costLabel: UILabel!
+    @IBOutlet private(set) public var dateLabel: UILabel!
+}

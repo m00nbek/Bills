@@ -15,15 +15,15 @@ final class FeedExpenseCellController {
         self.viewModel = viewModel
     }
     
-    func view() -> UITableViewCell {
-        let cell = binded(FeedExpenseCell())
+    func view(in tableView: UITableView) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "FeedExpenseCell") as! FeedExpenseCell
+        setup(cell)
         return cell
     }
     
-    private func binded(_ cell: FeedExpenseCell) -> FeedExpenseCell {
+    private func setup(_ cell: FeedExpenseCell) {
         cell.expenseTitleLabel.text = viewModel.expenseTitle
         cell.costLabel.text = viewModel.cost
         cell.dateLabel.text = viewModel.date
-        return cell
     }
 }

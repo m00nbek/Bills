@@ -89,6 +89,11 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="costLabel" destination="Pgj-cw-rIt" id="lxt-z5-jeg"/>
+                                    <outlet property="dateLabel" destination="ZLH-Fd-roT" id="Qhu-cN-jDQ"/>
+                                    <outlet property="expenseTitleLabel" destination="NVf-ok-lcE" id="aaF-7V-Dqc"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>

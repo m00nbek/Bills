@@ -41,7 +41,7 @@ public final class FeedViewController: UITableViewController, FeedLoadingView {
     }
     
     public override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        cellController(forRowAt: indexPath).view()
+        cellController(forRowAt: indexPath).view(in: tableView)
     }
     
     private func cellController(forRowAt indexPath: IndexPath) -> FeedExpenseCellController {
