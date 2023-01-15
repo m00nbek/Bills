@@ -8,14 +8,10 @@
 import UIKit
 
 public final class FeedViewController: UITableViewController {
-    private var refreshController: FeedRefreshViewController?
+    var refreshController: FeedRefreshViewController?
+    
     var tableModel = [FeedExpenseCellController]() {
         didSet { tableView.reloadData() }
-    }
-    
-    convenience init(refreshController: FeedRefreshViewController) {
-        self.init()
-        self.refreshController = refreshController
     }
     
     public override func viewDidLoad() {

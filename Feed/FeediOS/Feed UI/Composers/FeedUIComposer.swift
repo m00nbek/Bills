@@ -5,7 +5,7 @@
 //  Created by m00nbek Melikulov on 1/15/23.
 //
 
-import Foundation
+import UIKit
 import Feed
 
 public final class FeedUIComposer {
@@ -14,7 +14,11 @@ public final class FeedUIComposer {
     public static func feedComposedWith(feedLoader: FeedLoader) -> FeedViewController {
         let presentationAdapter = FeedLoaderPresentationAdapter(feedLoader: feedLoader)
         let refreshController = FeedRefreshViewController(delegate: presentationAdapter)
-        let feedController = FeedViewController(refreshController: refreshController)
+        
+        let bundle = Bundle(for: FeedViewController.self)
+        let storyboard = UIStoryboard(name: "Feed", bundle: bundle)
+        let feedController = storyboard.instantiateInitialViewController() as! FeedViewController
+        feedController.refreshController = refreshController
         
         presentationAdapter.presenter = FeedPresenter(
             feedView: FeedViewAdapter(controller: feedController),
