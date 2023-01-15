@@ -16,7 +16,7 @@ final class FeedExpenseCellController {
     }
     
     func view(in tableView: UITableView) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "FeedExpenseCell") as! FeedExpenseCell
+        let cell: FeedExpenseCell = tableView.dequeueReusableCell()
         setup(cell)
         return cell
     }
