@@ -10,23 +10,19 @@ import Feed
 
 final public class FeedViewController: UITableViewController {
     private var refreshController: FeedRefreshViewController?
-    private var tableModel = [FeedExpense]() {
+    var tableModel = [FeedExpenseCellController]() {
         didSet { tableView.reloadData() }
     }
-    private var cellControllers = [IndexPath: FeedExpenseCellController]()
     
-    public convenience init(loader: FeedLoader) {
+    convenience init(refreshController: FeedRefreshViewController) {
         self.init()
-        self.refreshController = FeedRefreshViewController(feedLoader: loader)
+        self.refreshController = refreshController
     }
     
     public override func viewDidLoad() {
         super.viewDidLoad()
         
         refreshControl = refreshController?.view
-        refreshController?.onRefresh = { [weak self] feed in
-            self?.tableModel = feed
-        }
         refreshController?.refresh()
     }
     
@@ -38,18 +34,7 @@ final public class FeedViewController: UITableViewController {
         cellController(forRowAt: indexPath).view()
     }
     
-    public override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        removeCellController(forRowAt: indexPath)
-    }
-    
     private func cellController(forRowAt indexPath: IndexPath) -> FeedExpenseCellController {
-        let cellModel = tableModel[indexPath.row]
-        let cellController = FeedExpenseCellController(model: cellModel)
-        cellControllers[indexPath] = cellController
-        return cellController
-    }
-    
-    private func removeCellController(forRowAt indexPath: IndexPath) {
-        cellControllers[indexPath] = nil
+        return tableModel[indexPath.row]
     }
 }
