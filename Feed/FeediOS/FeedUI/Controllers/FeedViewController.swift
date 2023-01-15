@@ -13,6 +13,7 @@ final public class FeedViewController: UITableViewController {
     private var tableModel = [FeedExpense]() {
         didSet { tableView.reloadData() }
     }
+    private var cellControllers = [IndexPath: FeedExpenseCellController]()
     
     public convenience init(loader: FeedLoader) {
         self.init()
@@ -34,29 +35,21 @@ final public class FeedViewController: UITableViewController {
     }
     
     public override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cellModel = tableModel[indexPath.row]
-        let cell = FeedExpenseCell()
-        cell.expenseTitleLabel.text = cellModel.title
-        cell.costLabel.text = "\(cellModel.cost)"
-        cell.dateLabel.text = cellModel.timestamp.formatted()
-        return cell
-    }
-}
-
-private extension Date {
-    func formatted() -> String {
-        let days = days(self)
-        switch days {
-        case 0:
-            return "Today"
-        case 1:
-            return "Yesterday"
-        default:
-            return "\(days) days ago"
-        }
+        cellController(forRowAt: indexPath).view()
     }
     
-    private func days(_ start: Date) -> Int {
-        return Calendar.current.dateComponents([.day], from: start, to: Date()).day!
+    public override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        removeCellController(forRowAt: indexPath)
+    }
+    
+    private func cellController(forRowAt indexPath: IndexPath) -> FeedExpenseCellController {
+        let cellModel = tableModel[indexPath.row]
+        let cellController = FeedExpenseCellController(model: cellModel)
+        cellControllers[indexPath] = cellController
+        return cellController
+    }
+    
+    private func removeCellController(forRowAt indexPath: IndexPath) {
+        cellControllers[indexPath] = nil
     }
 }
