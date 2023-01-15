@@ -414,6 +414,15 @@
 			path = Composers;
 			sourceTree = "<group>";
 		};
+		3B8CFA2E2973D1910075713D /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				3B8CFA1E2973BA830075713D /* Helpers */,
+				3BBE4915296FC954001FE56C /* FeedViewControllerTests.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
 		3BAF8B04296EA1B8002D114B /* FeediOS */ = {
 			isa = PBXGroup;
 			children = (
@@ -425,8 +434,7 @@
 		3BAF8B10296EA1B8002D114B /* FeediOSTests */ = {
 			isa = PBXGroup;
 			children = (
-				3B8CFA1E2973BA830075713D /* Helpers */,
-				3BBE4915296FC954001FE56C /* FeedViewControllerTests.swift */,
+				3B8CFA2E2973D1910075713D /* Controllers */,
 			);
 			path = FeediOSTests;
 			sourceTree = "<group>";
