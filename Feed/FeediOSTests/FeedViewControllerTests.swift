@@ -174,31 +174,3 @@ private extension FeedExpenseCell {
         dateLabel.text
     }
 }
-
-private extension UIRefreshControl {
-    func simulatePullToRefresh() {
-        allTargets.forEach { target in
-            actions(forTarget: target, forControlEvent: .valueChanged)?.forEach {
-                (target as NSObject).perform(Selector($0))
-            }
-        }
-    }
-}
-
-private extension Date {
-    func formatted() -> String {
-        let days = days(self)
-        switch days {
-        case 0:
-            return "Today"
-        case 1:
-            return "Yesterday"
-        default:
-            return "\(days) days ago"
-        }
-    }
-    
-    private func days(_ start: Date) -> Int {
-        return Calendar.current.dateComponents([.day], from: start, to: Date()).day!
-    }
-}
