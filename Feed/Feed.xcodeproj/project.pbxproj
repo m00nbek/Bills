@@ -380,7 +380,6 @@
 		3B8CFA1B2973B9A70075713D /* Feed UI */ = {
 			isa = PBXGroup;
 			children = (
-				3B8CFA382973D83D0075713D /* Feed Presentation */,
 				3B8CFA272973C6500075713D /* Composers */,
 				3B8CFA1D2973B9BF0075713D /* Controllers */,
 				3B8CFA1C2973B9BB0075713D /* Views */,
@@ -465,6 +464,7 @@
 		3BAF8B04296EA1B8002D114B /* FeediOS */ = {
 			isa = PBXGroup;
 			children = (
+				3B8CFA382973D83D0075713D /* Feed Presentation */,
 				3B8CFA1B2973B9A70075713D /* Feed UI */,
 			);
 			path = FeediOS;
