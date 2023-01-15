@@ -11,23 +11,23 @@ import FeediOS
 
 extension FeedViewControllerTests {
     class LoaderSpy: FeedLoader {
-        private var completions = [(FeedLoader.Result) -> Void]()
+        private var feedRequests = [(FeedLoader.Result) -> Void]()
         
-        var loadCallCount: Int {
-            return completions.count
+        var loadFeedCallCount: Int {
+            return feedRequests.count
         }
         
         func load(completion: @escaping (FeedLoader.Result) -> Void) {
-            completions.append(completion)
+            feedRequests.append(completion)
         }
         
-        func completeFeedLoading(with feed: [FeedExpense] = [], at index: Int) {
-            completions[index](.success(feed))
+        func completeFeedLoading(with feed: [FeedExpense] = [], at index: Int = 0) {
+            feedRequests[index](.success(feed))
         }
         
-        func completeFeedLoadingWithError(at index: Int) {
-            let error = NSError(domain: "error", code: 1, userInfo: nil)
-            completions[index](.failure(error))
+        func completeFeedLoadingWithError(at index: Int = 0) {
+            let error = NSError(domain: "an error", code: 0, userInfo: nil)
+            feedRequests[index](.failure(error))
         }
     }
 }
