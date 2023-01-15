@@ -8,7 +8,7 @@
 import UIKit
 import Feed
 
-final public class FeedViewController: UITableViewController {
+public final class FeedViewController: UITableViewController {
     private var refreshController: FeedRefreshViewController?
     var tableModel = [FeedExpenseCellController]() {
         didSet { tableView.reloadData() }
