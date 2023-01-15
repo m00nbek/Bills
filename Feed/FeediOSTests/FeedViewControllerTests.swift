@@ -132,21 +132,3 @@ final class FeedViewControllerTests: XCTestCase {
         }
     }
 }
-
-private extension FeedExpenseCell {
-    var titleText: String? {
-        expenseTitleLabel.text
-    }
-    
-    var costTextAsFloat: Float? {
-        if let text = costLabel.text {
-            return Float(text)
-        }
-        
-        return nil
-    }
-    
-    var dateText: String? {
-        dateLabel.text
-    }
-}
