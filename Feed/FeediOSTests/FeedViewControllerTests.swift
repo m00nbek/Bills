@@ -133,30 +133,6 @@ final class FeedViewControllerTests: XCTestCase {
     }
 }
 
-private extension FeedViewController {
-    func simulateUserInitiatedFeedReload() {
-        refreshControl?.simulatePullToRefresh()
-    }
-    
-    var isShowingLoadingIndicator: Bool {
-        return refreshControl?.isRefreshing == true
-    }
-    
-    func numberOfRenderedFeedExpenseViews() -> Int {
-        return tableView.numberOfRows(inSection: feedExpenseSection)
-    }
-    
-    func feedExpenseView(at row: Int) -> UITableViewCell? {
-        let ds = tableView.dataSource
-        let index = IndexPath(row: row, section: feedExpenseSection)
-        return ds?.tableView(tableView, cellForRowAt: index)
-    }
-    
-    private var feedExpenseSection: Int {
-        return 0
-    }
-}
-
 private extension FeedExpenseCell {
     var titleText: String? {
         expenseTitleLabel.text
