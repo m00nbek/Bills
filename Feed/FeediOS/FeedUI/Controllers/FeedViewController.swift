@@ -9,31 +9,24 @@ import UIKit
 import Feed
 
 final public class FeedViewController: UITableViewController {
-    private var loader: FeedLoader?
-    private var tableModel = [FeedExpense]()
+    private var refreshController: FeedRefreshViewController?
+    private var tableModel = [FeedExpense]() {
+        didSet { tableView.reloadData() }
+    }
     
     public convenience init(loader: FeedLoader) {
         self.init()
-        self.loader = loader
+        self.refreshController = FeedRefreshViewController(feedLoader: loader)
     }
     
     public override func viewDidLoad() {
         super.viewDidLoad()
         
-        refreshControl = UIRefreshControl()
-        refreshControl?.addTarget(self, action: #selector(load), for: .valueChanged)
-        load()
-    }
-    
-    @objc private func load() {
-        refreshControl?.beginRefreshing()
-        loader?.load { [weak self] result in
-            if let feed = try? result.get() {
-                self?.tableModel = feed
-                self?.tableView.reloadData()
-            }
-            self?.refreshControl?.endRefreshing()
+        refreshControl = refreshController?.view
+        refreshController?.onRefresh = { [weak self] feed in
+            self?.tableModel = feed
         }
+        refreshController?.refresh()
     }
     
     public override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

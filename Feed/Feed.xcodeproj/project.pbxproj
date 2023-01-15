@@ -45,6 +45,7 @@
 		3B693AA2295C786300C31C25 /* FeedStoreSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B693AA1295C786300C31C25 /* FeedStoreSpy.swift */; };
 		3B8CFA202973BA9D0075713D /* UIRefreshControl+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B8CFA1F2973BA9D0075713D /* UIRefreshControl+TestHelpers.swift */; };
 		3B8CFA222973BAD50075713D /* Date+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B8CFA212973BAD50075713D /* Date+TestHelpers.swift */; };
+		3B8CFA242973BEE60075713D /* FeedRefreshViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B8CFA232973BEE60075713D /* FeedRefreshViewController.swift */; };
 		3BAF8B0D296EA1B8002D114B /* FeediOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BAF8B03296EA1B8002D114B /* FeediOS.framework */; };
 		3BB45A8F29438E4400AC6642 /* CacheFeedUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB45A8E29438E4400AC6642 /* CacheFeedUseCaseTests.swift */; };
 		3BB6C91F29687FDF00FAE54C /* FeedCachePolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB6C91E29687FDF00FAE54C /* FeedCachePolicy.swift */; };
@@ -148,6 +149,7 @@
 		3B693AA1295C786300C31C25 /* FeedStoreSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedStoreSpy.swift; sourceTree = "<group>"; };
 		3B8CFA1F2973BA9D0075713D /* UIRefreshControl+TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIRefreshControl+TestHelpers.swift"; sourceTree = "<group>"; };
 		3B8CFA212973BAD50075713D /* Date+TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+TestHelpers.swift"; sourceTree = "<group>"; };
+		3B8CFA232973BEE60075713D /* FeedRefreshViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedRefreshViewController.swift; sourceTree = "<group>"; };
 		3BAF8B03296EA1B8002D114B /* FeediOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FeediOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BAF8B0C296EA1B8002D114B /* FeediOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FeediOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BB45A8E29438E4400AC6642 /* CacheFeedUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheFeedUseCaseTests.swift; sourceTree = "<group>"; };
@@ -357,11 +359,45 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
-		3BAF8B04296EA1B8002D114B /* FeediOS */ = {
+		3B8CFA1B2973B9A70075713D /* FeedUI */ = {
+			isa = PBXGroup;
+			children = (
+				3B8CFA1D2973B9BF0075713D /* Controllers */,
+				3B8CFA1C2973B9BB0075713D /* Views */,
+			);
+			path = FeedUI;
+			sourceTree = "<group>";
+		};
+		3B8CFA1C2973B9BB0075713D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3BBE4920296FE0A9001FE56C /* FeedExpenseCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		3B8CFA1D2973B9BF0075713D /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				3BBE491E296FD7B3001FE56C /* FeedViewController.swift */,
-				3BBE4920296FE0A9001FE56C /* FeedExpenseCell.swift */,
+				3B8CFA232973BEE60075713D /* FeedRefreshViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		3B8CFA1E2973BA830075713D /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				3B8CFA1F2973BA9D0075713D /* UIRefreshControl+TestHelpers.swift */,
+				3B8CFA212973BAD50075713D /* Date+TestHelpers.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		3BAF8B04296EA1B8002D114B /* FeediOS */ = {
+			isa = PBXGroup;
+			children = (
+				3B8CFA1B2973B9A70075713D /* FeedUI */,
 			);
 			path = FeediOS;
 			sourceTree = "<group>";
@@ -711,6 +747,7 @@
 			files = (
 				3BBE4921296FE0A9001FE56C /* FeedExpenseCell.swift in Sources */,
 				3BBE491F296FD7B3001FE56C /* FeedViewController.swift in Sources */,
+				3B8CFA242973BEE60075713D /* FeedRefreshViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
