@@ -9,35 +9,21 @@ import UIKit
 import Feed
 
 final class FeedExpenseCellController {
-    private let model: FeedExpense
+    private let viewModel: FeedExpenseViewModel
     
-    init(model: FeedExpense) {
-        self.model = model
+    init(viewModel: FeedExpenseViewModel) {
+        self.viewModel = viewModel
     }
     
     func view() -> UITableViewCell {
-        let cell = FeedExpenseCell()
-        cell.expenseTitleLabel.text = model.title
-        cell.costLabel.text = "\(model.cost)"
-        cell.dateLabel.text = model.timestamp.formatted()
+        let cell = binded(FeedExpenseCell())
         return cell
     }
-}
-
-private extension Date {
-    func formatted() -> String {
-        let days = days(self)
-        switch days {
-        case 0:
-            return "Today"
-        case 1:
-            return "Yesterday"
-        default:
-            return "\(days) days ago"
-        }
-    }
     
-    private func days(_ start: Date) -> Int {
-        return Calendar.current.dateComponents([.day], from: start, to: Date()).day!
+    private func binded(_ cell: FeedExpenseCell) -> FeedExpenseCell {
+        cell.expenseTitleLabel.text = viewModel.expenseTitle
+        cell.costLabel.text = viewModel.cost
+        cell.dateLabel.text = viewModel.date
+        return cell
     }
 }
