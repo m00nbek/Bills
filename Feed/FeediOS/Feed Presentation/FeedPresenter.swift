@@ -7,24 +7,12 @@
 
 import Feed
 
-struct FeedLoadingViewModel {
-    let isLoading: Bool
-}
-
 protocol FeedLoadingView {
     func display(_ viewModel: FeedLoadingViewModel)
 }
 
-struct FeedViewModel {
-    let feed: [FeedExpense]
-}
-
 protocol FeedView {
     func display(_ viewModel: FeedViewModel)
-}
-
-struct FeedErrorViewModel {
-    let message: String?
 }
 
 protocol FeedErrorView {
