@@ -9,7 +9,7 @@ import UIKit
 import Feed
 import FeediOS
 
-extension FeedViewControllerTests {
+extension FeedUIIntegrationTests {
     class LoaderSpy: FeedLoader {
         private var feedRequests = [(FeedLoader.Result) -> Void]()
         
