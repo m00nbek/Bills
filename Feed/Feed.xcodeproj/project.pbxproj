@@ -175,6 +175,7 @@
 		3BA6E7932975277B0059F3F0 /* FeedViewControllerTests+Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FeedViewControllerTests+Localization.swift"; sourceTree = "<group>"; };
 		3BA6E7962975289D0059F3F0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Feed.strings; sourceTree = "<group>"; };
 		3BA6E798297528E50059F3F0 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Feed.strings; sourceTree = "<group>"; };
+		3BA6E7992975295B0059F3F0 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Feed.strings; sourceTree = "<group>"; };
 		3BAF8B03296EA1B8002D114B /* FeediOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FeediOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BAF8B0C296EA1B8002D114B /* FeediOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FeediOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BB45A8E29438E4400AC6642 /* CacheFeedUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheFeedUseCaseTests.swift; sourceTree = "<group>"; };
@@ -675,6 +676,7 @@
 				en,
 				Base,
 				es,
+				ja,
 			);
 			mainGroup = 3B53FE5829278A7E0057473C;
 			productRefGroup = 3B53FE6329278A7F0057473C /* Products */;
@@ -873,6 +875,7 @@
 			children = (
 				3BA6E7962975289D0059F3F0 /* en */,
 				3BA6E798297528E50059F3F0 /* es */,
+				3BA6E7992975295B0059F3F0 /* ja */,
 			);
 			name = Feed.strings;
 			sourceTree = "<group>";
