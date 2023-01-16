@@ -413,8 +413,8 @@
 		3B8CFA1C2973B9BB0075713D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				3BA6E7AC2975752A0059F3F0 /* Helpers */,
 				3BBE4920296FE0A9001FE56C /* FeedExpenseCell.swift */,
-				3B8FB2CE297468FD0019D37A /* UITableView+Dequeueing.swift */,
 				3BA6E7AA2975725F0059F3F0 /* ErrorView.swift */,
 				3B8CFA40297453A30075713D /* Feed.storyboard */,
 			);
@@ -490,6 +490,14 @@
 				3BA6E7A8297568FE0059F3F0 /* FeedPresenterTests.swift */,
 			);
 			path = "Feed Presentation";
+			sourceTree = "<group>";
+		};
+		3BA6E7AC2975752A0059F3F0 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				3B8FB2CE297468FD0019D37A /* UITableView+Dequeueing.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		3BAF8B04296EA1B8002D114B /* FeediOS */ = {
