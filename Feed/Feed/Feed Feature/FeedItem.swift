@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct FeedExpense: Equatable {
+public struct FeedExpense: Hashable {
     public let id: UUID
     public let title: String
     public let timestamp: Date
