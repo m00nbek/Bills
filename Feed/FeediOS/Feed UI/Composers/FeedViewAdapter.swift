@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Feed
 
 final class FeedViewAdapter: FeedView {
     private weak var controller: FeedViewController?
