@@ -13,6 +13,7 @@ final class AppUIAcceptanceTests: XCTestCase {
         
         app.launch()
         
-        XCTAssertEqual(app.cells.count, 8)
+        let feedCells = app.cells.matching(identifier: "feed-expense-cell")
+        XCTAssertEqual(feedCells.count, 8)
     }
 }
