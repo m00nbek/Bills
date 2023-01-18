@@ -20,7 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		3B9ADF6F2977AF9900F21378 /* PBXContainerItemProxy */ = {
+		3B9ADF7E2977B28B00F21378 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 3BB788552976E7CB00E4DA75 /* Project object */;
 			proxyType = 1;
@@ -47,7 +47,7 @@
 /* Begin PBXFileReference section */
 		3B9ADF602976EAC100F21378 /* Feed.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Feed.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B9ADF612976EAC100F21378 /* FeediOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FeediOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3B9ADF6B2977AF9900F21378 /* AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3B9ADF7A2977B28B00F21378 /* AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BB7885D2976E7CB00E4DA75 /* App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = App.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BB788602976E7CB00E4DA75 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3BB788622976E7CB00E4DA75 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -59,7 +59,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		3B9ADF682977AF9900F21378 /* Frameworks */ = {
+		3B9ADF772977B28B00F21378 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -87,7 +87,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		3B9ADF6C2977AF9900F21378 /* AppTests */ = {
+		3B9ADF7B2977B28B00F21378 /* AppTests */ = {
 			isa = PBXGroup;
 			children = (
 			);
@@ -98,7 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				3BB7885F2976E7CB00E4DA75 /* App */,
-				3B9ADF6C2977AF9900F21378 /* AppTests */,
+				3B9ADF7B2977B28B00F21378 /* AppTests */,
 				3BB7885E2976E7CB00E4DA75 /* Products */,
 				3B9ADF5F2976EAC100F21378 /* Frameworks */,
 			);
@@ -108,7 +108,7 @@
 			isa = PBXGroup;
 			children = (
 				3BB7885D2976E7CB00E4DA75 /* App.app */,
-				3B9ADF6B2977AF9900F21378 /* AppTests.xctest */,
+				3B9ADF7A2977B28B00F21378 /* AppTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -130,22 +130,22 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		3B9ADF6A2977AF9900F21378 /* AppTests */ = {
+		3B9ADF792977B28B00F21378 /* AppTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3B9ADF712977AF9900F21378 /* Build configuration list for PBXNativeTarget "AppTests" */;
+			buildConfigurationList = 3B9ADF802977B28B00F21378 /* Build configuration list for PBXNativeTarget "AppTests" */;
 			buildPhases = (
-				3B9ADF672977AF9900F21378 /* Sources */,
-				3B9ADF682977AF9900F21378 /* Frameworks */,
-				3B9ADF692977AF9900F21378 /* Resources */,
+				3B9ADF762977B28B00F21378 /* Sources */,
+				3B9ADF772977B28B00F21378 /* Frameworks */,
+				3B9ADF782977B28B00F21378 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				3B9ADF702977AF9900F21378 /* PBXTargetDependency */,
+				3B9ADF7F2977B28B00F21378 /* PBXTargetDependency */,
 			);
 			name = AppTests;
 			productName = AppTests;
-			productReference = 3B9ADF6B2977AF9900F21378 /* AppTests.xctest */;
+			productReference = 3B9ADF7A2977B28B00F21378 /* AppTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		3BB7885C2976E7CB00E4DA75 /* App */ = {
@@ -176,7 +176,7 @@
 				LastSwiftUpdateCheck = 1420;
 				LastUpgradeCheck = 1420;
 				TargetAttributes = {
-					3B9ADF6A2977AF9900F21378 = {
+					3B9ADF792977B28B00F21378 = {
 						CreatedOnToolsVersion = 14.2;
 						TestTargetID = 3BB7885C2976E7CB00E4DA75;
 					};
@@ -199,13 +199,13 @@
 			projectRoot = "";
 			targets = (
 				3BB7885C2976E7CB00E4DA75 /* App */,
-				3B9ADF6A2977AF9900F21378 /* AppTests */,
+				3B9ADF792977B28B00F21378 /* AppTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		3B9ADF692977AF9900F21378 /* Resources */ = {
+		3B9ADF782977B28B00F21378 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -225,7 +225,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		3B9ADF672977AF9900F21378 /* Sources */ = {
+		3B9ADF762977B28B00F21378 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -245,10 +245,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		3B9ADF702977AF9900F21378 /* PBXTargetDependency */ = {
+		3B9ADF7F2977B28B00F21378 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 3BB7885C2976E7CB00E4DA75 /* App */;
-			targetProxy = 3B9ADF6F2977AF9900F21378 /* PBXContainerItemProxy */;
+			targetProxy = 3B9ADF7E2977B28B00F21378 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -272,7 +272,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		3B9ADF722977AF9900F21378 /* Debug */ = {
+		3B9ADF812977B28B00F21378 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -290,7 +290,7 @@
 			};
 			name = Debug;
 		};
-		3B9ADF732977AF9900F21378 /* Release */ = {
+		3B9ADF822977B28B00F21378 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -481,11 +481,11 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		3B9ADF712977AF9900F21378 /* Build configuration list for PBXNativeTarget "AppTests" */ = {
+		3B9ADF802977B28B00F21378 /* Build configuration list for PBXNativeTarget "AppTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				3B9ADF722977AF9900F21378 /* Debug */,
-				3B9ADF732977AF9900F21378 /* Release */,
+				3B9ADF812977B28B00F21378 /* Debug */,
+				3B9ADF822977B28B00F21378 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
