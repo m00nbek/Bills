@@ -8,14 +8,14 @@
 import UIKit
 import Feed
 
-final class FeedExpenseCellController {
+public final class FeedExpenseCellController {
     private let viewModel: FeedExpenseViewModel
     
-    init(viewModel: FeedExpenseViewModel) {
+    public init(viewModel: FeedExpenseViewModel) {
         self.viewModel = viewModel
     }
     
-    func view(in tableView: UITableView) -> UITableViewCell {
+    public func view(in tableView: UITableView) -> UITableViewCell {
         let cell: FeedExpenseCell = tableView.dequeueReusableCell()
         setup(cell)
         return cell
