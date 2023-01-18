@@ -21,21 +21,59 @@ class DebuggingSceneDelegate: SceneDelegate {
     }
     
     override func makeRemoteClient() -> HTTPClient {
-        if UserDefaults.standard.string(forKey: "connectivity") == "offline" {
-            return AlwaysFailingHTTPClient()
+        if let connectivity = UserDefaults.standard.string(forKey: "connectivity") {
+            return DebuggingHTTPClient(connectivity: connectivity)
         }
         return super.makeRemoteClient()
     }
 }
 
-private class AlwaysFailingHTTPClient: HTTPClient {
+private class DebuggingHTTPClient: HTTPClient {
     private class Task: HTTPClientTask {
         func cancel() {}
     }
     
+    private let connectivity: String
+
+    init(connectivity: String) {
+        self.connectivity = connectivity
+    }
+    
     func get(from url: URL, completion: @escaping (HTTPClient.Result) -> Void) -> HTTPClientTask {
-        completion(.failure(NSError(domain: "offline", code: 0)))
+        switch connectivity {
+        case "online":
+            completion(.success(makeSuccessfulResponse(for: url)))
+            
+        default:
+            completion(.failure(NSError(domain: "offline", code: 0)))
+        }
         return Task()
+    }
+    
+    private func makeSuccessfulResponse(for url: URL) -> (Data, HTTPURLResponse) {
+        let response = HTTPURLResponse(url: url, statusCode: 200, httpVersion: nil, headerFields: nil)!
+        return (makeFeedData(), response)
+    }
+    
+    private func makeFeedData() -> Data {
+        return try! JSONSerialization.data(withJSONObject: [
+            "items": [
+                [
+                    "id": UUID().uuidString,
+                    "title": "any title",
+                    "timestamp": Date().ISO8601Format(),
+                    "cost": 0,
+                    "currency": "USD"
+                ],
+                [
+                    "id": UUID().uuidString,
+                    "title": "any title",
+                    "timestamp": Date().ISO8601Format(),
+                    "cost": 0,
+                    "currency": "USD"
+                ],
+            ]
+        ])
     }
 }
 #endif
