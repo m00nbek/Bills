@@ -28,4 +28,13 @@ final class AppUIAcceptanceTests: XCTestCase {
         let cachedFeedCells = offlineApp.cells.matching(identifier: "feed-expense-cell")
         XCTAssertEqual(cachedFeedCells.count, 8)
     }
+    
+    func test_onLaunch_displaysEmptyFeedWhenCustomerHasNoConnectivityAndNoCache() {
+        let app = XCUIApplication()
+        app.launchArguments = ["-reset", "-connectivity", "offline"]
+        app.launch()
+
+        let feedCells = app.cells.matching(identifier: "feed-expense-cell")
+        XCTAssertEqual(feedCells.count, 0)
+    }
 }
