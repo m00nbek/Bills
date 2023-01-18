@@ -25,6 +25,7 @@
 		3BB7886A2976E7CD00E4DA75 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3BB788692976E7CD00E4DA75 /* Assets.xcassets */; };
 		3BB7886D2976E7CD00E4DA75 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3BB7886B2976E7CD00E4DA75 /* LaunchScreen.storyboard */; };
 		3BD6BD7229781247004A3EF9 /* DebuggingSceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD6BD7129781247004A3EF9 /* DebuggingSceneDelegate.swift */; };
+		3BD6BD79297833B8004A3EF9 /* SceneDelegateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD6BD78297833B8004A3EF9 /* SceneDelegateTests.swift */; };
 		3BE0313D2978009D0029BA68 /* AppUIAcceptanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE0313C2978009D0029BA68 /* AppUIAcceptanceTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -80,6 +81,7 @@
 		3BB7886C2976E7CD00E4DA75 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3BB7886E2976E7CD00E4DA75 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3BD6BD7129781247004A3EF9 /* DebuggingSceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebuggingSceneDelegate.swift; sourceTree = "<group>"; };
+		3BD6BD78297833B8004A3EF9 /* SceneDelegateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegateTests.swift; sourceTree = "<group>"; };
 		3BE0313A2978009D0029BA68 /* AppUIAcceptanceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppUIAcceptanceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BE0313C2978009D0029BA68 /* AppUIAcceptanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUIAcceptanceTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -123,9 +125,10 @@
 		3B9ADF7B2977B28B00F21378 /* AppTests */ = {
 			isa = PBXGroup;
 			children = (
+				3B9ADF892977BC0B00F21378 /* Helpers */,
 				3B9ADF832977B2D600F21378 /* FeedLoaderWithFallbackCompositeTests.swift */,
 				3B9ADF872977BB1E00F21378 /* FeedLoaderCacheDecoratorTests.swift */,
-				3B9ADF892977BC0B00F21378 /* Helpers */,
+				3BD6BD78297833B8004A3EF9 /* SceneDelegateTests.swift */,
 			);
 			path = AppTests;
 			sourceTree = "<group>";
@@ -321,6 +324,7 @@
 			files = (
 				3B9ADF8D2977BD0900F21378 /* SharedTestHelpers.swift in Sources */,
 				3B9ADF842977B2D600F21378 /* FeedLoaderWithFallbackCompositeTests.swift in Sources */,
+				3BD6BD79297833B8004A3EF9 /* SceneDelegateTests.swift in Sources */,
 				3B9ADF8F2977BD9700F21378 /* XCTestCase+FeedLoader.swift in Sources */,
 				3B9ADF8B2977BC1900F21378 /* FeedLoaderStub.swift in Sources */,
 				3B9ADF882977BB1E00F21378 /* FeedLoaderCacheDecoratorTests.swift in Sources */,
