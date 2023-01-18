@@ -69,12 +69,4 @@ class FeedLoaderWithFallbackCompositeTests: XCTestCase {
             XCTAssertNil(instance, "Instance should have been deallocated. Potential memory leak.", file: file, line: line)
         }
     }
-    
-    private func anyNSError() -> NSError {
-        return NSError(domain: "any error", code: 0)
-    }
-    
-    private func uniqueFeed() -> [FeedExpense] {
-        return [FeedExpense(id: UUID(), title: "any", timestamp: Date(), cost: 0, currency: .USD)]
-    }
 }
