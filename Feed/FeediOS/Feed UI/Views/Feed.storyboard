@@ -118,6 +118,7 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <accessibility key="accessibilityConfiguration" identifier="feed-expense-cell"/>
                                 <connections>
                                     <outlet property="costLabel" destination="Pgj-cw-rIt" id="lxt-z5-jeg"/>
                                     <outlet property="dateLabel" destination="ZLH-Fd-roT" id="Qhu-cN-jDQ"/>
