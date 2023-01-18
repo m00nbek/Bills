@@ -25,7 +25,6 @@
 		3BB7886A2976E7CD00E4DA75 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3BB788692976E7CD00E4DA75 /* Assets.xcassets */; };
 		3BB7886D2976E7CD00E4DA75 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3BB7886B2976E7CD00E4DA75 /* LaunchScreen.storyboard */; };
 		3BE0313D2978009D0029BA68 /* AppUIAcceptanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE0313C2978009D0029BA68 /* AppUIAcceptanceTests.swift */; };
-		3BE0313F2978009D0029BA68 /* AppUIAcceptanceTestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE0313E2978009D0029BA68 /* AppUIAcceptanceTestsLaunchTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,7 +80,6 @@
 		3BB7886E2976E7CD00E4DA75 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3BE0313A2978009D0029BA68 /* AppUIAcceptanceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppUIAcceptanceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BE0313C2978009D0029BA68 /* AppUIAcceptanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUIAcceptanceTests.swift; sourceTree = "<group>"; };
-		3BE0313E2978009D0029BA68 /* AppUIAcceptanceTestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUIAcceptanceTestsLaunchTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,7 +179,6 @@
 			isa = PBXGroup;
 			children = (
 				3BE0313C2978009D0029BA68 /* AppUIAcceptanceTests.swift */,
-				3BE0313E2978009D0029BA68 /* AppUIAcceptanceTestsLaunchTests.swift */,
 			);
 			path = AppUIAcceptanceTests;
 			sourceTree = "<group>";
@@ -344,7 +341,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3BE0313D2978009D0029BA68 /* AppUIAcceptanceTests.swift in Sources */,
-				3BE0313F2978009D0029BA68 /* AppUIAcceptanceTestsLaunchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
