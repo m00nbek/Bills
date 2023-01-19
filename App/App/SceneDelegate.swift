@@ -6,9 +6,8 @@
 //
 
 import UIKit
-import Feed
-import FeediOS
 import CoreData
+import Feed
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
@@ -55,7 +54,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                         decoratee: remoteFeedLoader,
                         cache: localFeedLoader),
                     fallback: localFeedLoader)))
-        window!.makeKeyAndVisible()
+        window?.makeKeyAndVisible()
     }
     
     func sceneWillResignActive(_ scene: UIScene) {
