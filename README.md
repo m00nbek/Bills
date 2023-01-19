@@ -1,2 +1,5 @@
 # Bills
-![Unit tests status](https://github.com/m00nbek/Bills/actions/workflows/test.yml/badge.svg?event=push)
+
+![](https://github.com/m00nbek/Bills/workflows/CI-iOS/badge.svg)
+
+![](https://github.com/m00nbek/Bills/workflows/CI-macOS/badge.svg)
