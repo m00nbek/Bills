@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3B20093B2979023C0028AFBB /* FeedAcceptanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B20093A2979023C0028AFBB /* FeedAcceptanceTests.swift */; };
+		3B20093D297907A80028AFBB /* HTTPClientStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B20093C297907A80028AFBB /* HTTPClientStub.swift */; };
 		3B9ADF622976EAC100F21378 /* Feed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B9ADF602976EAC100F21378 /* Feed.framework */; };
 		3B9ADF632976EAC100F21378 /* Feed.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3B9ADF602976EAC100F21378 /* Feed.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3B9ADF642976EAC100F21378 /* FeediOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B9ADF612976EAC100F21378 /* FeediOS.framework */; };
@@ -69,6 +70,7 @@
 
 /* Begin PBXFileReference section */
 		3B20093A2979023C0028AFBB /* FeedAcceptanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedAcceptanceTests.swift; sourceTree = "<group>"; };
+		3B20093C297907A80028AFBB /* HTTPClientStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClientStub.swift; sourceTree = "<group>"; };
 		3B9ADF602976EAC100F21378 /* Feed.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Feed.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B9ADF612976EAC100F21378 /* FeediOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FeediOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B9ADF7A2977B28B00F21378 /* AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -161,6 +163,7 @@
 				3B9ADF8C2977BD0900F21378 /* SharedTestHelpers.swift */,
 				3B9ADF8E2977BD9700F21378 /* XCTestCase+FeedLoader.swift */,
 				3B9ADF902977C00700F21378 /* XCTestCase+MemoryLeakTracking.swift */,
+				3B20093C297907A80028AFBB /* HTTPClientStub.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -319,6 +322,7 @@
 				3BD6BD8D29783514004A3EF9 /* FeedViewController+TestHelpers.swift in Sources */,
 				3B9ADF8B2977BC1900F21378 /* FeedLoaderStub.swift in Sources */,
 				3B20093B2979023C0028AFBB /* FeedAcceptanceTests.swift in Sources */,
+				3B20093D297907A80028AFBB /* HTTPClientStub.swift in Sources */,
 				3BD6BD8C29783514004A3EF9 /* UIRefreshControl+TestHelpers.swift in Sources */,
 				3BD6BD9129783514004A3EF9 /* Date+TestHelpers.swift in Sources */,
 				3BD6BD8E29783514004A3EF9 /* FeedViewControllerTests+Localization.swift in Sources */,
