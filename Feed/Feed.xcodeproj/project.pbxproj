@@ -75,6 +75,7 @@
 		3BE2DA6C295ACCEF00D8BB0B /* FeedStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE2DA6B295ACCEF00D8BB0B /* FeedStore.swift */; };
 		3BE2DA6E295B43E500D8BB0B /* RemoteFeedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE2DA6D295B43E500D8BB0B /* RemoteFeedItem.swift */; };
 		3BE2DA70295B441900D8BB0B /* LocalFeedExpense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE2DA6F295B441900D8BB0B /* LocalFeedExpense.swift */; };
+		3BFA5117297918DD00E13707 /* XCTestCase+Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BFA5116297918DD00E13707 /* XCTestCase+Snapshot.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -195,6 +196,7 @@
 		3BE2DA6B295ACCEF00D8BB0B /* FeedStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedStore.swift; sourceTree = "<group>"; };
 		3BE2DA6D295B43E500D8BB0B /* RemoteFeedItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteFeedItem.swift; sourceTree = "<group>"; };
 		3BE2DA6F295B441900D8BB0B /* LocalFeedExpense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalFeedExpense.swift; sourceTree = "<group>"; };
+		3BFA5116297918DD00E13707 /* XCTestCase+Snapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+Snapshot.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -269,6 +271,7 @@
 			isa = PBXGroup;
 			children = (
 				3B2009452979174D0028AFBB /* UIViewController+Snapshot.swift */,
+				3BFA5116297918DD00E13707 /* XCTestCase+Snapshot.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -866,6 +869,7 @@
 			files = (
 				3BBE491D296FCC37001FE56C /* XCTestCase+MemoryLeakTracking.swift in Sources */,
 				3B2009462979174D0028AFBB /* UIViewController+Snapshot.swift in Sources */,
+				3BFA5117297918DD00E13707 /* XCTestCase+Snapshot.swift in Sources */,
 				3B200941297908C90028AFBB /* FeedSnapshotTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
