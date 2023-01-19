@@ -21,9 +21,9 @@
 		3BB7886A2976E7CD00E4DA75 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3BB788692976E7CD00E4DA75 /* Assets.xcassets */; };
 		3BB7886D2976E7CD00E4DA75 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3BB7886B2976E7CD00E4DA75 /* LaunchScreen.storyboard */; };
 		3BCB4E9F2979576D0086D9E4 /* UIView+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BCB4E9E2979576D0086D9E4 /* UIView+TestHelpers.swift */; };
+		3BCB4EA129795B5E0086D9E4 /* CombineHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BCB4EA029795B5E0086D9E4 /* CombineHelpers.swift */; };
 		3BD6BD79297833B8004A3EF9 /* SceneDelegateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD6BD78297833B8004A3EF9 /* SceneDelegateTests.swift */; };
 		3BD6BD7F297834D9004A3EF9 /* FeedLoaderPresentationAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD6BD7A297834D9004A3EF9 /* FeedLoaderPresentationAdapter.swift */; };
-		3BD6BD80297834D9004A3EF9 /* MainQueueDispatchDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD6BD7E297834D9004A3EF9 /* MainQueueDispatchDecorator.swift */; };
 		3BD6BD81297834D9004A3EF9 /* WeakRefVirtualProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD6BD7C297834D9004A3EF9 /* WeakRefVirtualProxy.swift */; };
 		3BD6BD82297834D9004A3EF9 /* FeedViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD6BD7B297834D9004A3EF9 /* FeedViewAdapter.swift */; };
 		3BD6BD83297834D9004A3EF9 /* FeedUIComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD6BD7D297834D9004A3EF9 /* FeedUIComposer.swift */; };
@@ -79,12 +79,12 @@
 		3BB7886C2976E7CD00E4DA75 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3BB7886E2976E7CD00E4DA75 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3BCB4E9E2979576D0086D9E4 /* UIView+TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+TestHelpers.swift"; sourceTree = "<group>"; };
+		3BCB4EA029795B5E0086D9E4 /* CombineHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineHelpers.swift; sourceTree = "<group>"; };
 		3BD6BD78297833B8004A3EF9 /* SceneDelegateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegateTests.swift; sourceTree = "<group>"; };
 		3BD6BD7A297834D9004A3EF9 /* FeedLoaderPresentationAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedLoaderPresentationAdapter.swift; sourceTree = "<group>"; };
 		3BD6BD7B297834D9004A3EF9 /* FeedViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewAdapter.swift; sourceTree = "<group>"; };
 		3BD6BD7C297834D9004A3EF9 /* WeakRefVirtualProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeakRefVirtualProxy.swift; sourceTree = "<group>"; };
 		3BD6BD7D297834D9004A3EF9 /* FeedUIComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedUIComposer.swift; sourceTree = "<group>"; };
-		3BD6BD7E297834D9004A3EF9 /* MainQueueDispatchDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainQueueDispatchDecorator.swift; sourceTree = "<group>"; };
 		3BD6BD8429783513004A3EF9 /* FeedViewController+LoaderSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FeedViewController+LoaderSpy.swift"; sourceTree = "<group>"; };
 		3BD6BD8529783513004A3EF9 /* Date+TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+TestHelpers.swift"; sourceTree = "<group>"; };
 		3BD6BD8629783513004A3EF9 /* UIControl+TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIControl+TestHelpers.swift"; sourceTree = "<group>"; };
@@ -179,12 +179,12 @@
 			isa = PBXGroup;
 			children = (
 				3BD6BD7D297834D9004A3EF9 /* FeedUIComposer.swift */,
-				3BD6BD7E297834D9004A3EF9 /* MainQueueDispatchDecorator.swift */,
 				3BD6BD7C297834D9004A3EF9 /* WeakRefVirtualProxy.swift */,
 				3BD6BD7A297834D9004A3EF9 /* FeedLoaderPresentationAdapter.swift */,
+				3BB788622976E7CB00E4DA75 /* SceneDelegate.swift */,
+				3BCB4EA029795B5E0086D9E4 /* CombineHelpers.swift */,
 				3BD6BD7B297834D9004A3EF9 /* FeedViewAdapter.swift */,
 				3BB788602976E7CB00E4DA75 /* AppDelegate.swift */,
-				3BB788622976E7CB00E4DA75 /* SceneDelegate.swift */,
 				3BB788692976E7CD00E4DA75 /* Assets.xcassets */,
 				3BB7886B2976E7CD00E4DA75 /* LaunchScreen.storyboard */,
 				3BB7886E2976E7CD00E4DA75 /* Info.plist */,
@@ -318,8 +318,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				3BD6BD7F297834D9004A3EF9 /* FeedLoaderPresentationAdapter.swift in Sources */,
-				3BD6BD80297834D9004A3EF9 /* MainQueueDispatchDecorator.swift in Sources */,
 				3BD6BD81297834D9004A3EF9 /* WeakRefVirtualProxy.swift in Sources */,
+				3BCB4EA129795B5E0086D9E4 /* CombineHelpers.swift in Sources */,
 				3BB788612976E7CB00E4DA75 /* AppDelegate.swift in Sources */,
 				3BB788632976E7CB00E4DA75 /* SceneDelegate.swift in Sources */,
 				3BD6BD82297834D9004A3EF9 /* FeedViewAdapter.swift in Sources */,
