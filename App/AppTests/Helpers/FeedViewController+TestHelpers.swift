@@ -21,11 +21,19 @@ extension FeedViewController {
         return refreshControl?.isRefreshing == true
     }
     
+    @discardableResult
+    func simulateFeedExpenseViewVisible(at index: Int) -> FeedExpenseCell? {
+        return feedExpenseView(at: index) as? FeedExpenseCell
+    }
+    
     func numberOfRenderedFeedExpenseViews() -> Int {
         return tableView.numberOfRows(inSection: feedExpenseSection)
     }
     
     func feedExpenseView(at row: Int) -> UITableViewCell? {
+        guard numberOfRenderedFeedExpenseViews() > row else {
+            return nil
+        }
         let ds = tableView.dataSource
         let index = IndexPath(row: row, section: feedExpenseSection)
         return ds?.tableView(tableView, cellForRowAt: index)

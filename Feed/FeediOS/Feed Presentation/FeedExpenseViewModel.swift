@@ -9,10 +9,10 @@ import Foundation
 import UIKit
 import Feed
 
-final class FeedExpenseViewModel {
+public final class FeedExpenseViewModel {
     private let model: FeedExpense
     
-    init(model: FeedExpense) {
+    public init(model: FeedExpense) {
         self.model = model
     }
     
