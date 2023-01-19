@@ -7,6 +7,7 @@
 
 import XCTest
 import FeediOS
+@testable import Feed
 
 class FeedSnapshotTests: XCTestCase {
     
@@ -16,6 +17,14 @@ class FeedSnapshotTests: XCTestCase {
         sut.display(emptyFeed())
         
         record(snapshot: sut.snapshot(), named: "EMPTY_FEED")
+    }
+    
+    func test_feedWithContent() {
+        let sut = makeSUT()
+
+        sut.display(feedWithContent())
+
+        record(snapshot: sut.snapshot(), named: "FEED_WITH_CONTENT")
     }
     
     // MARK: - Helpers
@@ -30,6 +39,13 @@ class FeedSnapshotTests: XCTestCase {
     
     private func emptyFeed() -> [FeedExpenseCellController] {
         return []
+    }
+    
+    private func feedWithContent() -> [ExpenseStub] {
+        return [
+            ExpenseStub(title: "Exhaust pipes", timestamp: Date(), cost: 450, currency: .USD),
+            ExpenseStub(title: "Spinny boy", timestamp: Date(), cost: 4900, currency: .USD)
+        ]
     }
     
     private func record(snapshot: UIImage, named name: String, file: StaticString = #file, line: UInt = #line) {
@@ -55,6 +71,34 @@ class FeedSnapshotTests: XCTestCase {
         }
     }
     
+}
+
+private extension FeedViewController {
+    func display(_ stubs: [ExpenseStub]) {
+        let cells: [FeedExpenseCellController] = stubs.map { stub in
+            let cellController = FeedExpenseCellController(viewModel: stub.viewModel)
+            stub.controller = cellController
+            return cellController
+        }
+
+        display(cells)
+    }
+}
+
+private class ExpenseStub {
+    let viewModel: FeedExpenseViewModel
+    weak var controller: FeedExpenseCellController?
+
+    init(title: String, timestamp: Date, cost: Float, currency: FeedExpense.Currency) {
+        viewModel = FeedExpenseViewModel(
+            model: FeedExpense(
+                id: UUID(),
+                title: title,
+                timestamp: timestamp,
+                cost: cost,
+                currency: currency)
+        )
+    }
 }
 
 extension UIViewController {
