@@ -11,6 +11,7 @@ import FeediOS
 
 extension FeedUIIntegrationTests {
     func assertThat(_ sut: FeedViewController, isRendering feed: [FeedExpense], file: StaticString = #file, line: UInt = #line) {
+        sut.view.enforceLayoutCycle()
         guard sut.numberOfRenderedFeedExpenseViews() == feed.count else {
             return XCTFail("Expected \(feed.count) expenses, got \(sut.numberOfRenderedFeedExpenseViews()) instead.", file: file, line: line)
         }

@@ -8,6 +8,7 @@
 import UIKit
 import CoreData
 import Feed
+import Combine
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
@@ -43,21 +44,24 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func configureWindow() {
-        let remoteURL = URL(string: "https://api.jsonbin.io/v3/b/63c6b96a01a72b59f24d25b7?meta=false")!
-        
-        let remoteFeedLoader = RemoteFeedLoader(url: remoteURL, client: httpClient)
-        
         window?.rootViewController = UINavigationController(
-            rootViewController: FeedUIComposer.feedComposedWith(
-                feedLoader: FeedLoaderWithFallbackComposite(
-                    primary: FeedLoaderCacheDecorator(
-                        decoratee: remoteFeedLoader,
-                        cache: localFeedLoader),
-                    fallback: localFeedLoader)))
+            rootViewController: FeedUIComposer.feedComposedWith(feedLoader: makeRemoteFeedLoaderWithLocalFallback)
+        )
         window?.makeKeyAndVisible()
     }
     
     func sceneWillResignActive(_ scene: UIScene) {
         localFeedLoader.validateCache { _ in }
+    }
+    
+    private func makeRemoteFeedLoaderWithLocalFallback() -> FeedLoader.Publisher {
+        let remoteURL = URL(string: "https://api.jsonbin.io/v3/b/63c6b96a01a72b59f24d25b7?meta=false")!
+        
+        let remoteFeedLoader = RemoteFeedLoader(url: remoteURL, client: httpClient)
+        
+        return remoteFeedLoader
+            .loadPublisher()
+            .caching(to: localFeedLoader)
+            .fallback(to: localFeedLoader.loadPublisher)
     }
 }
