@@ -31,6 +31,9 @@ extension FeedViewController {
     }
     
     func feedExpenseView(at row: Int) -> UITableViewCell? {
+        guard numberOfRenderedFeedExpenseViews() > row else {
+            return nil
+        }
         let ds = tableView.dataSource
         let index = IndexPath(row: row, section: feedExpenseSection)
         return ds?.tableView(tableView, cellForRowAt: index)
