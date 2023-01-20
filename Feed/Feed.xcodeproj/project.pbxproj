@@ -358,6 +358,23 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		3B387D3B297ACB1E002B7901 /* Expense Notes API */ = {
+			isa = PBXGroup;
+			children = (
+				3B387D2E297AC26D002B7901 /* RemoteExpenseNotesLoader.swift */,
+				3B387D2C297AC234002B7901 /* ExpenseNotesMapper.swift */,
+			);
+			path = "Expense Notes API";
+			sourceTree = "<group>";
+		};
+		3B387D3C297ACB6B002B7901 /* Expense Notes API */ = {
+			isa = PBXGroup;
+			children = (
+				3B387D30297AC502002B7901 /* LoadExpenseNotesFromRemoteUseCaseTests.swift */,
+			);
+			path = "Expense Notes API";
+			sourceTree = "<group>";
+		};
 		3B452820296DA3A500763504 /* FeedStoreSpecs */ = {
 			isa = PBXGroup;
 			children = (
@@ -431,12 +448,13 @@
 			children = (
 				3B387D36297ACA17002B7901 /* Shared API */,
 				3B387D35297AC9F6002B7901 /* Shared API Infra */,
-				3B387D32297AC753002B7901 /* Expense Notes Feature */,
 				3BCB55E3297A5AD10031FAAE /* Shared Presentation */,
 				3BB788492976E21800E4DA75 /* Feed Presentation */,
 				3BE2DA68295ACC2700D8BB0B /* Feed Cache */,
 				3B53FE902929F1140057473C /* Feed Feature */,
 				3B53FE8329279EE90057473C /* Feed API */,
+				3B387D32297AC753002B7901 /* Expense Notes Feature */,
+				3B387D3B297ACB1E002B7901 /* Expense Notes API */,
 				3B53FE6529278A7F0057473C /* Feed.h */,
 				3B53FE6629278A7F0057473C /* Feed.docc */,
 			);
@@ -449,10 +467,11 @@
 				3B387D39297ACA8F002B7901 /* Shared API */,
 				3B387D37297ACA40002B7901 /* Shared API Infra */,
 				3BCB55E6297A5B0E0031FAAE /* Shared Presentation */,
-				3B060E06293776E2005A1566 /* Helpers */,
 				3BB45A8D29438E2800AC6642 /* Feed Cache */,
-				3B53FE8A2929EC840057473C /* Feed API */,
 				3BA6E7A7297568E10059F3F0 /* Feed Presentation */,
+				3B53FE8A2929EC840057473C /* Feed API */,
+				3B387D3C297ACB6B002B7901 /* Expense Notes API */,
+				3B060E06293776E2005A1566 /* Helpers */,
 			);
 			path = FeedTests;
 			sourceTree = "<group>";
@@ -463,8 +482,6 @@
 				3B53FE8429279F040057473C /* RemoteFeedLoader.swift */,
 				3B53FE882929E49A0057473C /* FeedItemsMapper.swift */,
 				3BE2DA6D295B43E500D8BB0B /* RemoteFeedItem.swift */,
-				3B387D2C297AC234002B7901 /* ExpenseNotesMapper.swift */,
-				3B387D2E297AC26D002B7901 /* RemoteExpenseNotesLoader.swift */,
 			);
 			path = "Feed API";
 			sourceTree = "<group>";
@@ -473,7 +490,6 @@
 			isa = PBXGroup;
 			children = (
 				3B53FE8129278E360057473C /* LoadFeedFromRemoteUseCaseTests.swift */,
-				3B387D30297AC502002B7901 /* LoadExpenseNotesFromRemoteUseCaseTests.swift */,
 			);
 			path = "Feed API";
 			sourceTree = "<group>";
