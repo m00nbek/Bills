@@ -54,13 +54,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         localFeedLoader.validateCache { _ in }
     }
     
-    private func makeRemoteFeedLoaderWithLocalFallback() -> FeedLoader.Publisher {
+    private func makeRemoteFeedLoaderWithLocalFallback() -> AnyPublisher<[FeedExpense], Error> {
         let remoteURL = URL(string: "https://api.jsonbin.io/v3/b/63c6b96a01a72b59f24d25b7?meta=false")!
         
-        let remoteFeedLoader = RemoteFeedLoader(url: remoteURL, client: httpClient)
-        
-        return remoteFeedLoader
-            .loadPublisher()
+        return httpClient
+            .getPublisher(url: remoteURL)
+            .tryMap(FeedItemsMapper.map)
             .caching(to: localFeedLoader)
             .fallback(to: localFeedLoader.loadPublisher)
     }

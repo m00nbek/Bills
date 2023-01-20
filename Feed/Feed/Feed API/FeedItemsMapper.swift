@@ -7,15 +7,41 @@
 
 import Foundation
 
- final class FeedItemsMapper {
+public final class FeedItemsMapper {
     
     private struct Root: Decodable {
-        let items: [RemoteFeedItem]
+        private let items: [RemoteFeedItem]
+        
+        private struct RemoteFeedItem: Decodable {
+            let id: UUID
+            let title: String
+            let timestamp: Date
+            let cost: Float
+            let currency: Currency
+            enum Currency: String, Decodable {
+                case USD
+                case UZS
+            }
+        }
+        
+        var expenses: [FeedExpense] {
+            items.map { FeedExpense(
+                id: $0.id,
+                title: $0.title,
+                timestamp: $0.timestamp,
+                cost: $0.cost,
+                currency: .init(rawValue: $0.currency.rawValue)!)
+            }
+        }
+    }
+    
+    public enum Error: Swift.Error {
+        case invalidData
     }
     
     private static var OK_200: Int { return 200 }
 
-     static func map(_ data: Data, from response: HTTPURLResponse) throws -> [RemoteFeedItem] {
+    public static func map(_ data: Data, from response: HTTPURLResponse) throws -> [FeedExpense] {
         
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
@@ -23,9 +49,9 @@ import Foundation
         guard response.statusCode == OK_200,
               let root = try? decoder.decode(Root.self, from: data)
         else {
-            throw RemoteFeedLoader.Error.invalidData
+            throw Error.invalidData
         }
         
-        return root.items
+        return root.expenses
     }
 }

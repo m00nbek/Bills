@@ -32,19 +32,21 @@ final class FeedAPIEndToEndTests: XCTestCase {
     
     // MARK: - Helpers
     
-    private func getFeedResult(file: StaticString = #filePath, line: UInt = #line) -> FeedLoader.Result? {
+    private func getFeedResult(file: StaticString = #file, line: UInt = #line) -> Swift.Result<[FeedExpense], Error>? {
         let testServerURL = URL(string: "https://api.jsonbin.io/v3/b/63c6b96a01a72b59f24d25b7?meta=false")!
         let client = URLSessionHTTPClient(session: URLSession(configuration: .ephemeral))
-        let loader = RemoteFeedLoader(url: testServerURL, client: client)
-        
-        trackForMemoryLeaks(client, file: file, line: line)
-        trackForMemoryLeaks(loader, file: file, line: line)
-        
+                
         let exp = expectation(description: "Wait for load completion")
         
-        var receivedResult: FeedLoader.Result?
-        loader.load { result in
-            receivedResult = result
+        var receivedResult: Swift.Result<[FeedExpense], Error>?
+        client.get(from: testServerURL) { result in
+            receivedResult = result.flatMap { (data, response) in
+                do {
+                    return .success(try FeedItemsMapper.map(data, from: response))
+                } catch {
+                    return .failure(error)
+                }
+            }
             exp.fulfill()
         }
         
