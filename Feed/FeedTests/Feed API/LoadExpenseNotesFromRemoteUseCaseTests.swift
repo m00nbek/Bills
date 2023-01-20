@@ -87,17 +87,15 @@ class LoadExpenseNotesFromRemoteUseCaseTests: XCTestCase {
         
         let item1 = makeItem(
             id: UUID(),
-            title: "A title",
-            timestamp: Date(timeIntervalSinceReferenceDate: Date.timeIntervalSinceReferenceDate.rounded()),
-            cost: 45,
-            currency: .USD)
+            message: "a message",
+            createdAt: (Date(timeIntervalSince1970: 1598627222), "2020-08-28T15:07:02+00:00")
+        )
         
         let item2 = makeItem(
             id: UUID(),
-            title: "Another title",
-            timestamp: Date(timeIntervalSinceReferenceDate: Date.timeIntervalSinceReferenceDate.rounded()),
-            cost: 23000,
-            currency: .UZS)
+            message: "another message",
+            createdAt: (Date(timeIntervalSince1970: 1577881882), "2020-01-01T12:31:22+00:00")
+        )
         
         let items = [item1.model, item2.model]
         let samples = [200, 201, 250, 280, 299]
@@ -139,15 +137,13 @@ class LoadExpenseNotesFromRemoteUseCaseTests: XCTestCase {
         return .failure(error)
     }
     
-    private func makeItem(id: UUID, title: String, timestamp: Date, cost: Float, currency: FeedExpense.Currency) -> (model: FeedExpense, json: [String: Any]) {
-        let item = FeedExpense(id: id, title: title, timestamp: timestamp, cost: cost, currency: currency)
+    private func makeItem(id: UUID, message: String, createdAt: (date: Date, iso8601String: String)) -> (model: ExpenseNote, json: [String: Any]) {
+             let item = ExpenseNote(id: id, message: message, createdAt: createdAt.date)
         
         let json: [String: Any] = [
             "id": item.id.uuidString,
-            "title": item.title,
-            "timestamp": item.timestamp.ISO8601Format(),
-            "cost": item.cost,
-            "currency": item.currency.rawValue
+            "message": message,
+            "created_at": createdAt.iso8601String
         ]
         
         return (item, json)

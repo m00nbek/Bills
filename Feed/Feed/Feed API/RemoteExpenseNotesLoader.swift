@@ -7,7 +7,7 @@
 
 import Foundation
 
-public final class RemoteExpenseNotesLoader: FeedLoader {
+public final class RemoteExpenseNotesLoader {
     private let url: URL
     private let client: HTTPClient
     
@@ -16,7 +16,7 @@ public final class RemoteExpenseNotesLoader: FeedLoader {
         case invalidData
     }
     
-    public typealias Result = FeedLoader.Result
+    public typealias Result = Swift.Result<[ExpenseNote], Swift.Error>
     
     public init(url: URL, client: HTTPClient) {
         self.url = url
@@ -39,15 +39,9 @@ public final class RemoteExpenseNotesLoader: FeedLoader {
     private static func map(_ data: Data, from response: HTTPURLResponse) -> Result {
         do {
             let items = try ExpenseNotesMapper.map(data, from: response)
-            return .success(items.toModels())
+            return .success(items)
         } catch {
             return .failure(error)
         }
-    }
-}
-
-private extension Array where Element == RemoteFeedItem {
-    func toModels() -> [FeedExpense] {
-        map { FeedExpense(id: $0.id, title: $0.title, timestamp: $0.timestamp, cost: $0.cost, currency: FeedExpense.Currency(rawValue: $0.currency.rawValue)!)}
     }
 }

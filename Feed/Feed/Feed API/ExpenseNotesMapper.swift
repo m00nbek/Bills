@@ -10,11 +10,20 @@ import Foundation
 final class ExpenseNotesMapper {
     
     private struct Root: Decodable {
-        let items: [RemoteFeedItem]
+        private let items: [Item]
+        
+        private struct Item: Decodable {
+            let id: UUID
+            let message: String
+            let created_at: Date
+        }
+        
+        var comments: [ExpenseNote] {
+            items.map { ExpenseNote(id: $0.id, message: $0.message, createdAt: $0.created_at) }
+        }
     }
     
-    static func map(_ data: Data, from response: HTTPURLResponse) throws -> [RemoteFeedItem] {
-        
+    static func map(_ data: Data, from response: HTTPURLResponse) throws -> [ExpenseNote] {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
         
@@ -22,7 +31,7 @@ final class ExpenseNotesMapper {
             throw RemoteExpenseNotesLoader.Error.invalidData
         }
         
-        return root.items
+        return root.comments
     }
     
     private static func isOK(_ response: HTTPURLResponse) -> Bool {
