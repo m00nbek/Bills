@@ -65,3 +65,5 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             .fallback(to: localFeedLoader.loadPublisher)
     }
 }
+
+extension RemoteLoader: FeedLoader where Resource == [FeedExpense] {}
