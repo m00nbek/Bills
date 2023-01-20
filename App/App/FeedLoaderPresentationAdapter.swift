@@ -9,19 +9,19 @@ import Feed
 import FeediOS
 import Combine
 
-final class FeedLoaderPresentationAdapter: FeedViewControllerDelegate {
-    private let feedLoader: () -> FeedLoader.Publisher
+final class LoadResourcePresentationAdapter<Resource, View: ResourceView> {
+    private let loader: () -> AnyPublisher<Resource, Error>
     private var cancellable: Cancellable?
-    var presenter: FeedPresenter?
+    var presenter: LoadResourcePresenter<Resource, View>?
     
-    init(feedLoader: @escaping () -> FeedLoader.Publisher) {
-        self.feedLoader = feedLoader
+    init(loader: @escaping () -> AnyPublisher<Resource, Error>) {
+        self.loader = loader
     }
     
-    func didRequestFeedRefresh() {
-        presenter?.didStartLoadingFeed()
+    func loadResource() {
+        presenter?.didStartLoading()
         
-        cancellable = feedLoader()
+        cancellable = loader()
             .dispatchOnMainQueue()
             .sink(
                 receiveCompletion: { [weak self] completion in
@@ -29,10 +29,16 @@ final class FeedLoaderPresentationAdapter: FeedViewControllerDelegate {
                     case .finished: break
                         
                     case let .failure(error):
-                        self?.presenter?.didFinishLoadingFeed(with: error)
+                        self?.presenter?.didFinishLoading(with: error)
                     }
-                }, receiveValue: { [weak self] feed in
-                    self?.presenter?.didFinishLoadingFeed(with: feed)
+                }, receiveValue: { [weak self] resource in
+                    self?.presenter?.didFinishLoading(with: resource)
                 })
+    }
+}
+
+extension LoadResourcePresentationAdapter: FeedViewControllerDelegate {
+    func didRequestFeedRefresh() {
+        loadResource()
     }
 }
