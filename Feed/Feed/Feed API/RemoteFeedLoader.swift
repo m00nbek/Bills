@@ -39,15 +39,9 @@ public final class RemoteFeedLoader: FeedLoader {
     private static func map(_ data: Data, from response: HTTPURLResponse) -> Result {
         do {
             let items = try FeedItemsMapper.map(data, from: response)
-            return .success(items.toModels())
+            return .success(items)
         } catch {
             return .failure(error)
         }
-    }
-}
-
-private extension Array where Element == RemoteFeedItem {
-    func toModels() -> [FeedExpense] {
-        map { FeedExpense(id: $0.id, title: $0.title, timestamp: $0.timestamp, cost: $0.cost, currency: FeedExpense.Currency(rawValue: $0.currency.rawValue)!)}
     }
 }
