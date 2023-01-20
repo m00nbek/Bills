@@ -7,4 +7,4 @@
 */
 
 "FEED_VIEW_TITLE" = "私の経費";
-"FEED_VIEW_CONNECTION_ERROR" = "サーバーに接続できませんでした";
+"GENERIC_CONNECTION_ERROR" = "サーバーに接続できませんでした";
