@@ -9,7 +9,7 @@ import Foundation
 import Feed
 import FeediOS
 
-final class FeedViewAdapter: FeedView {
+final class FeedViewAdapter: ResourceView {
     private weak var controller: FeedViewController?
     
     init(controller: FeedViewController) {
