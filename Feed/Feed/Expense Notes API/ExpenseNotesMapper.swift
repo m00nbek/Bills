@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class ExpenseNotesMapper {
+public final class ExpenseNotesMapper {
     
     private struct Root: Decodable {
         private let items: [Item]
@@ -23,7 +23,7 @@ final class ExpenseNotesMapper {
         }
     }
     
-    static func map(_ data: Data, from response: HTTPURLResponse) throws -> [ExpenseNote] {
+    public static func map(_ data: Data, from response: HTTPURLResponse) throws -> [ExpenseNote] {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
         
