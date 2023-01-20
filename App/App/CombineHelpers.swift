@@ -24,7 +24,7 @@ public extension HTTPClient {
     }
 }
 
-public extension FeedLoader {
+public extension LocalFeedLoader {
     typealias Publisher = AnyPublisher<[FeedExpense], Error>
     
     func loadPublisher() -> Publisher {
