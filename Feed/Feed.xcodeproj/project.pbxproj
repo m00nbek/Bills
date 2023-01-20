@@ -22,6 +22,7 @@
 		3B387D2D297AC234002B7901 /* ExpenseNotesMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B387D2C297AC234002B7901 /* ExpenseNotesMapper.swift */; };
 		3B387D2F297AC26D002B7901 /* RemoteExpenseNotesLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B387D2E297AC26D002B7901 /* RemoteExpenseNotesLoader.swift */; };
 		3B387D31297AC502002B7901 /* LoadExpenseNotesFromRemoteUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B387D30297AC502002B7901 /* LoadExpenseNotesFromRemoteUseCaseTests.swift */; };
+		3B387D34297AC77B002B7901 /* ExpenseNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B387D33297AC77B002B7901 /* ExpenseNote.swift */; };
 		3B452815296D891900763504 /* FeedStoreSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B452814296D891900763504 /* FeedStoreSpecs.swift */; };
 		3B452817296D8A6000763504 /* XCTestCase+FeedStoreSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B452816296D8A6000763504 /* XCTestCase+FeedStoreSpecs.swift */; };
 		3B452819296D903100763504 /* XCTestCase+FailableRetrieveFeedStoreSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B452818296D903100763504 /* XCTestCase+FailableRetrieveFeedStoreSpecs.swift */; };
@@ -155,6 +156,7 @@
 		3B387D2C297AC234002B7901 /* ExpenseNotesMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseNotesMapper.swift; sourceTree = "<group>"; };
 		3B387D2E297AC26D002B7901 /* RemoteExpenseNotesLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteExpenseNotesLoader.swift; sourceTree = "<group>"; };
 		3B387D30297AC502002B7901 /* LoadExpenseNotesFromRemoteUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadExpenseNotesFromRemoteUseCaseTests.swift; sourceTree = "<group>"; };
+		3B387D33297AC77B002B7901 /* ExpenseNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseNote.swift; sourceTree = "<group>"; };
 		3B452814296D891900763504 /* FeedStoreSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedStoreSpecs.swift; sourceTree = "<group>"; };
 		3B452816296D8A6000763504 /* XCTestCase+FeedStoreSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+FeedStoreSpecs.swift"; sourceTree = "<group>"; };
 		3B452818296D903100763504 /* XCTestCase+FailableRetrieveFeedStoreSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+FailableRetrieveFeedStoreSpecs.swift"; sourceTree = "<group>"; };
@@ -299,6 +301,14 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		3B387D32297AC753002B7901 /* Expense Notes Feature */ = {
+			isa = PBXGroup;
+			children = (
+				3B387D33297AC77B002B7901 /* ExpenseNote.swift */,
+			);
+			path = "Expense Notes Feature";
+			sourceTree = "<group>";
+		};
 		3B452820296DA3A500763504 /* FeedStoreSpecs */ = {
 			isa = PBXGroup;
 			children = (
@@ -370,6 +380,7 @@
 		3B53FE6429278A7F0057473C /* Feed */ = {
 			isa = PBXGroup;
 			children = (
+				3B387D32297AC753002B7901 /* Expense Notes Feature */,
 				3BCB55E3297A5AD10031FAAE /* Shared Presentation */,
 				3BB788492976E21800E4DA75 /* Feed Presentation */,
 				3BE2DA68295ACC2700D8BB0B /* Feed Cache */,
@@ -873,6 +884,7 @@
 				3BCB55F7297A65CF0031FAAE /* ResourceLoadingView.swift in Sources */,
 				3BE2DA6A295ACC4300D8BB0B /* LocalFeedLoader.swift in Sources */,
 				3B53FE6729278A7F0057473C /* Feed.docc in Sources */,
+				3B387D34297AC77B002B7901 /* ExpenseNote.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
