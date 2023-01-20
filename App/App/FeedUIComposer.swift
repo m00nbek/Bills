@@ -12,8 +12,10 @@ import FeediOS
 public final class FeedUIComposer {
     private init() {}
     
+    private typealias FeedPresentationAdapter = LoadResourcePresentationAdapter<[FeedExpense], FeedViewAdapter>
+    
     public static func feedComposedWith(feedLoader: @escaping () -> FeedLoader.Publisher) -> FeedViewController {
-        let presentationAdapter = LoadResourcePresentationAdapter<[FeedExpense], FeedViewAdapter>(loader: feedLoader)
+        let presentationAdapter =  FeedPresentationAdapter(loader: feedLoader)
         
         let feedController = makeFeedViewController(
             delegate: presentationAdapter,
