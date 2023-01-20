@@ -1,5 +1,5 @@
 //
-//  FeedLoaderPresentationAdapter.swift
+//  LoadResourcePresentationAdapter.swift
 //  FeediOS
 //
 //  Created by m00nbek Melikulov on 1/16/23.
