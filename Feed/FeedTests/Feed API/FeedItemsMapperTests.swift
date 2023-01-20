@@ -61,10 +61,6 @@ class FeedItemsMapperTests: XCTestCase {
     
     // MARK: - Helpers
     
-    private func failure(_ error: RemoteFeedLoader.Error) -> RemoteFeedLoader.Result {
-        return .failure(error)
-    }
-    
     private func makeItem(id: UUID, title: String, timestamp: Date, cost: Float, currency: FeedExpense.Currency) -> (model: FeedExpense, json: [String: Any]) {
         let item = FeedExpense(id: id, title: title, timestamp: timestamp, cost: cost, currency: currency)
         
