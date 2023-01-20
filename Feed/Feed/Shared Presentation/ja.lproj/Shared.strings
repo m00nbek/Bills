@@ -1,0 +1,9 @@
+/* 
+  Shared.strings
+  Feed
+
+  Created by m00nbek Melikulov on 1/20/23.
+  
+*/
+
+"GENERIC_CONNECTION_ERROR" = "サーバーに接続できませんでした";
