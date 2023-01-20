@@ -12,7 +12,7 @@ public protocol FeedViewControllerDelegate {
     func didRequestFeedRefresh()
 }
 
-public final class FeedViewController: UITableViewController, ResourceLoadingView, FeedErrorView {
+public final class FeedViewController: UITableViewController, ResourceLoadingView, ResourceErrorView {
     @IBOutlet private(set) public var errorView: ErrorView?
     
     private var tableModel = [FeedExpenseCellController]() {
@@ -44,7 +44,7 @@ public final class FeedViewController: UITableViewController, ResourceLoadingVie
         refreshControl?.update(isRefreshing: viewModel.isLoading)
     }
     
-    public func display(_ viewModel: FeedErrorViewModel) {
+    public func display(_ viewModel: ResourceErrorViewModel) {
         errorView?.message = viewModel.message
     }
     
