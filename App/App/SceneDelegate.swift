@@ -57,7 +57,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     private func makeRemoteFeedLoaderWithLocalFallback() -> FeedLoader.Publisher {
         let remoteURL = URL(string: "https://api.jsonbin.io/v3/b/63c6b96a01a72b59f24d25b7?meta=false")!
         
-        let remoteFeedLoader = RemoteFeedLoader(url: remoteURL, client: httpClient)
+        let remoteFeedLoader = RemoteLoader(url: remoteURL, client: httpClient, mapper: FeedItemsMapper.map)
         
         return remoteFeedLoader
             .loadPublisher()

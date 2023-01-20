@@ -35,8 +35,12 @@ public final class FeedItemsMapper {
         }
     }
     
-    private static var OK_200: Int { return 200 }
+    public enum Error: Swift.Error {
+        case invalidData
+    }
     
+    private static var OK_200: Int { return 200 }
+
     public static func map(_ data: Data, from response: HTTPURLResponse) throws -> [FeedExpense] {
         
         let decoder = JSONDecoder()
@@ -45,7 +49,7 @@ public final class FeedItemsMapper {
         guard response.statusCode == OK_200,
               let root = try? decoder.decode(Root.self, from: data)
         else {
-            throw RemoteFeedLoader.Error.invalidData
+            throw Error.invalidData
         }
         
         return root.expenses
