@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class FeedItemsMapper {
+public final class FeedItemsMapper {
     
     private struct Root: Decodable {
         private let items: [RemoteFeedItem]
@@ -37,7 +37,7 @@ final class FeedItemsMapper {
     
     private static var OK_200: Int { return 200 }
     
-    static func map(_ data: Data, from response: HTTPURLResponse) throws -> [FeedExpense] {
+    public static func map(_ data: Data, from response: HTTPURLResponse) throws -> [FeedExpense] {
         
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
