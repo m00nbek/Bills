@@ -15,24 +15,24 @@ class ExpenseNotesPresenterTests: XCTestCase {
     
     func test_map_createsViewModels() {
         let now = Date()
-        let calender = Calendar(identifier: .gregorian)
+        let calendar = Calendar(identifier: .gregorian)
         let locale = Locale(identifier: "en_US_POSIX")
         
         let notes = [
             ExpenseNote(
                 id: UUID(),
                 message: "a message",
-                createdAt: now.adding(minutes: -5)),
+                createdAt: now.adding(minutes: -5, calendar: calendar)),
             ExpenseNote(
                 id: UUID(),
                 message: "another message",
-                createdAt: now.adding(days: -1))
+                createdAt: now.adding(days: -1, calendar: calendar))
         ]
 
         let viewModel = ExpenseNotesPresenter.map(
             notes,
             currentDate: now,
-            calender: calender,
+            calender: calendar,
             locale: locale
         )
 
