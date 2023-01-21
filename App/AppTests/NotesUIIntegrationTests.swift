@@ -36,19 +36,19 @@ class NotesUIIntegrationTests: FeedUIIntegrationTests {
         XCTAssertEqual(loader.loadNotesCallCount, 3, "Expected yet another loading request once user initiates another reload")
     }
     
-    override func test_loadingFeedIndicator_isVisibleWhileLoadingFeed() {
+    func test_loadingNotesIndicator_isVisibleWhileLoadingNotes() {
         let (sut, loader) = makeSUT()
         
         sut.loadViewIfNeeded()
         XCTAssertTrue(sut.isShowingLoadingIndicator, "Expected loading indicator once view is loaded")
         
-        loader.completeFeedLoading(at: 0)
+        loader.completeNoteLoading(at: 0)
         XCTAssertFalse(sut.isShowingLoadingIndicator, "Expected no loading indicator once loading completes successfully")
         
         sut.simulateUserInitiatedReload()
         XCTAssertTrue(sut.isShowingLoadingIndicator, "Expected loading indicator once user initiates a reload")
         
-        loader.completeFeedLoadingWithError(at: 1)
+        loader.completeNoteLoadingWithError(at: 1)
         XCTAssertFalse(sut.isShowingLoadingIndicator, "Expected no loading indicator once user initiated loading completes with error")
     }
     
@@ -62,11 +62,11 @@ class NotesUIIntegrationTests: FeedUIIntegrationTests {
         sut.loadViewIfNeeded()
         assertThat(sut, isRendering: [])
         
-        loader.completeFeedLoading(with: [expense0], at: 0)
+        loader.completeNoteLoading(with: [expense0], at: 0)
         assertThat(sut, isRendering: [expense0])
         
         sut.simulateUserInitiatedReload()
-        loader.completeFeedLoading(with: [expense0, expense1, expense2, expense3], at: 1)
+        loader.completeNoteLoading(with: [expense0, expense1, expense2, expense3], at: 1)
         assertThat(sut, isRendering: [expense0, expense1, expense2, expense3])
     }
     
@@ -75,11 +75,11 @@ class NotesUIIntegrationTests: FeedUIIntegrationTests {
         let (sut, loader) = makeSUT()
         
         sut.loadViewIfNeeded()
-        loader.completeFeedLoading(with: [expense0], at: 0)
+        loader.completeNoteLoading(with: [expense0], at: 0)
         assertThat(sut, isRendering: [expense0])
         
         sut.simulateUserInitiatedReload()
-        loader.completeFeedLoadingWithError(at: 1)
+        loader.completeNoteLoadingWithError(at: 1)
         assertThat(sut, isRendering: [expense0])
     }
     
@@ -89,7 +89,7 @@ class NotesUIIntegrationTests: FeedUIIntegrationTests {
         
         let exp = expectation(description: "Wait for background queue")
         DispatchQueue.global().async {
-            loader.completeFeedLoading(at: 0)
+            loader.completeNoteLoading(at: 0)
             exp.fulfill()
         }
         wait(for: [exp], timeout: 1.0)
@@ -101,7 +101,7 @@ class NotesUIIntegrationTests: FeedUIIntegrationTests {
         sut.loadViewIfNeeded()
         XCTAssertEqual(sut.errorMessage, nil)
         
-        loader.completeFeedLoadingWithError(at: 0)
+        loader.completeNoteLoadingWithError(at: 0)
         XCTAssertEqual(sut.errorMessage, loadError)
         
         sut.simulateUserInitiatedReload()
@@ -114,7 +114,7 @@ class NotesUIIntegrationTests: FeedUIIntegrationTests {
         sut.loadViewIfNeeded()
         XCTAssertEqual(sut.errorMessage, nil)
         
-        loader.completeFeedLoadingWithError(at: 0)
+        loader.completeNoteLoadingWithError(at: 0)
         XCTAssertEqual(sut.errorMessage, loadError)
         
         sut.simulateErrorViewTap()
@@ -148,11 +148,11 @@ class NotesUIIntegrationTests: FeedUIIntegrationTests {
             return publisher.eraseToAnyPublisher()
         }
         
-        func completeFeedLoading(with feed: [FeedExpense] = [], at index: Int = 0) {
+        func completeNoteLoading(with feed: [FeedExpense] = [], at index: Int = 0) {
             requests[index].send(feed)
         }
         
-        func completeFeedLoadingWithError(at index: Int = 0) {
+        func completeNoteLoadingWithError(at index: Int = 0) {
             let error = NSError(domain: "an error", code: 0)
             requests[index].send(completion: .failure(error))
         }
