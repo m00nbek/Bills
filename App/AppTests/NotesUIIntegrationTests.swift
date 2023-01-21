@@ -93,7 +93,7 @@ class NotesUIIntegrationTests: FeedUIIntegrationTests {
         assertThat(sut, isRendering: [note])
     }
     
-    override func test_loadFeedCompletion_dispatchesFromBackgroundToMainThread() {
+    func test_loadCommentsCompletion_dispatchesFromBackgroundToMainThread() {
         let (sut, loader) = makeSUT()
         sut.loadViewIfNeeded()
         
