@@ -12,7 +12,7 @@ import Feed
 import FeediOS
 import App
 
-class NotesUIIntegrationTests: FeedUIIntegrationTests {
+class NotesUIIntegrationTests: XCTestCase {
     
     func notesView_hasTitle() {
         let (sut, _) = makeSUT()
@@ -93,7 +93,7 @@ class NotesUIIntegrationTests: FeedUIIntegrationTests {
         assertThat(sut, isRendering: [note])
     }
     
-    func test_loadCommentsCompletion_dispatchesFromBackgroundToMainThread() {
+    func test_loadNotesCompletion_dispatchesFromBackgroundToMainThread() {
         let (sut, loader) = makeSUT()
         sut.loadViewIfNeeded()
         
@@ -105,7 +105,7 @@ class NotesUIIntegrationTests: FeedUIIntegrationTests {
         wait(for: [exp], timeout: 1.0)
     }
     
-    override func test_loadFeedCompletion_rendersErrorMessageOnErrorUntilNextReload()  {
+    func test_loadNotesCompletion_rendersErrorMessageOnErrorUntilNextReload() {
         let (sut, loader) = makeSUT()
         
         sut.loadViewIfNeeded()
@@ -118,7 +118,7 @@ class NotesUIIntegrationTests: FeedUIIntegrationTests {
         XCTAssertEqual(sut.errorMessage, nil)
     }
     
-    override func test_tapOnErrorView_hidesErrorMessage() {
+    func test_tapOnErrorView_hidesErrorMessage() {
         let (sut, loader) = makeSUT()
         
         sut.loadViewIfNeeded()
