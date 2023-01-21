@@ -60,7 +60,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     private func showNotes(for expense: FeedExpense) {
-        let url = baseURL.appendingPathComponent("/v1/expense/\(expense.id)/notes")
+        let url = ExpenseNotesEndpoint.get(expense.id).url(baseURL: baseURL)
         let notes = NotesUIComposer.notesComposedWith(notesLoader: makeRemoteNotesLoader(url: url))
         navigationController.pushViewController(notes, animated: true)
     }
@@ -75,10 +75,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     private func makeRemoteFeedLoaderWithLocalFallback() -> AnyPublisher<[FeedExpense], Error> {
-        let remoteURL = baseURL.appendingPathComponent("/v1/feed")
+        let url = FeedEndpoint.get.url(baseURL: baseURL)
         
         return httpClient
-            .getPublisher(url: remoteURL)
+            .getPublisher(url: url)
             .tryMap(FeedItemsMapper.map)
             .caching(to: localFeedLoader)
             .fallback(to: localFeedLoader.loadPublisher)
