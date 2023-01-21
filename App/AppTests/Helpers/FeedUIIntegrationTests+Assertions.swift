@@ -10,7 +10,7 @@ import Feed
 import FeediOS
 
 extension FeedUIIntegrationTests {
-    func assertThat(_ sut: FeedViewController, isRendering feed: [FeedExpense], file: StaticString = #file, line: UInt = #line) {
+    func assertThat(_ sut: ListViewController, isRendering feed: [FeedExpense], file: StaticString = #file, line: UInt = #line) {
         sut.view.enforceLayoutCycle()
         guard sut.numberOfRenderedFeedExpenseViews() == feed.count else {
             return XCTFail("Expected \(feed.count) expenses, got \(sut.numberOfRenderedFeedExpenseViews()) instead.", file: file, line: line)
@@ -21,7 +21,7 @@ extension FeedUIIntegrationTests {
         }
     }
     
-    func assertThat(_ sut: FeedViewController, hasViewConfiguredFor expense: FeedExpense, at index: Int, file: StaticString = #file, line: UInt = #line) {
+    func assertThat(_ sut: ListViewController, hasViewConfiguredFor expense: FeedExpense, at index: Int, file: StaticString = #file, line: UInt = #line) {
         let view = sut.feedExpenseView(at: index)
         
         guard let cell = view as? FeedExpenseCell else {

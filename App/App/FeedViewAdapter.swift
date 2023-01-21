@@ -10,9 +10,9 @@ import Feed
 import FeediOS
 
 final class FeedViewAdapter: ResourceView {
-    private weak var controller: FeedViewController?
+    private weak var controller: ListViewController?
     
-    init(controller: FeedViewController) {
+    init(controller: ListViewController) {
         self.controller = controller
     }
     
