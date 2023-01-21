@@ -11,7 +11,7 @@ import Feed
 import FeediOS
 import App
 
-final class FeedUIIntegrationTests: XCTestCase {
+class FeedUIIntegrationTests: XCTestCase {
     
     func test_feedView_hasTitle() {
         let (sut, _) = makeSUT()
@@ -28,10 +28,10 @@ final class FeedUIIntegrationTests: XCTestCase {
         sut.loadViewIfNeeded()
         XCTAssertEqual(loader.loadFeedCallCount, 1, "Expected a loading request once view is loaded")
         
-        sut.simulateUserInitiatedFeedReload()
+        sut.simulateUserInitiatedReload()
         XCTAssertEqual(loader.loadFeedCallCount, 2, "Expected another loading request once user initiates a reload")
         
-        sut.simulateUserInitiatedFeedReload()
+        sut.simulateUserInitiatedReload()
         XCTAssertEqual(loader.loadFeedCallCount, 3, "Expected yet another loading request once user initiates another reload")
     }
     
@@ -44,7 +44,7 @@ final class FeedUIIntegrationTests: XCTestCase {
         loader.completeFeedLoading(at: 0)
         XCTAssertFalse(sut.isShowingLoadingIndicator, "Expected no loading indicator once loading completes successfully")
         
-        sut.simulateUserInitiatedFeedReload()
+        sut.simulateUserInitiatedReload()
         XCTAssertTrue(sut.isShowingLoadingIndicator, "Expected loading indicator once user initiates a reload")
         
         loader.completeFeedLoadingWithError(at: 1)
@@ -64,7 +64,7 @@ final class FeedUIIntegrationTests: XCTestCase {
         loader.completeFeedLoading(with: [expense0], at: 0)
         assertThat(sut, isRendering: [expense0])
         
-        sut.simulateUserInitiatedFeedReload()
+        sut.simulateUserInitiatedReload()
         loader.completeFeedLoading(with: [expense0, expense1, expense2, expense3], at: 1)
         assertThat(sut, isRendering: [expense0, expense1, expense2, expense3])
     }
@@ -77,22 +77,9 @@ final class FeedUIIntegrationTests: XCTestCase {
         loader.completeFeedLoading(with: [expense0], at: 0)
         assertThat(sut, isRendering: [expense0])
         
-        sut.simulateUserInitiatedFeedReload()
+        sut.simulateUserInitiatedReload()
         loader.completeFeedLoadingWithError(at: 1)
         assertThat(sut, isRendering: [expense0])
-    }
-    
-    func test_loadFeedCompletion_rendersErrorMessageOnErrorUntilNextReload()  {
-        let (sut, loader) = makeSUT()
-        
-        sut.loadViewIfNeeded()
-        XCTAssertEqual(sut.errorMessage, nil)
-        
-        loader.completeFeedLoadingWithError(at: 0)
-        XCTAssertEqual(sut.errorMessage, loadError)
-        
-        sut.simulateUserInitiatedFeedReload()
-        XCTAssertEqual(sut.errorMessage, nil)
     }
     
     func test_loadFeedCompletion_dispatchesFromBackgroundToMainThread() {
@@ -107,17 +94,67 @@ final class FeedUIIntegrationTests: XCTestCase {
         wait(for: [exp], timeout: 1.0)
     }
     
+    func test_loadFeedCompletion_rendersErrorMessageOnErrorUntilNextReload()  {
+        let (sut, loader) = makeSUT()
+        
+        sut.loadViewIfNeeded()
+        XCTAssertEqual(sut.errorMessage, nil)
+        
+        loader.completeFeedLoadingWithError(at: 0)
+        XCTAssertEqual(sut.errorMessage, loadError)
+        
+        sut.simulateUserInitiatedReload()
+        XCTAssertEqual(sut.errorMessage, nil)
+    }
+    
+    func test_tapOnErrorView_hidesErrorMessage() {
+        let (sut, loader) = makeSUT()
+
+        sut.loadViewIfNeeded()
+        XCTAssertEqual(sut.errorMessage, nil)
+
+        loader.completeFeedLoadingWithError(at: 0)
+        XCTAssertEqual(sut.errorMessage, loadError)
+
+        sut.simulateErrorViewTap()
+        XCTAssertEqual(sut.errorMessage, nil)
+    }
+    
+    
+    func test_expenseSelection_notifiesHandler() {
+        let expense0 = makeExpense()
+        let expense1 = makeExpense()
+        var selectedExpenses = [FeedExpense]()
+        let (sut, loader) = makeSUT(selection: { selectedExpenses.append($0) })
+
+        sut.loadViewIfNeeded()
+        loader.completeFeedLoading(with: [expense0, expense1], at: 0)
+
+        sut.simulateTapOnFeedExpense(at: 0)
+        XCTAssertEqual(selectedExpenses, [expense0])
+
+        sut.simulateTapOnFeedExpense(at: 1)
+        XCTAssertEqual(selectedExpenses, [expense0, expense1])
+    }
+    
     // MARK: - Helpers
     
-    private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (sut: FeedViewController, loader: LoaderSpy) {
+    private func makeSUT(
+        selection: @escaping (FeedExpense) -> Void = { _ in },
+        file: StaticString = #file,
+        line: UInt = #line)
+    -> (sut: ListViewController, loader: LoaderSpy) {
         let loader = LoaderSpy()
-        let sut = FeedUIComposer.feedComposedWith(feedLoader: loader.loadPublisher)
+        let sut = FeedUIComposer.feedComposedWith(
+            feedLoader: loader.loadPublisher,
+            selection: selection
+        )
         trackForMemoryLeaks(loader, file: file, line: line)
         trackForMemoryLeaks(sut, file: file, line: line)
         return (sut, loader)
     }    
     
-    private func makeExpense(title: String, timestamp: Date, cost: Float) -> FeedExpense {
+    private func makeExpense(title: String = "", timestamp: Date = Date(), cost: Float = 0) -> FeedExpense {
         return FeedExpense(id: UUID(), title: title, timestamp: timestamp, cost: cost, currency: .USD)
     }
 }

@@ -14,3 +14,19 @@ func anyNSError() -> NSError {
 func uniqueFeed() -> [FeedExpense] {
     return [FeedExpense(id: UUID(), title: "any", timestamp: Date(), cost: 0, currency: .USD)]
 }
+
+private class DummyView: ResourceView {
+    func display(_ viewModel: Any) {}
+}
+
+var loadError: String {
+    LoadResourcePresenter<Any, DummyView>.loadError
+}
+
+var feedTitle: String {
+    FeedPresenter.title
+}
+
+var notesTitle: String {
+    ExpenseNotesPresenter.title
+}

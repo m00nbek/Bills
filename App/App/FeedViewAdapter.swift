@@ -10,15 +10,23 @@ import Feed
 import FeediOS
 
 final class FeedViewAdapter: ResourceView {
-    private weak var controller: FeedViewController?
+    private weak var controller: ListViewController?
+    private let selection: (FeedExpense) -> Void
     
-    init(controller: FeedViewController) {
+    init(controller: ListViewController, selection: @escaping (FeedExpense) -> Void) {
         self.controller = controller
+        self.selection = selection
     }
     
     func display(_ viewModel: FeedViewModel) {
         controller?.display(viewModel.feed.map { model in
-            FeedExpenseCellController(viewModel: FeedExpenseViewModel(model: model))
+            let view = FeedExpenseCellController(
+                viewModel: FeedExpenseViewModel(model: model),
+                selection: { [selection] in
+                    selection(model)
+                })
+            
+            return CellController(id: model, view)
         })
     }
 }
