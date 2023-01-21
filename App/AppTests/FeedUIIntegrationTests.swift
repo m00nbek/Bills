@@ -82,6 +82,18 @@ final class FeedUIIntegrationTests: XCTestCase {
         assertThat(sut, isRendering: [expense0])
     }
     
+    func test_loadFeedCompletion_dispatchesFromBackgroundToMainThread() {
+        let (sut, loader) = makeSUT()
+        sut.loadViewIfNeeded()
+        
+        let exp = expectation(description: "Wait for background queue")
+        DispatchQueue.global().async {
+            loader.completeFeedLoading(at: 0)
+            exp.fulfill()
+        }
+        wait(for: [exp], timeout: 1.0)
+    }
+    
     func test_loadFeedCompletion_rendersErrorMessageOnErrorUntilNextReload()  {
         let (sut, loader) = makeSUT()
         
@@ -93,18 +105,6 @@ final class FeedUIIntegrationTests: XCTestCase {
         
         sut.simulateUserInitiatedFeedReload()
         XCTAssertEqual(sut.errorMessage, nil)
-    }
-    
-    func test_loadFeedCompletion_dispatchesFromBackgroundToMainThread() {
-        let (sut, loader) = makeSUT()
-        sut.loadViewIfNeeded()
-        
-        let exp = expectation(description: "Wait for background queue")
-        DispatchQueue.global().async {
-            loader.completeFeedLoading(at: 0)
-            exp.fulfill()
-        }
-        wait(for: [exp], timeout: 1.0)
     }
     
     func test_tapOnErrorView_hidesErrorMessage() {
