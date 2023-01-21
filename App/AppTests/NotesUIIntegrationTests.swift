@@ -7,6 +7,7 @@
 
 import XCTest
 import UIKit
+import Combine
 import Feed
 import FeediOS
 import App
@@ -21,18 +22,18 @@ class NotesUIIntegrationTests: FeedUIIntegrationTests {
         XCTAssertEqual(sut.title, notesTitle)
     }
     
-    override func test_loadFeedActions_requestFeedFromLoader() {
+    func test_loadNotesActions_requestNotesFromLoader() {
         let (sut, loader) = makeSUT()
-        XCTAssertEqual(loader.loadFeedCallCount, 0, "Expected no loading requests before view is loaded")
+        XCTAssertEqual(loader.loadNotesCallCount, 0, "Expected no loading requests before view is loaded")
         
         sut.loadViewIfNeeded()
-        XCTAssertEqual(loader.loadFeedCallCount, 1, "Expected a loading request once view is loaded")
+        XCTAssertEqual(loader.loadNotesCallCount, 1, "Expected a loading request once view is loaded")
         
-        sut.simulateUserInitiatedFeedReload()
-        XCTAssertEqual(loader.loadFeedCallCount, 2, "Expected another loading request once user initiates a reload")
+        sut.simulateUserInitiatedReload()
+        XCTAssertEqual(loader.loadNotesCallCount, 2, "Expected another loading request once user initiates a reload")
         
-        sut.simulateUserInitiatedFeedReload()
-        XCTAssertEqual(loader.loadFeedCallCount, 3, "Expected yet another loading request once user initiates another reload")
+        sut.simulateUserInitiatedReload()
+        XCTAssertEqual(loader.loadNotesCallCount, 3, "Expected yet another loading request once user initiates another reload")
     }
     
     override func test_loadingFeedIndicator_isVisibleWhileLoadingFeed() {
@@ -44,7 +45,7 @@ class NotesUIIntegrationTests: FeedUIIntegrationTests {
         loader.completeFeedLoading(at: 0)
         XCTAssertFalse(sut.isShowingLoadingIndicator, "Expected no loading indicator once loading completes successfully")
         
-        sut.simulateUserInitiatedFeedReload()
+        sut.simulateUserInitiatedReload()
         XCTAssertTrue(sut.isShowingLoadingIndicator, "Expected loading indicator once user initiates a reload")
         
         loader.completeFeedLoadingWithError(at: 1)
@@ -64,7 +65,7 @@ class NotesUIIntegrationTests: FeedUIIntegrationTests {
         loader.completeFeedLoading(with: [expense0], at: 0)
         assertThat(sut, isRendering: [expense0])
         
-        sut.simulateUserInitiatedFeedReload()
+        sut.simulateUserInitiatedReload()
         loader.completeFeedLoading(with: [expense0, expense1, expense2, expense3], at: 1)
         assertThat(sut, isRendering: [expense0, expense1, expense2, expense3])
     }
@@ -77,7 +78,7 @@ class NotesUIIntegrationTests: FeedUIIntegrationTests {
         loader.completeFeedLoading(with: [expense0], at: 0)
         assertThat(sut, isRendering: [expense0])
         
-        sut.simulateUserInitiatedFeedReload()
+        sut.simulateUserInitiatedReload()
         loader.completeFeedLoadingWithError(at: 1)
         assertThat(sut, isRendering: [expense0])
     }
@@ -103,7 +104,7 @@ class NotesUIIntegrationTests: FeedUIIntegrationTests {
         loader.completeFeedLoadingWithError(at: 0)
         XCTAssertEqual(sut.errorMessage, loadError)
         
-        sut.simulateUserInitiatedFeedReload()
+        sut.simulateUserInitiatedReload()
         XCTAssertEqual(sut.errorMessage, nil)
     }
     
@@ -132,5 +133,28 @@ class NotesUIIntegrationTests: FeedUIIntegrationTests {
     
     private func makeExpense(title: String, timestamp: Date, cost: Float) -> FeedExpense {
         return FeedExpense(id: UUID(), title: title, timestamp: timestamp, cost: cost, currency: .USD)
+    }
+    
+    private class LoaderSpy {
+        private var requests = [PassthroughSubject<[FeedExpense], Error>]()
+        
+        var loadNotesCallCount: Int {
+            return requests.count
+        }
+        
+        func loadPublisher() -> AnyPublisher<[FeedExpense], Error> {
+            let publisher = PassthroughSubject<[FeedExpense], Error>()
+            requests.append(publisher)
+            return publisher.eraseToAnyPublisher()
+        }
+        
+        func completeFeedLoading(with feed: [FeedExpense] = [], at index: Int = 0) {
+            requests[index].send(feed)
+        }
+        
+        func completeFeedLoadingWithError(at index: Int = 0) {
+            let error = NSError(domain: "an error", code: 0)
+            requests[index].send(completion: .failure(error))
+        }
     }
 }
