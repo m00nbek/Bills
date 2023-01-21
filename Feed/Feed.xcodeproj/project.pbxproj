@@ -22,6 +22,7 @@
 		3B341B63297BA92D002E9F0C /* ExpenseNotesPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B341B62297BA92D002E9F0C /* ExpenseNotesPresenterTests.swift */; };
 		3B341B66297BA9A9002E9F0C /* ExpenseNotesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B341B65297BA9A9002E9F0C /* ExpenseNotesPresenter.swift */; };
 		3B341B69297BA9F2002E9F0C /* ExpenseNotes.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3B341B6B297BA9F2002E9F0C /* ExpenseNotes.strings */; };
+		3B341B6F297BAB45002E9F0C /* ExpenseNotesLocalizationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B341B6E297BAB45002E9F0C /* ExpenseNotesLocalizationTests.swift */; };
 		3B387D2D297AC234002B7901 /* ExpenseNotesMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B387D2C297AC234002B7901 /* ExpenseNotesMapper.swift */; };
 		3B387D34297AC77B002B7901 /* ExpenseNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B387D33297AC77B002B7901 /* ExpenseNote.swift */; };
 		3B387D42297AD1A9002B7901 /* FeedItemsMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B387D41297AD1A9002B7901 /* FeedItemsMapperTests.swift */; };
@@ -156,6 +157,7 @@
 		3B341B6A297BA9F2002E9F0C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/ExpenseNotes.strings; sourceTree = "<group>"; };
 		3B341B6C297BA9F3002E9F0C /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/ExpenseNotes.strings; sourceTree = "<group>"; };
 		3B341B6D297BA9F4002E9F0C /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/ExpenseNotes.strings; sourceTree = "<group>"; };
+		3B341B6E297BAB45002E9F0C /* ExpenseNotesLocalizationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseNotesLocalizationTests.swift; sourceTree = "<group>"; };
 		3B387D2C297AC234002B7901 /* ExpenseNotesMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseNotesMapper.swift; sourceTree = "<group>"; };
 		3B387D33297AC77B002B7901 /* ExpenseNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseNote.swift; sourceTree = "<group>"; };
 		3B387D41297AD1A9002B7901 /* FeedItemsMapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedItemsMapperTests.swift; sourceTree = "<group>"; };
@@ -303,6 +305,7 @@
 			isa = PBXGroup;
 			children = (
 				3B341B62297BA92D002E9F0C /* ExpenseNotesPresenterTests.swift */,
+				3B341B6E297BAB45002E9F0C /* ExpenseNotesLocalizationTests.swift */,
 			);
 			path = "Expense Notes Presentation";
 			sourceTree = "<group>";
@@ -945,6 +948,7 @@
 				3B387D44297AE311002B7901 /* ExpenseNotesMapperTests.swift in Sources */,
 				3B2E72682966FA46000722AF /* FeedCacheTestHelpers.swift in Sources */,
 				3B2E72662966E2A8000722AF /* ValidateFeedCacheUseCaseTests.swift in Sources */,
+				3B341B6F297BAB45002E9F0C /* ExpenseNotesLocalizationTests.swift in Sources */,
 				3BA6E7A9297568FE0059F3F0 /* FeedPresenterTests.swift in Sources */,
 				3BCB55F3297A60DE0031FAAE /* SharedLocalizationTests.swift in Sources */,
 				3B45281B296D910D00763504 /* XCTestCase+FailableInsertFeedStoreSpecs.swift in Sources */,
