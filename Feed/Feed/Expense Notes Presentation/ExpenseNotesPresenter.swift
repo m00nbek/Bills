@@ -11,7 +11,7 @@ public struct ExpenseNotesViewModel {
     public let notes: [ExpenseNoteViewModel]
 }
 
-public struct ExpenseNoteViewModel: Equatable {
+public struct ExpenseNoteViewModel: Hashable {
     public let message: String
     public let date: String
 

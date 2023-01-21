@@ -30,6 +30,36 @@ extension ListViewController {
     var errorMessage: String? {
         return errorView.message
     }
+}
+
+extension ListViewController {
+    func numberOfRenderedNotes() -> Int {
+        tableView.numberOfSections == 0 ? 0 :  tableView.numberOfRows(inSection: notesSection)
+    }
+    
+    func noteMessage(at row: Int) -> String? {
+        noteView(at: row)?.messageLabel.text
+    }
+    
+    func noteDate(at row: Int) -> String? {
+        noteView(at: row)?.dateLabel.text
+    }
+    
+    private func noteView(at row: Int) -> ExpenseNoteCell? {
+        guard numberOfRenderedNotes() > row else {
+            return nil
+        }
+        let ds = tableView.dataSource
+        let index = IndexPath(row: row, section: notesSection)
+        return ds?.tableView(tableView, cellForRowAt: index) as? ExpenseNoteCell
+    }
+    
+    private var notesSection: Int {
+        return 0
+    }
+}
+
+extension ListViewController {
     
     @discardableResult
     func simulateFeedExpenseViewVisible(at index: Int) -> FeedExpenseCell? {

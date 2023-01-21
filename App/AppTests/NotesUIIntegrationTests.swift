@@ -42,7 +42,7 @@ class NotesUIIntegrationTests: FeedUIIntegrationTests {
         sut.loadViewIfNeeded()
         XCTAssertTrue(sut.isShowingLoadingIndicator, "Expected loading indicator once view is loaded")
         
-        loader.completeNoteLoading(at: 0)
+        loader.completeNotesLoading(at: 0)
         XCTAssertFalse(sut.isShowingLoadingIndicator, "Expected no loading indicator once loading completes successfully")
         
         sut.simulateUserInitiatedReload()
@@ -52,35 +52,45 @@ class NotesUIIntegrationTests: FeedUIIntegrationTests {
         XCTAssertFalse(sut.isShowingLoadingIndicator, "Expected no loading indicator once user initiated loading completes with error")
     }
     
-    override func test_loadFeedCompletion_renderSuccessfullyLoadedFeed() {
-        let expense0 = makeExpense(title: "a title", timestamp: Date(), cost: 47)
-        let expense1 = makeExpense(title: "another title", timestamp: Date(), cost: 37)
-        let expense2 = makeExpense(title: "ttitle with double Ts", timestamp: Date(), cost: 27)
-        let expense3 = makeExpense(title: "title without an article", timestamp: Date(), cost: 17)
+    func test_loadnotesCompletion_rendersSuccessfullyLoadednotes() {
+        let note0 = makeNote(message: "a message")
+        let note1 = makeNote(message: "another message")
         let (sut, loader) = makeSUT()
         
         sut.loadViewIfNeeded()
-        assertThat(sut, isRendering: [])
+        assertThat(sut, isRendering: [ExpenseNote]())
         
-        loader.completeNoteLoading(with: [expense0], at: 0)
-        assertThat(sut, isRendering: [expense0])
+        loader.completeNotesLoading(with: [note0], at: 0)
+        assertThat(sut, isRendering: [note0])
         
         sut.simulateUserInitiatedReload()
-        loader.completeNoteLoading(with: [expense0, expense1, expense2, expense3], at: 1)
-        assertThat(sut, isRendering: [expense0, expense1, expense2, expense3])
+        loader.completeNotesLoading(with: [note0, note1], at: 1)
+        assertThat(sut, isRendering: [note0, note1])
     }
-    
-    override func test_loadFeedCompletion_doesNotAlterCurrentRenderingStateOnError() {
-        let expense0 = makeExpense(title: "title", timestamp: Date(), cost: 12)
+    func test_loadnotesCompletion_rendersSuccessfullyLoadedEmptynotesAfterNonEmptynotes() {
+        let note = makeNote()
         let (sut, loader) = makeSUT()
         
         sut.loadViewIfNeeded()
-        loader.completeNoteLoading(with: [expense0], at: 0)
-        assertThat(sut, isRendering: [expense0])
+        loader.completeNotesLoading(with: [note], at: 0)
+        assertThat(sut, isRendering: [note])
+        
+        sut.simulateUserInitiatedReload()
+        loader.completeNotesLoading(with: [], at: 1)
+        assertThat(sut, isRendering: [ExpenseNote]())
+    }
+    
+    func test_loadnotesCompletion_doesNotAlterCurrentRenderingStateOnError() {
+        let note = makeNote()
+        let (sut, loader) = makeSUT()
+        
+        sut.loadViewIfNeeded()
+        loader.completeNotesLoading(with: [note], at: 0)
+        assertThat(sut, isRendering: [note])
         
         sut.simulateUserInitiatedReload()
         loader.completeNoteLoadingWithError(at: 1)
-        assertThat(sut, isRendering: [expense0])
+        assertThat(sut, isRendering: [note])
     }
     
     override func test_loadFeedCompletion_dispatchesFromBackgroundToMainThread() {
@@ -89,7 +99,7 @@ class NotesUIIntegrationTests: FeedUIIntegrationTests {
         
         let exp = expectation(description: "Wait for background queue")
         DispatchQueue.global().async {
-            loader.completeNoteLoading(at: 0)
+            loader.completeNotesLoading(at: 0)
             exp.fulfill()
         }
         wait(for: [exp], timeout: 1.0)
@@ -131,25 +141,36 @@ class NotesUIIntegrationTests: FeedUIIntegrationTests {
         return (sut, loader)
     }
     
-    private func makeExpense(title: String, timestamp: Date, cost: Float) -> FeedExpense {
-        return FeedExpense(id: UUID(), title: title, timestamp: timestamp, cost: cost, currency: .USD)
+    private func makeNote(message: String = "any message") -> ExpenseNote {
+        return ExpenseNote(id: UUID(), message: message, createdAt: Date())
+    }
+    
+    private func assertThat(_ sut: ListViewController, isRendering notes: [ExpenseNote], file: StaticString = #filePath, line: UInt = #line) {
+        XCTAssertEqual(sut.numberOfRenderedNotes(), notes.count, "notes count", file: file, line: line)
+        
+        let viewModel = ExpenseNotesPresenter.map(notes)
+        
+        viewModel.notes.enumerated().forEach { index, note in
+            XCTAssertEqual(sut.noteMessage(at: index), note.message, "message at \(index)", file: file, line: line)
+            XCTAssertEqual(sut.noteDate(at: index), note.date, "date at \(index)", file: file, line: line)
+        }
     }
     
     private class LoaderSpy {
-        private var requests = [PassthroughSubject<[FeedExpense], Error>]()
+        private var requests = [PassthroughSubject<[ExpenseNote], Error>]()
         
         var loadNotesCallCount: Int {
             return requests.count
         }
         
-        func loadPublisher() -> AnyPublisher<[FeedExpense], Error> {
-            let publisher = PassthroughSubject<[FeedExpense], Error>()
+        func loadPublisher() -> AnyPublisher<[ExpenseNote], Error> {
+            let publisher = PassthroughSubject<[ExpenseNote], Error>()
             requests.append(publisher)
             return publisher.eraseToAnyPublisher()
         }
         
-        func completeNoteLoading(with feed: [FeedExpense] = [], at index: Int = 0) {
-            requests[index].send(feed)
+        func completeNotesLoading(with notes: [ExpenseNote] = [], at index: Int = 0) {
+            requests[index].send(notes)
         }
         
         func completeNoteLoadingWithError(at index: Int = 0) {

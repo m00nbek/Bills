@@ -13,30 +13,44 @@ import Combine
 public final class NotesUIComposer {
     private init() {}
     
-    private typealias FeedPresentationAdapter = LoadResourcePresentationAdapter<[FeedExpense], FeedViewAdapter>
+    private typealias NotesPresentationAdapter = LoadResourcePresentationAdapter<[ExpenseNote], NotesViewAdapter>
     
     public static func notesComposedWith(
-        notesLoader: @escaping () -> AnyPublisher<[FeedExpense], Error>
+        notesLoader: @escaping () -> AnyPublisher<[ExpenseNote], Error>
     ) -> ListViewController {
-        let presentationAdapter = FeedPresentationAdapter(loader: notesLoader)
+        let presentationAdapter = NotesPresentationAdapter(loader: notesLoader)
         
-        let feedController = makeFeedViewController(title: ExpenseNotesPresenter.title)
-        feedController.onRefresh = presentationAdapter.loadResource
+        let notesController = makeNotesViewController(title: ExpenseNotesPresenter.title)
+        notesController.onRefresh = presentationAdapter.loadResource
         
         presentationAdapter.presenter = LoadResourcePresenter(
-            resourceView: FeedViewAdapter(controller: feedController),
-            loadingView: WeakRefVirtualProxy(feedController),
-            errorView: WeakRefVirtualProxy(feedController),
-            mapper: FeedPresenter.map)
+            resourceView: NotesViewAdapter(controller: notesController),
+            loadingView: WeakRefVirtualProxy(notesController),
+            errorView: WeakRefVirtualProxy(notesController),
+            mapper: { ExpenseNotesPresenter.map($0) })
         
-        return feedController
+        return notesController
     }
     
-    private static func makeFeedViewController(title: String) -> ListViewController {
+    private static func makeNotesViewController(title: String) -> ListViewController {
         let bundle = Bundle(for: ListViewController.self)
-        let storyboard = UIStoryboard(name: "Feed", bundle: bundle)
-        let feedController = storyboard.instantiateInitialViewController() as! ListViewController
-        feedController.title = title
-        return feedController
+        let storyboard = UIStoryboard(name: "ExpenseNotes", bundle: bundle)
+        let controller = storyboard.instantiateInitialViewController() as! ListViewController
+        controller.title = title
+        return controller
+    }
+}
+
+final class NotesViewAdapter: ResourceView {
+    private weak var controller: ListViewController?
+
+    init(controller: ListViewController) {
+        self.controller = controller
+    }
+
+    func display(_ viewModel: ExpenseNotesViewModel) {
+        controller?.display(viewModel.notes.map { viewModel in
+            CellController(id: viewModel, ExpenseNoteCellController(model: viewModel))
+        })
     }
 }
