@@ -13,12 +13,12 @@ import App
 
 class NotesUIIntegrationTests: FeedUIIntegrationTests {
     
-    override func test_feedView_hasTitle() {
+    func notesView_hasTitle() {
         let (sut, _) = makeSUT()
         
         sut.loadViewIfNeeded()
         
-        XCTAssertEqual(sut.title, feedTitle)
+        XCTAssertEqual(sut.title, notesTitle)
     }
     
     override func test_loadFeedActions_requestFeedFromLoader() {

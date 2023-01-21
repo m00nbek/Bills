@@ -20,7 +20,7 @@ public final class NotesUIComposer {
     ) -> ListViewController {
         let presentationAdapter = FeedPresentationAdapter(loader: notesLoader)
         
-        let feedController = makeFeedViewController(title: FeedPresenter.title)
+        let feedController = makeFeedViewController(title: ExpenseNotesPresenter.title)
         feedController.onRefresh = presentationAdapter.loadResource
         
         presentationAdapter.presenter = LoadResourcePresenter(
