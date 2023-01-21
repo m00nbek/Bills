@@ -8,22 +8,24 @@
 import UIKit
 import Feed
 
-public final class FeedExpenseCellController: CellController {
+public final class FeedExpenseCellController: NSObject {
     private let viewModel: FeedExpenseViewModel
     
     public init(viewModel: FeedExpenseViewModel) {
         self.viewModel = viewModel
     }
-    
-    public func view(in tableView: UITableView) -> UITableViewCell {
-        let cell: FeedExpenseCell = tableView.dequeueReusableCell()
-        setup(cell)
-        return cell
+}
+
+extension FeedExpenseCellController: CellController {
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        1
     }
     
-    private func setup(_ cell: FeedExpenseCell) {
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell: FeedExpenseCell = tableView.dequeueReusableCell()
         cell.expenseTitleLabel.text = viewModel.expenseTitle
         cell.costLabel.text = viewModel.cost
         cell.dateLabel.text = viewModel.date
+        return cell
     }
 }

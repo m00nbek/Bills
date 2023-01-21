@@ -8,14 +8,18 @@
 import UIKit
 import Feed
 
-public class ExpenseNoteCellController: CellController {
+public class ExpenseNoteCellController: NSObject, CellController {
     private let model: ExpenseNoteViewModel
     
     public init(model: ExpenseNoteViewModel) {
         self.model = model
     }
     
-    public func view(in tableView: UITableView) -> UITableViewCell {
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        1
+    }
+    
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: ExpenseNoteCell = tableView.dequeueReusableCell()
         cell.messageLabel.text = model.message
         cell.dateLabel.text = model.date
