@@ -1,8 +1,8 @@
 //
-//  FeedUIIntegrationTests.swift
-//  FeediOSTests
+//  NotesUIIntegrationTests.swift
+//  AppTests
 //
-//  Created by m00nbek Melikulov on 1/12/23.
+//  Created by m00nbek Melikulov on 1/21/23.
 //
 
 import XCTest
@@ -11,9 +11,9 @@ import Feed
 import FeediOS
 import App
 
-class FeedUIIntegrationTests: XCTestCase {
+class NotesUIIntegrationTests: FeedUIIntegrationTests {
     
-    func test_feedView_hasTitle() {
+    override func test_feedView_hasTitle() {
         let (sut, _) = makeSUT()
         
         sut.loadViewIfNeeded()
@@ -21,7 +21,7 @@ class FeedUIIntegrationTests: XCTestCase {
         XCTAssertEqual(sut.title, feedTitle)
     }
     
-    func test_loadFeedActions_requestFeedFromLoader() {
+    override func test_loadFeedActions_requestFeedFromLoader() {
         let (sut, loader) = makeSUT()
         XCTAssertEqual(loader.loadFeedCallCount, 0, "Expected no loading requests before view is loaded")
         
@@ -35,7 +35,7 @@ class FeedUIIntegrationTests: XCTestCase {
         XCTAssertEqual(loader.loadFeedCallCount, 3, "Expected yet another loading request once user initiates another reload")
     }
     
-    func test_loadingFeedIndicator_isVisibleWhileLoadingFeed() {
+    override func test_loadingFeedIndicator_isVisibleWhileLoadingFeed() {
         let (sut, loader) = makeSUT()
         
         sut.loadViewIfNeeded()
@@ -51,7 +51,7 @@ class FeedUIIntegrationTests: XCTestCase {
         XCTAssertFalse(sut.isShowingLoadingIndicator, "Expected no loading indicator once user initiated loading completes with error")
     }
     
-    func test_loadFeedCompletion_renderSuccessfullyLoadedFeed() {
+    override func test_loadFeedCompletion_renderSuccessfullyLoadedFeed() {
         let expense0 = makeExpense(title: "a title", timestamp: Date(), cost: 47)
         let expense1 = makeExpense(title: "another title", timestamp: Date(), cost: 37)
         let expense2 = makeExpense(title: "ttitle with double Ts", timestamp: Date(), cost: 27)
@@ -69,7 +69,7 @@ class FeedUIIntegrationTests: XCTestCase {
         assertThat(sut, isRendering: [expense0, expense1, expense2, expense3])
     }
     
-    func test_loadFeedCompletion_doesNotAlterCurrentRenderingStateOnError() {
+    override func test_loadFeedCompletion_doesNotAlterCurrentRenderingStateOnError() {
         let expense0 = makeExpense(title: "title", timestamp: Date(), cost: 12)
         let (sut, loader) = makeSUT()
         
@@ -82,7 +82,7 @@ class FeedUIIntegrationTests: XCTestCase {
         assertThat(sut, isRendering: [expense0])
     }
     
-    func test_loadFeedCompletion_dispatchesFromBackgroundToMainThread() {
+    override func test_loadFeedCompletion_dispatchesFromBackgroundToMainThread() {
         let (sut, loader) = makeSUT()
         sut.loadViewIfNeeded()
         
@@ -94,7 +94,7 @@ class FeedUIIntegrationTests: XCTestCase {
         wait(for: [exp], timeout: 1.0)
     }
     
-    func test_loadFeedCompletion_rendersErrorMessageOnErrorUntilNextReload()  {
+    override func test_loadFeedCompletion_rendersErrorMessageOnErrorUntilNextReload()  {
         let (sut, loader) = makeSUT()
         
         sut.loadViewIfNeeded()
@@ -107,15 +107,15 @@ class FeedUIIntegrationTests: XCTestCase {
         XCTAssertEqual(sut.errorMessage, nil)
     }
     
-    func test_tapOnErrorView_hidesErrorMessage() {
+    override func test_tapOnErrorView_hidesErrorMessage() {
         let (sut, loader) = makeSUT()
-
+        
         sut.loadViewIfNeeded()
         XCTAssertEqual(sut.errorMessage, nil)
-
+        
         loader.completeFeedLoadingWithError(at: 0)
         XCTAssertEqual(sut.errorMessage, loadError)
-
+        
         sut.simulateErrorViewTap()
         XCTAssertEqual(sut.errorMessage, nil)
     }
@@ -124,11 +124,11 @@ class FeedUIIntegrationTests: XCTestCase {
     
     private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (sut: ListViewController, loader: LoaderSpy) {
         let loader = LoaderSpy()
-        let sut = FeedUIComposer.feedComposedWith(feedLoader: loader.loadPublisher)
+        let sut = NotesUIComposer.notesComposedWith(notesLoader: loader.loadPublisher)
         trackForMemoryLeaks(loader, file: file, line: line)
         trackForMemoryLeaks(sut, file: file, line: line)
         return (sut, loader)
-    }    
+    }
     
     private func makeExpense(title: String, timestamp: Date, cost: Float) -> FeedExpense {
         return FeedExpense(id: UUID(), title: title, timestamp: timestamp, cost: cost, currency: .USD)
