@@ -14,10 +14,11 @@ import XCTest
      func test_listWithComments() {
          let sut = makeSUT()
 
-         sut.display(comments())
+         sut.display(notes())
 
          assert(snapshot: sut.snapshot(for: .iPhone8(style: .light)), named: "EXPENSE_NOTES_light")
          assert(snapshot: sut.snapshot(for: .iPhone8(style: .dark)), named: "EXPENSE_NOTES_dark")
+         assert(snapshot: sut.snapshot(for: .iPhone8(style: .light, contentSize: .extraExtraExtraLarge)), named: "IMAGE_COMMENTS_light_extraExtraExtraLarge")
      }
 
      // MARK: - Helpers
