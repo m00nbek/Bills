@@ -19,6 +19,9 @@
 		3B2E72662966E2A8000722AF /* ValidateFeedCacheUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2E72652966E2A8000722AF /* ValidateFeedCacheUseCaseTests.swift */; };
 		3B2E72682966FA46000722AF /* FeedCacheTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2E72672966FA45000722AF /* FeedCacheTestHelpers.swift */; };
 		3B2E726A2966FB6D000722AF /* SharedTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2E72692966FB6D000722AF /* SharedTestHelpers.swift */; };
+		3B341B63297BA92D002E9F0C /* ExpenseNotesPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B341B62297BA92D002E9F0C /* ExpenseNotesPresenterTests.swift */; };
+		3B341B66297BA9A9002E9F0C /* ExpenseNotesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B341B65297BA9A9002E9F0C /* ExpenseNotesPresenter.swift */; };
+		3B341B69297BA9F2002E9F0C /* ExpenseNotes.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3B341B6B297BA9F2002E9F0C /* ExpenseNotes.strings */; };
 		3B387D2D297AC234002B7901 /* ExpenseNotesMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B387D2C297AC234002B7901 /* ExpenseNotesMapper.swift */; };
 		3B387D34297AC77B002B7901 /* ExpenseNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B387D33297AC77B002B7901 /* ExpenseNote.swift */; };
 		3B387D42297AD1A9002B7901 /* FeedItemsMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B387D41297AD1A9002B7901 /* FeedItemsMapperTests.swift */; };
@@ -148,6 +151,11 @@
 		3B2E72652966E2A8000722AF /* ValidateFeedCacheUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateFeedCacheUseCaseTests.swift; sourceTree = "<group>"; };
 		3B2E72672966FA45000722AF /* FeedCacheTestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCacheTestHelpers.swift; sourceTree = "<group>"; };
 		3B2E72692966FB6D000722AF /* SharedTestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedTestHelpers.swift; sourceTree = "<group>"; };
+		3B341B62297BA92D002E9F0C /* ExpenseNotesPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseNotesPresenterTests.swift; sourceTree = "<group>"; };
+		3B341B65297BA9A9002E9F0C /* ExpenseNotesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseNotesPresenter.swift; sourceTree = "<group>"; };
+		3B341B6A297BA9F2002E9F0C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/ExpenseNotes.strings; sourceTree = "<group>"; };
+		3B341B6C297BA9F3002E9F0C /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/ExpenseNotes.strings; sourceTree = "<group>"; };
+		3B341B6D297BA9F4002E9F0C /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/ExpenseNotes.strings; sourceTree = "<group>"; };
 		3B387D2C297AC234002B7901 /* ExpenseNotesMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseNotesMapper.swift; sourceTree = "<group>"; };
 		3B387D33297AC77B002B7901 /* ExpenseNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseNote.swift; sourceTree = "<group>"; };
 		3B387D41297AD1A9002B7901 /* FeedItemsMapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedItemsMapperTests.swift; sourceTree = "<group>"; };
@@ -291,6 +299,23 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		3B341B61297BA908002E9F0C /* Expense Notes Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				3B341B62297BA92D002E9F0C /* ExpenseNotesPresenterTests.swift */,
+			);
+			path = "Expense Notes Presentation";
+			sourceTree = "<group>";
+		};
+		3B341B64297BA998002E9F0C /* Expense Notes Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				3B341B65297BA9A9002E9F0C /* ExpenseNotesPresenter.swift */,
+				3B341B6B297BA9F2002E9F0C /* ExpenseNotes.strings */,
+			);
+			path = "Expense Notes Presentation";
+			sourceTree = "<group>";
+		};
 		3B387D32297AC753002B7901 /* Expense Notes Feature */ = {
 			isa = PBXGroup;
 			children = (
@@ -428,6 +453,7 @@
 				3B53FE8329279EE90057473C /* Feed API */,
 				3B387D32297AC753002B7901 /* Expense Notes Feature */,
 				3B387D3B297ACB1E002B7901 /* Expense Notes API */,
+				3B341B64297BA998002E9F0C /* Expense Notes Presentation */,
 				3B53FE6529278A7F0057473C /* Feed.h */,
 				3B53FE6629278A7F0057473C /* Feed.docc */,
 			);
@@ -443,6 +469,7 @@
 				3BA6E7A7297568E10059F3F0 /* Feed Presentation */,
 				3B53FE8A2929EC840057473C /* Feed API */,
 				3B387D3C297ACB6B002B7901 /* Expense Notes API */,
+				3B341B61297BA908002E9F0C /* Expense Notes Presentation */,
 				3B060E06293776E2005A1566 /* Helpers */,
 			);
 			path = FeedTests;
@@ -828,6 +855,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3BB7884C2976E33B00E4DA75 /* Feed.strings in Resources */,
+				3B341B69297BA9F2002E9F0C /* ExpenseNotes.strings in Resources */,
 				3BCB55ED297A5FF30031FAAE /* Shared.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -894,6 +922,7 @@
 				3BB788502976E3C000E4DA75 /* ResourceLoadingViewModel.swift in Sources */,
 				3BD6BD7029780DED004A3EF9 /* CoreDataFeedStore+FeedStore.swift in Sources */,
 				3B45282E296DC5CF00763504 /* CoreDataHelpers.swift in Sources */,
+				3B341B66297BA9A9002E9F0C /* ExpenseNotesPresenter.swift in Sources */,
 				3B53FE872929E42A0057473C /* HTTPClient.swift in Sources */,
 				3B452826296DAA7600763504 /* CoreDataFeedStore.swift in Sources */,
 				3B452830296DC67F00763504 /* ManagedCache.swift in Sources */,
@@ -935,6 +964,7 @@
 				3BCB55F5297A64900031FAAE /* SharedLocalizationTestHelpers.swift in Sources */,
 				3B452822296DA99700763504 /* CoreDataFeedStoreTests.swift in Sources */,
 				3B452817296D8A6000763504 /* XCTestCase+FeedStoreSpecs.swift in Sources */,
+				3B341B63297BA92D002E9F0C /* ExpenseNotesPresenterTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -996,6 +1026,16 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		3B341B6B297BA9F2002E9F0C /* ExpenseNotes.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3B341B6A297BA9F2002E9F0C /* en */,
+				3B341B6C297BA9F3002E9F0C /* ja */,
+				3B341B6D297BA9F4002E9F0C /* es */,
+			);
+			name = ExpenseNotes.strings;
+			sourceTree = "<group>";
+		};
 		3BB788462976E12200E4DA75 /* Feed.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
