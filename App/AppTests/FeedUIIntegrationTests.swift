@@ -120,17 +120,41 @@ class FeedUIIntegrationTests: XCTestCase {
         XCTAssertEqual(sut.errorMessage, nil)
     }
     
+    
+    func test_expenseSelection_notifiesHandler() {
+        let expense0 = makeExpense()
+        let expense1 = makeExpense()
+        var selectedExpenses = [FeedExpense]()
+        let (sut, loader) = makeSUT(selection: { selectedExpenses.append($0) })
+
+        sut.loadViewIfNeeded()
+        loader.completeFeedLoading(with: [expense0, expense1], at: 0)
+
+        sut.simulateTapOnFeedExpense(at: 0)
+        XCTAssertEqual(selectedExpenses, [expense0])
+
+        sut.simulateTapOnFeedExpense(at: 1)
+        XCTAssertEqual(selectedExpenses, [expense0, expense1])
+    }
+    
     // MARK: - Helpers
     
-    private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (sut: ListViewController, loader: LoaderSpy) {
+    private func makeSUT(
+        selection: @escaping (FeedExpense) -> Void = { _ in },
+        file: StaticString = #file,
+        line: UInt = #line)
+    -> (sut: ListViewController, loader: LoaderSpy) {
         let loader = LoaderSpy()
-        let sut = FeedUIComposer.feedComposedWith(feedLoader: loader.loadPublisher)
+        let sut = FeedUIComposer.feedComposedWith(
+            feedLoader: loader.loadPublisher,
+            selection: selection
+        )
         trackForMemoryLeaks(loader, file: file, line: line)
         trackForMemoryLeaks(sut, file: file, line: line)
         return (sut, loader)
     }    
     
-    private func makeExpense(title: String, timestamp: Date, cost: Float) -> FeedExpense {
+    private func makeExpense(title: String = "", timestamp: Date = Date(), cost: Float = 0) -> FeedExpense {
         return FeedExpense(id: UUID(), title: title, timestamp: timestamp, cost: cost, currency: .USD)
     }
 }

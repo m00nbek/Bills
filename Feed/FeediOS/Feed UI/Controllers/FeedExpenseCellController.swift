@@ -10,9 +10,11 @@ import Feed
 
 public final class FeedExpenseCellController: NSObject {
     private let viewModel: FeedExpenseViewModel
+    private let selection: () -> Void
     
-    public init(viewModel: FeedExpenseViewModel) {
+    public init(viewModel: FeedExpenseViewModel, selection: @escaping () -> Void) {
         self.viewModel = viewModel
+        self.selection = selection
     }
 }
 
@@ -28,4 +30,9 @@ extension FeedExpenseCellController: UITableViewDataSource, UITableViewDelegate 
         cell.dateLabel.text = viewModel.date
         return cell
     }
+    
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selection()
+    }
+    
 }

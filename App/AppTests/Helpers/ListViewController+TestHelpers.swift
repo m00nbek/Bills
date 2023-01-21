@@ -61,6 +61,12 @@ extension ListViewController {
 
 extension ListViewController {
     
+    func simulateTapOnFeedExpense(at row: Int) {
+        let delegate = tableView.delegate
+        let index = IndexPath(row: row, section: feedExpenseSection)
+        delegate?.tableView?(tableView, didSelectRowAt: index)
+    }
+    
     @discardableResult
     func simulateFeedExpenseViewVisible(at index: Int) -> FeedExpenseCell? {
         return feedExpenseView(at: index) as? FeedExpenseCell
