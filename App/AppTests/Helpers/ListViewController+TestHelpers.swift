@@ -30,11 +30,24 @@ extension ListViewController {
     var errorMessage: String? {
         return errorView.message
     }
+    
+    func numberOfRows(in section: Int) -> Int {
+        tableView.numberOfSections > section ? tableView.numberOfRows(inSection: section) : 0
+    }
+    
+    func cell(row: Int, section: Int) -> UITableViewCell? {
+        guard numberOfRows(in: section) > row else {
+            return nil
+        }
+        let ds = tableView.dataSource
+        let index = IndexPath(row: row, section: section)
+        return ds?.tableView(tableView, cellForRowAt: index)
+    }
 }
 
 extension ListViewController {
     func numberOfRenderedNotes() -> Int {
-        tableView.numberOfSections == 0 ? 0 :  tableView.numberOfRows(inSection: notesSection)
+        numberOfRows(in: notesSection)
     }
     
     func noteMessage(at row: Int) -> String? {
@@ -46,17 +59,10 @@ extension ListViewController {
     }
     
     private func noteView(at row: Int) -> ExpenseNoteCell? {
-        guard numberOfRenderedNotes() > row else {
-            return nil
-        }
-        let ds = tableView.dataSource
-        let index = IndexPath(row: row, section: notesSection)
-        return ds?.tableView(tableView, cellForRowAt: index) as? ExpenseNoteCell
+        cell(row: row, section: notesSection) as? ExpenseNoteCell
     }
     
-    private var notesSection: Int {
-        return 0
-    }
+    private var notesSection: Int { 0 }
 }
 
 extension ListViewController {
@@ -73,19 +79,12 @@ extension ListViewController {
     }
     
     func numberOfRenderedFeedExpenseViews() -> Int {
-        tableView.numberOfSections == 0 ? 0 : tableView.numberOfRows(inSection: feedExpenseSection)
+        numberOfRows(in: feedExpenseSection)
     }
     
     func feedExpenseView(at row: Int) -> UITableViewCell? {
-        guard numberOfRenderedFeedExpenseViews() > row else {
-            return nil
-        }
-        let ds = tableView.dataSource
-        let index = IndexPath(row: row, section: feedExpenseSection)
-        return ds?.tableView(tableView, cellForRowAt: index)
+        cell(row: row, section: feedExpenseSection)
     }
     
-    private var feedExpenseSection: Int {
-        return 0
-    }
+    private var feedExpenseSection: Int { 0 }
 }
