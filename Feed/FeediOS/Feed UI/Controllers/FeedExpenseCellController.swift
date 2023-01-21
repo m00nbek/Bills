@@ -16,7 +16,7 @@ public final class FeedExpenseCellController: NSObject {
     }
 }
 
-extension FeedExpenseCellController: CellController {
+extension FeedExpenseCellController: UITableViewDataSource, UITableViewDelegate {
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         1
     }

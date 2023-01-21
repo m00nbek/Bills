@@ -18,7 +18,9 @@ final class FeedViewAdapter: ResourceView {
     
     func display(_ viewModel: FeedViewModel) {
         controller?.display(viewModel.feed.map { model in
-            FeedExpenseCellController(viewModel: FeedExpenseViewModel(model: model))
+            let view = FeedExpenseCellController(viewModel: FeedExpenseViewModel(model: model))
+            
+            return CellController(view)
         })
     }
 }

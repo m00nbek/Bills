@@ -32,7 +32,11 @@ import XCTest
          return controller
      }
 
-     private func comments() -> [CellController] {
+     private func notes() -> [CellController] {
+         noteControllers().map { CellController($0) }
+     }
+     
+     private func noteControllers() -> [ExpenseNoteCellController] {
          return [
              ExpenseNoteCellController(
                  model: ExpenseNoteViewModel(

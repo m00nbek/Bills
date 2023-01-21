@@ -8,7 +8,7 @@
 import UIKit
 import Feed
 
-public class ExpenseNoteCellController: NSObject, CellController {
+public class ExpenseNoteCellController: NSObject, UITableViewDataSource {
     private let model: ExpenseNoteViewModel
     
     public init(model: ExpenseNoteViewModel) {

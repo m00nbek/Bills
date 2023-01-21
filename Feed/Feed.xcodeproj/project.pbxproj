@@ -66,6 +66,7 @@
 		3B53FE922929F1D00057473C /* FeedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B53FE912929F1D00057473C /* FeedItem.swift */; };
 		3B693A9F295C76BF00C31C25 /* LoadFeedFromCacheUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B693A9E295C76BF00C31C25 /* LoadFeedFromCacheUseCaseTests.swift */; };
 		3B693AA2295C786300C31C25 /* FeedStoreSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B693AA1295C786300C31C25 /* FeedStoreSpy.swift */; };
+		3B6CBE2D297BD2970001E908 /* CellController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B6CBE2C297BD2970001E908 /* CellController.swift */; };
 		3B8CFA262973C2790075713D /* FeedExpenseCellController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B8CFA252973C2790075713D /* FeedExpenseCellController.swift */; };
 		3B8CFA3D297410380075713D /* FeedExpenseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B8CFA3C297410380075713D /* FeedExpenseViewModel.swift */; };
 		3B8FB2CF297468FD0019D37A /* UITableView+Dequeueing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B8FB2CE297468FD0019D37A /* UITableView+Dequeueing.swift */; };
@@ -213,6 +214,7 @@
 		3B53FE912929F1D00057473C /* FeedItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedItem.swift; sourceTree = "<group>"; };
 		3B693A9E295C76BF00C31C25 /* LoadFeedFromCacheUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadFeedFromCacheUseCaseTests.swift; sourceTree = "<group>"; };
 		3B693AA1295C786300C31C25 /* FeedStoreSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedStoreSpy.swift; sourceTree = "<group>"; };
+		3B6CBE2C297BD2970001E908 /* CellController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellController.swift; sourceTree = "<group>"; };
 		3B8CFA252973C2790075713D /* FeedExpenseCellController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedExpenseCellController.swift; sourceTree = "<group>"; };
 		3B8CFA3C297410380075713D /* FeedExpenseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedExpenseViewModel.swift; sourceTree = "<group>"; };
 		3B8FB2CE297468FD0019D37A /* UITableView+Dequeueing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Dequeueing.swift"; sourceTree = "<group>"; };
@@ -385,6 +387,7 @@
 			isa = PBXGroup;
 			children = (
 				3BBE491E296FD7B3001FE56C /* ListViewController.swift */,
+				3B6CBE2C297BD2970001E908 /* CellController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1115,6 +1118,7 @@
 				3BA6E7B4297576A20059F3F0 /* UIRefreshControl+Helpers.swift in Sources */,
 				3BBE491F296FD7B3001FE56C /* ListViewController.swift in Sources */,
 				3B8FB2CF297468FD0019D37A /* UITableView+Dequeueing.swift in Sources */,
+				3B6CBE2D297BD2970001E908 /* CellController.swift in Sources */,
 				3BA6E7AB2975725F0059F3F0 /* ErrorView.swift in Sources */,
 				3B341BA4297BCAE8002E9F0C /* ExpenseNoteCellController.swift in Sources */,
 				3B8CFA262973C2790075713D /* FeedExpenseCellController.swift in Sources */,

@@ -8,8 +8,6 @@
 import UIKit
 import Feed
 
-public typealias CellController = UITableViewDataSource & UITableViewDelegate
-
 public final class ListViewController: UITableViewController, ResourceLoadingView, ResourceErrorView {
     @IBOutlet private(set) public var errorView: ErrorView?
     
@@ -52,8 +50,8 @@ public final class ListViewController: UITableViewController, ResourceLoadingVie
     }
     
     public override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let controller = cellController(forRowAt: indexPath)
-        return controller.tableView(tableView, cellForRowAt: indexPath)
+        let ds = cellController(forRowAt: indexPath).dataSource
+        return ds.tableView(tableView, cellForRowAt: indexPath)
     }
     
     private func cellController(forRowAt indexPath: IndexPath) -> CellController {
