@@ -13,6 +13,35 @@ class ExpenseNotesPresenterTests: XCTestCase {
         XCTAssertEqual(ExpenseNotesPresenter.title, localized("EXPENSE_NOTES_VIEW_TITLE"))
     }
     
+    func test_map_createsViewModels() {
+        let now = Date()
+
+        let notes = [
+            ExpenseNote(
+                id: UUID(),
+                message: "a message",
+                createdAt: now.adding(minutes: -5)),
+            ExpenseNote(
+                id: UUID(),
+                message: "another message",
+                createdAt: now.adding(days: -1))
+        ]
+
+        let viewModel = ExpenseNotesPresenter.map(notes)
+
+        XCTAssertEqual(viewModel.notes, [
+            ExpenseNoteViewModel(
+                message: "a message",
+                date: "5 minutes ago"
+            ),
+            ExpenseNoteViewModel(
+                message: "another message",
+                date: "1 day ago"
+            )
+        ])
+    }
+
+    
     // MARK: - Helpers
     
     private func localized(_ key: String, file: StaticString = #file, line: UInt = #line) -> String {
