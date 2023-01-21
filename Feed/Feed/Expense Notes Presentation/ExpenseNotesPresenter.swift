@@ -29,13 +29,20 @@ public final class ExpenseNotesPresenter {
                           comment: "Title for the expense notes view")
     }
     
-    public static func map(_ notes: [ExpenseNote]) -> ExpenseNotesViewModel {
+    public static func map(
+        _ notes: [ExpenseNote],
+        currentDate: Date = Date(),
+        calender: Calendar = .current,
+        locale: Locale = .current
+    ) -> ExpenseNotesViewModel {
         let formatter = RelativeDateTimeFormatter()
+        formatter.calendar = calender
+        formatter.locale = locale
 
         return ExpenseNotesViewModel(notes: notes.map { note in
             ExpenseNoteViewModel(
                 message: note.message,
-                date: formatter.localizedString(for: note.createdAt, relativeTo: Date()))
+                date: formatter.localizedString(for: note.createdAt, relativeTo: currentDate))
         })
     }
 }

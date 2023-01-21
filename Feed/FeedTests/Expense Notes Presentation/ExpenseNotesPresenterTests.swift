@@ -15,7 +15,9 @@ class ExpenseNotesPresenterTests: XCTestCase {
     
     func test_map_createsViewModels() {
         let now = Date()
-
+        let calender = Calendar(identifier: .gregorian)
+        let locale = Locale(identifier: "en_US_POSIX")
+        
         let notes = [
             ExpenseNote(
                 id: UUID(),
@@ -27,7 +29,12 @@ class ExpenseNotesPresenterTests: XCTestCase {
                 createdAt: now.adding(days: -1))
         ]
 
-        let viewModel = ExpenseNotesPresenter.map(notes)
+        let viewModel = ExpenseNotesPresenter.map(
+            notes,
+            currentDate: now,
+            calender: calender,
+            locale: locale
+        )
 
         XCTAssertEqual(viewModel.notes, [
             ExpenseNoteViewModel(
