@@ -34,7 +34,7 @@ import XCTest
      }
 
      private func notes() -> [CellController] {
-         noteControllers().map { CellController($0) }
+         noteControllers().map { CellController(id: UUID(), $0) }
      }
      
      private func noteControllers() -> [ExpenseNoteCellController] {

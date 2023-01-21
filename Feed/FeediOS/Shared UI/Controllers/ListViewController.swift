@@ -11,15 +11,18 @@ import Feed
 public final class ListViewController: UITableViewController, ResourceLoadingView, ResourceErrorView {
     private(set) public var errorView = ErrorView()
     
-    private var tableModel = [CellController]() {
-        didSet { tableView.reloadData() }
-    }
+    private lazy var dataSource: UITableViewDiffableDataSource<Int, CellController> = {
+        .init(tableView: tableView) { (tableView, index, controller) in
+            controller.dataSource.tableView(tableView, cellForRowAt: index)
+        }
+    }()
     
     public var onRefresh: (() -> Void)?
     
     public override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.dataSource = dataSource
         configureErrorView()
         refresh()
     }
@@ -28,7 +31,7 @@ public final class ListViewController: UITableViewController, ResourceLoadingVie
         let container = UIView()
         container.backgroundColor = .clear
         container.addSubview(errorView)
-
+        
         errorView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             errorView.leadingAnchor.constraint(equalTo: container.leadingAnchor),
@@ -36,9 +39,9 @@ public final class ListViewController: UITableViewController, ResourceLoadingVie
             errorView.topAnchor.constraint(equalTo: container.topAnchor),
             container.bottomAnchor.constraint(equalTo: errorView.bottomAnchor),
         ])
-
+        
         tableView.tableHeaderView = container
-
+        
         errorView.onHide = { [weak self] in
             self?.tableView.beginUpdates()
             self?.tableView.sizeTableHeaderToFit()
@@ -52,12 +55,21 @@ public final class ListViewController: UITableViewController, ResourceLoadingVie
         tableView.sizeTableHeaderToFit()
     }
     
+    public override func traitCollectionDidChange(_ previous: UITraitCollection?) {
+        if previous?.preferredContentSizeCategory != traitCollection.preferredContentSizeCategory {
+            tableView.reloadData()
+        }
+    }
+    
     @IBAction private func refresh() {
         onRefresh?()
     }
     
     public func display(_ cellControllers: [CellController]) {
-        tableModel = cellControllers
+        var snapshot = NSDiffableDataSourceSnapshot<Int, CellController>()
+        snapshot.appendSections([0])
+        snapshot.appendItems(cellControllers, toSection: 0)
+        dataSource.apply(snapshot)
     }
     
     public func display(_ viewModel: ResourceLoadingViewModel) {
@@ -68,16 +80,7 @@ public final class ListViewController: UITableViewController, ResourceLoadingVie
         errorView.message = viewModel.message
     }
     
-    public override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tableModel.count
-    }
-    
-    public override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let ds = cellController(forRowAt: indexPath).dataSource
-        return ds.tableView(tableView, cellForRowAt: indexPath)
-    }
-    
-    private func cellController(forRowAt indexPath: IndexPath) -> CellController {
-        return tableModel[indexPath.row]
+    private func cellController(at indexPath: IndexPath) -> CellController? {
+        dataSource.itemIdentifier(for: indexPath)
     }
 }
