@@ -100,6 +100,7 @@
 		3BE2DA6A295ACC4300D8BB0B /* LocalFeedLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE2DA69295ACC4300D8BB0B /* LocalFeedLoader.swift */; };
 		3BE2DA6C295ACCEF00D8BB0B /* FeedStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE2DA6B295ACCEF00D8BB0B /* FeedStore.swift */; };
 		3BE2DA70295B441900D8BB0B /* LocalFeedExpense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE2DA6F295B441900D8BB0B /* LocalFeedExpense.swift */; };
+		3BEE7EA3297BE88400896BB9 /* UIView+Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BEE7EA2297BE88400896BB9 /* UIView+Container.swift */; };
 		3BFA5117297918DD00E13707 /* XCTestCase+Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BFA5116297918DD00E13707 /* XCTestCase+Snapshot.swift */; };
 /* End PBXBuildFile section */
 
@@ -250,6 +251,7 @@
 		3BE2DA69295ACC4300D8BB0B /* LocalFeedLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalFeedLoader.swift; sourceTree = "<group>"; };
 		3BE2DA6B295ACCEF00D8BB0B /* FeedStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedStore.swift; sourceTree = "<group>"; };
 		3BE2DA6F295B441900D8BB0B /* LocalFeedExpense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalFeedExpense.swift; sourceTree = "<group>"; };
+		3BEE7EA2297BE88400896BB9 /* UIView+Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Container.swift"; sourceTree = "<group>"; };
 		3BFA5116297918DD00E13707 /* XCTestCase+Snapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+Snapshot.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -685,6 +687,7 @@
 				3B8FB2CE297468FD0019D37A /* UITableView+Dequeueing.swift */,
 				3BA6E7B3297576A20059F3F0 /* UIRefreshControl+Helpers.swift */,
 				3B20094229790CB50028AFBB /* UITableView+HeaderSizing.swift */,
+				3BEE7EA2297BE88400896BB9 /* UIView+Container.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1115,6 +1118,7 @@
 				3BBE4921296FE0A9001FE56C /* FeedExpenseCell.swift in Sources */,
 				3B8CFA3D297410380075713D /* FeedExpenseViewModel.swift in Sources */,
 				3B20094329790CB50028AFBB /* UITableView+HeaderSizing.swift in Sources */,
+				3BEE7EA3297BE88400896BB9 /* UIView+Container.swift in Sources */,
 				3BA6E7B4297576A20059F3F0 /* UIRefreshControl+Helpers.swift in Sources */,
 				3BBE491F296FD7B3001FE56C /* ListViewController.swift in Sources */,
 				3B8FB2CF297468FD0019D37A /* UITableView+Dequeueing.swift in Sources */,
