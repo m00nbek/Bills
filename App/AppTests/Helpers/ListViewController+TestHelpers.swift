@@ -1,5 +1,5 @@
 //
-//  FeedViewController+TestHelpers.swift
+//  ListViewController+TestHelpers.swift
 //  FeediOSTests
 //
 //  Created by m00nbek Melikulov on 1/15/23.
@@ -19,16 +19,16 @@ extension ListViewController {
         refreshControl?.simulatePullToRefresh()
     }
     
+    var isShowingLoadingIndicator: Bool {
+        return refreshControl?.isRefreshing == true
+    }
+    
     func simulateErrorViewTap() {
         errorView.simulateTap()
     }
     
     var errorMessage: String? {
         return errorView.message
-    }
-    
-    var isShowingLoadingIndicator: Bool {
-        return refreshControl?.isRefreshing == true
     }
     
     @discardableResult

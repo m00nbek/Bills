@@ -28,7 +28,7 @@
 		3BD6BD82297834D9004A3EF9 /* FeedViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD6BD7B297834D9004A3EF9 /* FeedViewAdapter.swift */; };
 		3BD6BD83297834D9004A3EF9 /* FeedUIComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD6BD7D297834D9004A3EF9 /* FeedUIComposer.swift */; };
 		3BD6BD8C29783514004A3EF9 /* UIRefreshControl+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD6BD8929783513004A3EF9 /* UIRefreshControl+TestHelpers.swift */; };
-		3BD6BD8D29783514004A3EF9 /* FeedViewController+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD6BD8A29783513004A3EF9 /* FeedViewController+TestHelpers.swift */; };
+		3BD6BD8D29783514004A3EF9 /* ListViewController+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD6BD8A29783513004A3EF9 /* ListViewController+TestHelpers.swift */; };
 		3BD6BD8E29783514004A3EF9 /* FeedUIIntegrationTests+Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD6BD8829783513004A3EF9 /* FeedUIIntegrationTests+Localization.swift */; };
 		3BD6BD8F29783514004A3EF9 /* UIControl+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD6BD8629783513004A3EF9 /* UIControl+TestHelpers.swift */; };
 		3BD6BD9029783514004A3EF9 /* FeedUIIntegrationTests+Assertions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD6BD8B29783514004A3EF9 /* FeedUIIntegrationTests+Assertions.swift */; };
@@ -91,7 +91,7 @@
 		3BD6BD8729783513004A3EF9 /* FeedExpenseCell+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FeedExpenseCell+Helpers.swift"; sourceTree = "<group>"; };
 		3BD6BD8829783513004A3EF9 /* FeedUIIntegrationTests+Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FeedUIIntegrationTests+Localization.swift"; sourceTree = "<group>"; };
 		3BD6BD8929783513004A3EF9 /* UIRefreshControl+TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIRefreshControl+TestHelpers.swift"; sourceTree = "<group>"; };
-		3BD6BD8A29783513004A3EF9 /* FeedViewController+TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FeedViewController+TestHelpers.swift"; sourceTree = "<group>"; };
+		3BD6BD8A29783513004A3EF9 /* ListViewController+TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListViewController+TestHelpers.swift"; sourceTree = "<group>"; };
 		3BD6BD8B29783514004A3EF9 /* FeedUIIntegrationTests+Assertions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FeedUIIntegrationTests+Assertions.swift"; sourceTree = "<group>"; };
 		3BD6BD942978352D004A3EF9 /* FeedUIIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedUIIntegrationTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -143,7 +143,7 @@
 				3BD6BD8929783513004A3EF9 /* UIRefreshControl+TestHelpers.swift */,
 				3BD6BD8529783513004A3EF9 /* Date+TestHelpers.swift */,
 				3BD6BD8729783513004A3EF9 /* FeedExpenseCell+Helpers.swift */,
-				3BD6BD8A29783513004A3EF9 /* FeedViewController+TestHelpers.swift */,
+				3BD6BD8A29783513004A3EF9 /* ListViewController+TestHelpers.swift */,
 				3BD6BD8B29783514004A3EF9 /* FeedUIIntegrationTests+Assertions.swift */,
 				3BD6BD8429783513004A3EF9 /* FeedUIIntegrationTests+LoaderSpy.swift */,
 				3BD6BD8829783513004A3EF9 /* FeedUIIntegrationTests+Localization.swift */,
@@ -302,7 +302,7 @@
 				3BD6BD9329783514004A3EF9 /* FeedUIIntegrationTests+LoaderSpy.swift in Sources */,
 				3BD6BD8F29783514004A3EF9 /* UIControl+TestHelpers.swift in Sources */,
 				3BD6BD9229783514004A3EF9 /* FeedExpenseCell+Helpers.swift in Sources */,
-				3BD6BD8D29783514004A3EF9 /* FeedViewController+TestHelpers.swift in Sources */,
+				3BD6BD8D29783514004A3EF9 /* ListViewController+TestHelpers.swift in Sources */,
 				3B20093B2979023C0028AFBB /* FeedAcceptanceTests.swift in Sources */,
 				3B20093D297907A80028AFBB /* HTTPClientStub.swift in Sources */,
 				3BD6BD8C29783514004A3EF9 /* UIRefreshControl+TestHelpers.swift in Sources */,
