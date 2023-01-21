@@ -8,7 +8,7 @@
 import UIKit
 import Feed
 
-public final class FeedExpenseCellController {
+public final class FeedExpenseCellController: CellController {
     private let viewModel: FeedExpenseViewModel
     
     public init(viewModel: FeedExpenseViewModel) {
