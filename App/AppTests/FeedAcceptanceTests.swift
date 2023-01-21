@@ -51,6 +51,13 @@ class FeedAcceptanceTests: XCTestCase {
         XCTAssertNotNil(store.feedCache, "Expected to keep non-expired cache")
     }
     
+    func test_onFeedExpenseSelection_displaysNotes() {
+        let notes = showNotesForFirstExpense()
+        
+        XCTAssertEqual(notes.numberOfRenderedNotes(), 1)
+        XCTAssertEqual(notes.noteMessage(at: 0), makeNoteMessage())
+    }
+    
     // MARK: - Helpers
     
     private func launch(httpClient: HTTPClientStub = .offline, store: InMemoryFeedStore = .empty) -> ListViewController {
@@ -67,9 +74,26 @@ class FeedAcceptanceTests: XCTestCase {
         sut.sceneWillResignActive(UIApplication.shared.connectedScenes.first!)
     }
     
+    private func showNotesForFirstExpense() -> ListViewController {
+        let feed = launch(httpClient: .online(response), store: .empty)
+
+        feed.simulateTapOnFeedExpense(at: 0)
+        RunLoop.current.run(until: Date())
+
+        let nav = feed.navigationController
+        return nav?.topViewController as! ListViewController
+    }
+    
     private func response(for url: URL) -> (Data, HTTPURLResponse) {
         let response = HTTPURLResponse(url: url, statusCode: 200, httpVersion: nil, headerFields: nil)!
-        return (makeFeedData(), response)
+        switch url.absoluteString {
+        case "/feed/v1/feed":
+            return (makeFeedData(), response)
+        case "/feed/v1/expense/2AB2AE66-A4B7-4A16-B374-51BBAC8DB086/notes":
+            return (makeNotesData(), response)
+        default:
+            return (Data(), response)
+        }
     }
     
     private func makeFeedData() -> Data {
@@ -93,4 +117,17 @@ class FeedAcceptanceTests: XCTestCase {
         ])
     }
     
+    private func makeNotesData() -> Data {
+        return try! JSONSerialization.data(withJSONObject: ["items": [
+            [
+                "id": UUID().uuidString,
+                "message": makeNoteMessage(),
+                "created_at": "2020-05-20T11:24:59+0000"
+            ],
+        ]])
+    }
+
+    private func makeNoteMessage() -> String {
+        "a message"
+    }
 }

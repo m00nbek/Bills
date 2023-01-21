@@ -28,6 +28,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         LocalFeedLoader(store: store, currentDate: Date.init)
     }()
     
+    private lazy var baseURL = URL(string: "https://ile-api.essentialdeveloper.com/essential-feed")!
+    
+    private lazy var navigationController = UINavigationController(
+        rootViewController: FeedUIComposer.feedComposedWith(
+            feedLoader: makeRemoteFeedLoaderWithLocalFallback,
+            selection: showNotes))
+    
     convenience init(httpClient: HTTPClient, store: FeedStore) {
         self.init()
         self.httpClient = httpClient
@@ -44,9 +51,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func configureWindow() {
-        window?.rootViewController = UINavigationController(
-            rootViewController: FeedUIComposer.feedComposedWith(feedLoader: makeRemoteFeedLoaderWithLocalFallback)
-        )
+        window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
     }
     
@@ -54,8 +59,23 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         localFeedLoader.validateCache { _ in }
     }
     
+    private func showNotes(for expense: FeedExpense) {
+        let url = baseURL.appendingPathComponent("/v1/expense/\(expense.id)/notes")
+        let notes = NotesUIComposer.notesComposedWith(notesLoader: makeRemoteNotesLoader(url: url))
+        navigationController.pushViewController(notes, animated: true)
+    }
+
+    private func makeRemoteNotesLoader(url: URL) -> () -> AnyPublisher<[ExpenseNote], Error> {
+        return { [httpClient] in
+            return httpClient
+                .getPublisher(url: url)
+                .tryMap(ExpenseNotesMapper.map)
+                .eraseToAnyPublisher()
+        }
+    }
+    
     private func makeRemoteFeedLoaderWithLocalFallback() -> AnyPublisher<[FeedExpense], Error> {
-        let remoteURL = URL(string: "https://api.jsonbin.io/v3/b/63c6b96a01a72b59f24d25b7?meta=false")!
+        let remoteURL = baseURL.appendingPathComponent("/v1/feed")
         
         return httpClient
             .getPublisher(url: remoteURL)
