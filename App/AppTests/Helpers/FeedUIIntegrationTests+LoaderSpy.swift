@@ -12,20 +12,20 @@ import Combine
 
 extension FeedUIIntegrationTests {
     class LoaderSpy {
-        private var feedRequests = [PassthroughSubject<[FeedExpense], Error>]()
+        private var feedRequests = [PassthroughSubject<Paginated<FeedExpense>, Error>]()
         
         var loadFeedCallCount: Int {
             return feedRequests.count
         }
         
-        func loadPublisher() -> AnyPublisher<[FeedExpense], Error> {
-            let publisher = PassthroughSubject<[FeedExpense], Error>()
+        func loadPublisher() -> AnyPublisher<Paginated<FeedExpense>, Error> {
+            let publisher = PassthroughSubject<Paginated<FeedExpense>, Error>()
             feedRequests.append(publisher)
             return publisher.eraseToAnyPublisher()
         }
 
         func completeFeedLoading(with feed: [FeedExpense] = [], at index: Int = 0) {
-            feedRequests[index].send(feed)
+            feedRequests[index].send(Paginated(items: feed))
         }
         
         func completeFeedLoadingWithError(at index: Int = 0) {

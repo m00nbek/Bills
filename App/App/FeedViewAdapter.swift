@@ -18,8 +18,8 @@ final class FeedViewAdapter: ResourceView {
         self.selection = selection
     }
     
-    func display(_ viewModel: FeedViewModel) {
-        controller?.display(viewModel.feed.map { model in
+    func display(_ viewModel: Paginated<FeedExpense>) {
+        controller?.display(viewModel.items.map { model in
             let view = FeedExpenseCellController(
                 viewModel: FeedExpenseViewModel(model: model),
                 selection: { [selection] in
