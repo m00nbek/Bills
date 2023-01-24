@@ -13,13 +13,13 @@ import Combine
 public final class FeedUIComposer {
     private init() {}
     
-    private typealias FeedPresentationAdapter = LoadResourcePresentationAdapter<[FeedExpense], FeedViewAdapter>
+    private typealias FeedPresentationAdapter = LoadResourcePresentationAdapter<Paginated<FeedExpense>, FeedViewAdapter>
     
     public static func feedComposedWith(
-        feedLoader: @escaping () -> AnyPublisher<[FeedExpense], Error>,
+        feedLoader: @escaping () -> AnyPublisher<Paginated<FeedExpense>, Error>,
         selection: @escaping (FeedExpense) -> Void = { _ in }
     ) -> ListViewController {
-        let presentationAdapter =  FeedPresentationAdapter(loader: feedLoader)
+        let presentationAdapter = FeedPresentationAdapter(loader: feedLoader)
         
         let feedController = makeFeedViewController(title: FeedPresenter.title)
         feedController.onRefresh = presentationAdapter.loadResource
@@ -29,8 +29,7 @@ public final class FeedUIComposer {
                 controller: feedController,
                 selection: selection),
             loadingView: WeakRefVirtualProxy(feedController),
-            errorView: WeakRefVirtualProxy(feedController),
-            mapper: FeedPresenter.map
+            errorView: WeakRefVirtualProxy(feedController)
         )
         
         return feedController

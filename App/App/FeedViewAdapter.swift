@@ -12,14 +12,15 @@ import FeediOS
 final class FeedViewAdapter: ResourceView {
     private weak var controller: ListViewController?
     private let selection: (FeedExpense) -> Void
+    private typealias LoadMorePresentationAdapter = LoadResourcePresentationAdapter<Paginated<FeedExpense>, FeedViewAdapter>
     
     init(controller: ListViewController, selection: @escaping (FeedExpense) -> Void) {
         self.controller = controller
         self.selection = selection
     }
     
-    func display(_ viewModel: FeedViewModel) {
-        controller?.display(viewModel.feed.map { model in
+    func display(_ viewModel: Paginated<FeedExpense>) {
+        let feed: [CellController] = viewModel.items.map { model in
             let view = FeedExpenseCellController(
                 viewModel: FeedExpenseViewModel(model: model),
                 selection: { [selection] in
@@ -27,6 +28,25 @@ final class FeedViewAdapter: ResourceView {
                 })
             
             return CellController(id: model, view)
-        })
+        }
+        
+        guard let loadMorePublisher = viewModel.loadMorePublisher else {
+            controller?.display(feed)
+            return
+        }
+        
+        let loadMoreAdapter = LoadMorePresentationAdapter(loader: loadMorePublisher)
+        let loadMore = LoadMoreCellController(callback: loadMoreAdapter.loadResource)
+        
+        loadMoreAdapter.presenter = LoadResourcePresenter(
+            resourceView: self,
+            loadingView: WeakRefVirtualProxy(loadMore),
+            errorView: WeakRefVirtualProxy(loadMore)
+        )
+        
+        
+        let loadMoreSection = [CellController(id: UUID(), loadMore)]
+        
+        controller?.display(feed, loadMoreSection)
     }
 }

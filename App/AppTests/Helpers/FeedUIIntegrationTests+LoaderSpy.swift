@@ -12,25 +12,52 @@ import Combine
 
 extension FeedUIIntegrationTests {
     class LoaderSpy {
-        private var feedRequests = [PassthroughSubject<[FeedExpense], Error>]()
+        private var feedRequests = [PassthroughSubject<Paginated<FeedExpense>, Error>]()
         
         var loadFeedCallCount: Int {
             return feedRequests.count
         }
         
-        func loadPublisher() -> AnyPublisher<[FeedExpense], Error> {
-            let publisher = PassthroughSubject<[FeedExpense], Error>()
+        func loadPublisher() -> AnyPublisher<Paginated<FeedExpense>, Error> {
+            let publisher = PassthroughSubject<Paginated<FeedExpense>, Error>()
             feedRequests.append(publisher)
             return publisher.eraseToAnyPublisher()
         }
-
-        func completeFeedLoading(with feed: [FeedExpense] = [], at index: Int = 0) {
-            feedRequests[index].send(feed)
-        }
         
         func completeFeedLoadingWithError(at index: Int = 0) {
-            let error = NSError(domain: "an error", code: 0, userInfo: nil)
-            feedRequests[index].send(completion: .failure(error))
+            feedRequests[index].send(completion: .failure(anyNSError()))
+        }
+
+        func completeFeedLoading(with feed: [FeedExpense] = [], at index: Int = 0) {
+            feedRequests[index].send(Paginated(items: feed, loadMorePublisher: { [weak self] in
+                self?.loadMorePublisher() ?? Empty().eraseToAnyPublisher()
+            }))
+        }
+        
+        // MARK: - LoadMoreFeedLoader
+
+        private var loadMoreRequests = [PassthroughSubject<Paginated<FeedExpense>, Error>]()
+
+        var loadMoreCallCount: Int {
+            return loadMoreRequests.count
+        }
+
+        func loadMorePublisher() -> AnyPublisher<Paginated<FeedExpense>, Error> {
+            let publisher = PassthroughSubject<Paginated<FeedExpense>, Error>()
+            loadMoreRequests.append(publisher)
+            return publisher.eraseToAnyPublisher()
+        }
+        
+        func completeLoadMore(with feed: [FeedExpense] = [], lastPage: Bool = false, at index: Int = 0) {
+            loadMoreRequests[index].send(Paginated(
+                items: feed,
+                loadMorePublisher: lastPage ? nil : { [weak self] in
+                    self?.loadMorePublisher() ?? Empty().eraseToAnyPublisher()
+                }))
+        }
+        
+        func completeLoadMoreWithError(at index: Int = 0) {
+            loadMoreRequests[index].send(completion: .failure(anyNSError()))
         }
     }
 }
