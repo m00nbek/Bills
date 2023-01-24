@@ -109,12 +109,35 @@ class FeedUIIntegrationTests: XCTestCase {
         sut.loadViewIfNeeded()
         assertThat(sut, isRendering: [])
         
-        loader.completeFeedLoading(with: [expense0], at: 0)
-        assertThat(sut, isRendering: [expense0])
+        loader.completeFeedLoading(with: [expense0, expense1], at: 0)
+        assertThat(sut, isRendering: [expense0, expense1])
+        
+        sut.simulateLoadMoreFeedAction()
+        loader.completeLoadMore(with: [expense0, expense1, expense2, expense3], at: 0)
+        assertThat(sut, isRendering: [expense0, expense1, expense2, expense3])
         
         sut.simulateUserInitiatedReload()
-        loader.completeFeedLoading(with: [expense0, expense1, expense2, expense3], at: 1)
-        assertThat(sut, isRendering: [expense0, expense1, expense2, expense3])
+        loader.completeFeedLoading(with: [expense0, expense1], at: 1)
+        assertThat(sut, isRendering: [expense0, expense1])
+    }
+    
+    func test_loadFeedCompletion_rendersSuccessfullyLoadedEmptyFeedAfterNonEmptyFeed() {
+        let expense0 = makeExpense(title: "a title", timestamp: Date(), cost: 47)
+        let expense1 = makeExpense(title: "another title", timestamp: Date(), cost: 37)
+
+        let (sut, loader) = makeSUT()
+        
+        sut.loadViewIfNeeded()
+        loader.completeFeedLoading(with: [expense0], at: 0)
+        assertThat(sut, isRendering: [expense0])
+
+        sut.simulateLoadMoreFeedAction()
+        loader.completeLoadMore(with: [expense0, expense1], at: 0)
+        assertThat(sut, isRendering: [expense0, expense1])
+
+        sut.simulateUserInitiatedReload()
+        loader.completeFeedLoading(with: [], at: 1)
+        assertThat(sut, isRendering: [])
     }
     
     func test_loadFeedCompletion_doesNotAlterCurrentRenderingStateOnError() {
@@ -137,6 +160,20 @@ class FeedUIIntegrationTests: XCTestCase {
         let exp = expectation(description: "Wait for background queue")
         DispatchQueue.global().async {
             loader.completeFeedLoading(at: 0)
+            exp.fulfill()
+        }
+        wait(for: [exp], timeout: 1.0)
+    }
+    
+    func test_loadMoreCompletion_dispatchesFromBackgroundToMainThread() {
+        let (sut, loader) = makeSUT()
+        sut.loadViewIfNeeded()
+        loader.completeFeedLoading(at: 0)
+        sut.simulateLoadMoreFeedAction()
+
+        let exp = expectation(description: "Wait for background queue")
+        DispatchQueue.global().async {
+            loader.completeLoadMore()
             exp.fulfill()
         }
         wait(for: [exp], timeout: 1.0)
