@@ -64,7 +64,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let notes = NotesUIComposer.notesComposedWith(notesLoader: makeRemoteNotesLoader(url: url))
         navigationController.pushViewController(notes, animated: true)
     }
-
+    
     private func makeRemoteNotesLoader(url: URL) -> () -> AnyPublisher<[ExpenseNote], Error> {
         return { [httpClient] in
             return httpClient
@@ -82,9 +82,26 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             .tryMap(FeedItemsMapper.map)
             .caching(to: localFeedLoader)
             .fallback(to: localFeedLoader.loadPublisher)
-            .map {
-                Paginated(items: $0)
+            .map { items in
+                Paginated(items: items, loadMorePublisher: self.makeRemoteLoadMoreLoader(items: items, last: items.last))
             }
             .eraseToAnyPublisher()
     }
+    
+    private func makeRemoteLoadMoreLoader(items: [FeedExpense], last: FeedExpense?) -> (() -> AnyPublisher<Paginated<FeedExpense>, Error>)? {
+        last.map { lastItem in
+            let url = FeedEndpoint.get(after: lastItem).url(baseURL: baseURL)
+            
+            return { [httpClient] in
+                httpClient
+                    .getPublisher(url: url)
+                    .tryMap(FeedItemsMapper.map)
+                    .map { newItems in
+                        let allItems = items + newItems
+                        return Paginated(items: allItems, loadMorePublisher: self.makeRemoteLoadMoreLoader(items: allItems, last: newItems.last))
+                    }.eraseToAnyPublisher()
+            }
+        }
+    }
+    
 }
