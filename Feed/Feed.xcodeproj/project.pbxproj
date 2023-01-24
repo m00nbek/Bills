@@ -87,7 +87,6 @@
 		3BB6C91F29687FDF00FAE54C /* FeedCachePolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB6C91E29687FDF00FAE54C /* FeedCachePolicy.swift */; };
 		3BB7884B2976E23100E4DA75 /* FeedPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB7884A2976E23100E4DA75 /* FeedPresenter.swift */; };
 		3BB7884C2976E33B00E4DA75 /* Feed.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3BB788462976E12200E4DA75 /* Feed.strings */; };
-		3BB7884E2976E37400E4DA75 /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB7884D2976E37400E4DA75 /* FeedViewModel.swift */; };
 		3BB788502976E3C000E4DA75 /* ResourceLoadingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB7884F2976E3C000E4DA75 /* ResourceLoadingViewModel.swift */; };
 		3BB788522976E3F100E4DA75 /* ResourceErrorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB788512976E3F100E4DA75 /* ResourceErrorViewModel.swift */; };
 		3BB788532976E5DD00E4DA75 /* FeedLocalizationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BA6E79B297529E80059F3F0 /* FeedLocalizationTests.swift */; };
@@ -252,7 +251,6 @@
 		3BB788472976E12C00E4DA75 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Feed.strings; sourceTree = "<group>"; };
 		3BB788482976E12D00E4DA75 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Feed.strings; sourceTree = "<group>"; };
 		3BB7884A2976E23100E4DA75 /* FeedPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPresenter.swift; sourceTree = "<group>"; };
-		3BB7884D2976E37400E4DA75 /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
 		3BB7884F2976E3C000E4DA75 /* ResourceLoadingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceLoadingViewModel.swift; sourceTree = "<group>"; };
 		3BB788512976E3F100E4DA75 /* ResourceErrorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceErrorViewModel.swift; sourceTree = "<group>"; };
 		3BBE491E296FD7B3001FE56C /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
@@ -768,7 +766,6 @@
 			children = (
 				3BB788462976E12200E4DA75 /* Feed.strings */,
 				3BB7884A2976E23100E4DA75 /* FeedPresenter.swift */,
-				3BB7884D2976E37400E4DA75 /* FeedViewModel.swift */,
 			);
 			path = "Feed Presentation";
 			sourceTree = "<group>";
@@ -1093,7 +1090,6 @@
 			files = (
 				3BEE7EAB297BFDA500896BB9 /* FeedEndpoint.swift in Sources */,
 				3B271BBA297ECB3A005853C4 /* Paginated.swift in Sources */,
-				3BB7884E2976E37400E4DA75 /* FeedViewModel.swift in Sources */,
 				3BCB55F9297A67330031FAAE /* ResourceErrorView.swift in Sources */,
 				3B387D2D297AC234002B7901 /* ExpenseNotesMapper.swift in Sources */,
 				3BE2DA70295B441900D8BB0B /* LocalFeedExpense.swift in Sources */,
