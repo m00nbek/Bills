@@ -19,7 +19,7 @@ final class FeedViewAdapter: ResourceView {
     }
     
     func display(_ viewModel: Paginated<FeedExpense>) {
-        controller?.display(viewModel.items.map { model in
+        let feed: [CellController] = viewModel.items.map { model in
             let view = FeedExpenseCellController(
                 viewModel: FeedExpenseViewModel(model: model),
                 selection: { [selection] in
@@ -27,6 +27,14 @@ final class FeedViewAdapter: ResourceView {
                 })
             
             return CellController(id: model, view)
-        })
+        }
+        
+        let loadMore = LoadMoreCellController {
+            viewModel.loadMore?({ _ in })
+        }
+        
+        let loadMoreSection = [CellController(id: UUID(), loadMore)]
+        
+        controller?.display(feed, loadMoreSection)
     }
 }

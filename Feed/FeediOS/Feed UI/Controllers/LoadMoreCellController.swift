@@ -8,7 +8,13 @@
 import UIKit
 import Feed
 
-public class LoadMoreCellController: NSObject, UITableViewDataSource {
+public class LoadMoreCellController: NSObject, UITableViewDataSource, UITableViewDelegate {
+    private let callback: () -> Void
+    
+    public init(callback: @escaping () -> Void) {
+        self.callback = callback
+    }
+    
     private let cell = LoadMoreCell()
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -17,6 +23,10 @@ public class LoadMoreCellController: NSObject, UITableViewDataSource {
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         cell
+    }
+    
+    public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        callback()
     }
 }
 
