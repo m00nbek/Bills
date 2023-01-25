@@ -38,6 +38,7 @@
 		3BEE7EA5297BEA7C00896BB9 /* NotesUIComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BEE7EA4297BEA7C00896BB9 /* NotesUIComposer.swift */; };
 		3BEE7EA7297BEB5B00896BB9 /* NotesUIIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BEE7EA6297BEB5B00896BB9 /* NotesUIIntegrationTests.swift */; };
 		3BEE7EA9297BECFD00896BB9 /* UIButton+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BEE7EA8297BECFD00896BB9 /* UIButton+TestHelpers.swift */; };
+		3BFC395E29813C6C0094BEFC /* NullStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BFC395D29813C6C0094BEFC /* NullStore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,6 +99,7 @@
 		3BEE7EA4297BEA7C00896BB9 /* NotesUIComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesUIComposer.swift; sourceTree = "<group>"; };
 		3BEE7EA6297BEB5B00896BB9 /* NotesUIIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesUIIntegrationTests.swift; sourceTree = "<group>"; };
 		3BEE7EA8297BECFD00896BB9 /* UIButton+TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+TestHelpers.swift"; sourceTree = "<group>"; };
+		3BFC395D29813C6C0094BEFC /* NullStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NullStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -191,6 +193,7 @@
 				3BCB4EA029795B5E0086D9E4 /* CombineHelpers.swift */,
 				3BD6BD7B297834D9004A3EF9 /* FeedViewAdapter.swift */,
 				3BB788602976E7CB00E4DA75 /* AppDelegate.swift */,
+				3BFC395D29813C6C0094BEFC /* NullStore.swift */,
 				3BB788692976E7CD00E4DA75 /* Assets.xcassets */,
 				3BB7886B2976E7CD00E4DA75 /* LaunchScreen.storyboard */,
 				3BB7886E2976E7CD00E4DA75 /* Info.plist */,
@@ -327,6 +330,7 @@
 				3BD6BD7F297834D9004A3EF9 /* LoadResourcePresentationAdapter.swift in Sources */,
 				3BD6BD81297834D9004A3EF9 /* WeakRefVirtualProxy.swift in Sources */,
 				3BCB4EA129795B5E0086D9E4 /* CombineHelpers.swift in Sources */,
+				3BFC395E29813C6C0094BEFC /* NullStore.swift in Sources */,
 				3BB788612976E7CB00E4DA75 /* AppDelegate.swift in Sources */,
 				3BB788632976E7CB00E4DA75 /* SceneDelegate.swift in Sources */,
 				3BD6BD82297834D9004A3EF9 /* FeedViewAdapter.swift in Sources */,
