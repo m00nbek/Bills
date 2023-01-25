@@ -30,7 +30,12 @@ class NotesUIIntegrationTests: XCTestCase {
         XCTAssertEqual(loader.loadNotesCallCount, 1, "Expected a loading request once view is loaded")
         
         sut.simulateUserInitiatedReload()
+        XCTAssertEqual(loader.loadNotesCallCount, 1, "Expected no request until previous completes")
+        loader.completeNotesLoading(at: 0)
+        
+        sut.simulateUserInitiatedReload()
         XCTAssertEqual(loader.loadNotesCallCount, 2, "Expected another loading request once user initiates a reload")
+        loader.completeNotesLoading(at: 1)
         
         sut.simulateUserInitiatedReload()
         XCTAssertEqual(loader.loadNotesCallCount, 3, "Expected yet another loading request once user initiates another reload")
@@ -194,6 +199,7 @@ class NotesUIIntegrationTests: XCTestCase {
         
         func completeNotesLoading(with notes: [ExpenseNote] = [], at index: Int = 0) {
             requests[index].send(notes)
+            requests[index].send(completion: .finished)
         }
         
         func completeNoteLoadingWithError(at index: Int = 0) {
