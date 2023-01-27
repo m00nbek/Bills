@@ -15,10 +15,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <view key="tableFooterView" contentMode="scaleToFill" id="pGT-Qn-vv2">
-                            <rect key="frame" x="0.0" y="203" width="414" height="16"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="ExpenseNoteCell" rowHeight="125" id="4Aa-lg-gTp" userLabel="ExpenseNoteCell" customClass="ExpenseNoteCell" customModule="FeediOS" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="50" width="414" height="125"/>
@@ -27,10 +23,10 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="125"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Qvu-nr-tUP">
-                                            <rect key="frame" x="20" y="11" width="374" height="103"/>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Qvu-nr-tUP">
+                                            <rect key="frame" x="8" y="8" width="398" height="109"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="date" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3cP-Se-4uP">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="date" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3cP-Se-4uP">
                                                     <rect key="frame" x="0.0" y="0.0" width="30.5" height="34"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="34" id="CHp-gf-Duy"/>
@@ -40,7 +36,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="note note note note note note note note note note note note note note note note note note note note note note note note" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DyT-qx-rbM">
-                                                    <rect key="frame" x="0.0" y="42" width="345.5" height="61"/>
+                                                    <rect key="frame" x="0.0" y="42" width="383.5" height="67"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -49,10 +45,10 @@
                                         </stackView>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="bottomMargin" secondItem="Qvu-nr-tUP" secondAttribute="bottom" id="12E-8C-6pN"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="Qvu-nr-tUP" secondAttribute="trailing" id="CRk-tB-Yqi"/>
-                                        <constraint firstItem="Qvu-nr-tUP" firstAttribute="leading" secondItem="ZOf-kB-Mm6" secondAttribute="leadingMargin" id="JfU-fo-KtR"/>
-                                        <constraint firstItem="Qvu-nr-tUP" firstAttribute="top" secondItem="ZOf-kB-Mm6" secondAttribute="topMargin" id="rWA-xu-jaI"/>
+                                        <constraint firstItem="Qvu-nr-tUP" firstAttribute="leading" secondItem="ZOf-kB-Mm6" secondAttribute="leading" constant="8" id="0Qa-Rr-oqp"/>
+                                        <constraint firstAttribute="bottom" secondItem="Qvu-nr-tUP" secondAttribute="bottom" constant="8" id="2Mw-zd-2mE"/>
+                                        <constraint firstAttribute="trailing" secondItem="Qvu-nr-tUP" secondAttribute="trailing" constant="8" id="Sqa-d1-CYA"/>
+                                        <constraint firstItem="Qvu-nr-tUP" firstAttribute="top" secondItem="ZOf-kB-Mm6" secondAttribute="top" constant="8" id="omw-8X-RaA"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <accessibility key="accessibilityConfiguration" identifier="feed-expense-cell"/>
