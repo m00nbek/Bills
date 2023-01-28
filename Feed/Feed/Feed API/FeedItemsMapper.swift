@@ -15,7 +15,7 @@ public final class FeedItemsMapper {
         private struct RemoteFeedItem: Decodable {
             let id: UUID
             let title: String
-            let createdAt: Date
+            let created_at: Date
             let cost: Float
             let currency: Currency
             enum Currency: String, Decodable {
@@ -28,7 +28,7 @@ public final class FeedItemsMapper {
             items.map { FeedExpense(
                 id: $0.id,
                 title: $0.title,
-                timestamp: $0.createdAt,
+                timestamp: $0.created_at,
                 cost: $0.cost,
                 currency: .init(rawValue: $0.currency.rawValue)!)
             }
@@ -44,7 +44,7 @@ public final class FeedItemsMapper {
     public static func map(_ data: Data, from response: HTTPURLResponse) throws -> [FeedExpense] {
         
         let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .secondsSince1970
+        decoder.dateDecodingStrategy = .iso8601
         
         guard response.statusCode == OK_200,
               let root = try? decoder.decode(Root.self, from: data)
