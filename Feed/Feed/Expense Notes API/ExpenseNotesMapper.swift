@@ -18,7 +18,7 @@ public final class ExpenseNotesMapper {
             let created_at: Date
         }
         
-        var comments: [ExpenseNote] {
+        var notes: [ExpenseNote] {
             items.map { ExpenseNote(id: $0.id, message: $0.message, createdAt: $0.created_at) }
         }
     }
@@ -35,7 +35,7 @@ public final class ExpenseNotesMapper {
             throw Error.invalidData
         }
         
-        return root.comments
+        return root.notes
     }
     
     private static func isOK(_ response: HTTPURLResponse) -> Bool {

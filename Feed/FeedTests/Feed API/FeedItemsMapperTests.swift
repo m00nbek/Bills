@@ -67,7 +67,7 @@ class FeedItemsMapperTests: XCTestCase {
         let json: [String: Any] = [
             "id": item.id.uuidString,
             "title": item.title,
-            "timestamp": item.timestamp.ISO8601Format(),
+            "created_at": item.timestamp.ISO8601Format(),
             "cost": item.cost,
             "currency": item.currency.rawValue
         ]
