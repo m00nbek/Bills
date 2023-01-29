@@ -12,16 +12,10 @@ public struct CellController {
     let dataSource: UITableViewDataSource
     let delegate: UITableViewDelegate?
     
-    public init(id: AnyHashable, _ dataSource: UITableViewDataSource & UITableViewDelegate ) {
-        self.id = id
-        self.dataSource = dataSource
-        self.delegate = dataSource
-    }
-    
     public init(id: AnyHashable, _ dataSource: UITableViewDataSource) {
         self.id = id
         self.dataSource = dataSource
-        self.delegate = nil
+        self.delegate = dataSource as? UITableViewDelegate
     }
 }
 
