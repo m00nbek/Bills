@@ -123,7 +123,7 @@ class FeedAcceptanceTests: XCTestCase {
     }
     
     private func makeFirstFeedPageData() -> Data {
-        var items = [
+        let items = [
             [
                 "id": "2AB2AE66-A4B7-4A16-B374-51BBAC8DB086",
                 "title": "any title",

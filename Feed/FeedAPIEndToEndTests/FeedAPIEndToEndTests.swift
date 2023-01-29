@@ -39,7 +39,7 @@ final class FeedAPIEndToEndTests: XCTestCase {
         let exp = expectation(description: "Wait for load completion")
         
         var receivedResult: Swift.Result<[FeedExpense], Error>?
-        client.get(from: testServerURL) { result in
+        _ = client.get(from: testServerURL) { result in
             receivedResult = result.flatMap { (data, response) in
                 do {
                     return .success(try FeedItemsMapper.map(data, from: response))
