@@ -10,12 +10,11 @@ import Feed
 
 public class LoadMoreCellController: NSObject, UITableViewDataSource, UITableViewDelegate {
     private let callback: () -> Void
+    private let cell = LoadMoreCell()
     
     public init(callback: @escaping () -> Void) {
         self.callback = callback
     }
-    
-    private let cell = LoadMoreCell()
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         1
